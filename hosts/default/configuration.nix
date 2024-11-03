@@ -83,6 +83,7 @@
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       gcc14
+      ripgrep
       fastfetch
       btop
       stow
