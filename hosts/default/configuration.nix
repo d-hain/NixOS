@@ -54,7 +54,7 @@
   boot.initrd.kernelModules = ["amdgpu"];
   boot.kernelParams = [
     "video=DP-2:2560x1440@165"
-    "video=DP-3:2560x1440@60"
+    "video=DP-3:1920x1080@60"
   ];
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
