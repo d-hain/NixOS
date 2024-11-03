@@ -14,7 +14,7 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.doce-pc = nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {inherit inputs;};
 
