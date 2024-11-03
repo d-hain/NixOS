@@ -7,18 +7,20 @@
   lib,
   pkgs,
   ...
-}: let
-  hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Allow Unfree Packages for NVIDIA Drivers
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.nvidia.acceptLicense = true;
+  # Allow Steam Unfree Package
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-run"
+    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -47,24 +49,30 @@ in {
     pulse.enable = true;
   };
 
-  # Graphics Stuff. aka. Nvidia
-  hardware.opengl = { # WARN: Will be changed to "hardware.graphics" after NixOS 24.11
-    enable = true; 
+  # Graphics Stuff - https://nixos.wiki/wiki/AMD_GPU
+  hardware.amdgpu.initrd.enable = true;
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.kernelParams = [
+    "video=DP-2:2560x1440@165"
+    "video=DP-3:2560x1440@60"
+  ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+  hardware.opengl = {
+    # WARN: Will be changed to "hardware.graphics" after NixOS 24.11
+    enable = true;
 
-    package = hyprland-pkgs.mesa.drivers;
+    extraPackages = [
+      pkgs.amdvlk
+      pkgs.rocmPackages.clr.icd
+    ];
 
     # 32bit Support (eg. Steam)
-    driSupport32Bit = true;
-    package32 = hyprland-pkgs.pkgsi686Linux.mesa.drivers;
+    driSupport32Bit = true; # WARN: Will soon be changed to "enable32Bit"
+    extraPackages32 = [pkgs.driversi686Linux.amdvlk];
   };
-  services.xserver.videoDrivers = ["nvidia"]; # Amazing naming. This is for Xorg and Wayland
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false; # Using non-open Kernel Modules
-    nvidiaSettings = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  services.xserver.videoDrivers = ["amdgpu"]; # Amazing naming. This is for Xorg and Wayland
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -74,12 +82,12 @@ in {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
+      gcc14
       fastfetch
       btop
       stow
       killall
 
-      alacritty
       wezterm
       neovim
 
@@ -91,7 +99,7 @@ in {
 
       firefox
       brave
-      webcord
+      vesktop
       gimp
     ];
   };
@@ -109,11 +117,9 @@ in {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
-  services.hypridle.enable = true;
   programs.hyprlock.enable = true;
+
   # Hint to Electron Apps to use Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -134,9 +140,6 @@ in {
     wget
     vim
     git
-
-    # Always this Nvidia guy
-    nvidia-vaapi-driver
   ];
 
   # Default editor
