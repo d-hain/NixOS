@@ -12,6 +12,10 @@
     ./hardware-configuration.nix
   ];
 
+  ##################
+  ### Nix Config ###
+  ##################
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Allow Steam Unfree Package
@@ -22,32 +26,19 @@
       "steam-run"
     ];
 
+  ################################
+  ### Hardware Stuff / Booting ###
+  ################################
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "doce-pc"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Vienna";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = lib.mkDefault {
-    font = "Lat2-Terminus16";
-    keyMap = "de";
-    useXkbConfig = true; # use xkb.options in tty.
-  };
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.libinput.enable = true;
 
   # Graphics Stuff - https://nixos.wiki/wiki/AMD_GPU
   hardware.amdgpu.initrd.enable = true;
@@ -74,8 +65,9 @@
   };
   services.xserver.videoDrivers = ["amdgpu"]; # Amazing naming. This is for Xorg and Wayland
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  ###################
+  ### User Config ###
+  ###################
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dhain = {
@@ -110,6 +102,11 @@
     ];
   };
 
+  ################
+  ### Programs ###
+  ################
+
+  # Greeter
   services.greetd = {
     enable = true;
     settings = {
@@ -122,14 +119,12 @@
 
   programs.zsh.enable = true;
 
+  # Window Manager
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
   programs.hyprlock.enable = true;
-
-  # Hint to Electron Apps to use Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   programs.steam = {
     enable = true;
@@ -138,11 +133,35 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  ###############################
+  ### System-wide environment ###
+  ###############################
+
+  networking.hostName = "doce-pc"; # Define your hostname.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+
+  # Set your time zone.
+  time.timeZone = "Europe/Vienna";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = lib.mkDefault {
+    font = "Lat2-Terminus16";
+    keyMap = "de";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
+
   fonts.packages = with pkgs; [
     jetbrains-mono
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
 
+  # Hint to Electron Apps to use Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # Default editor
+  environment.variables.EDITOR = "vim";
+
+  # System-wide packages
   environment.systemPackages = with pkgs; [
     tree
     wget
@@ -150,8 +169,16 @@
     git
   ];
 
-  # Default editor
-  environment.variables.EDITOR = "vim";
+  # Enable sound.
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -160,8 +187,9 @@
     enableSSHSupport = true;
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  #############################
+  ### "DO NOT CHANGE"-stuff ###
+  #############################
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
