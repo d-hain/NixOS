@@ -81,8 +81,13 @@
   users.users.dhain = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+
+    shell = pkgs.zsh;
+
     packages = with pkgs; [
       gcc14
+      eza
+      sl
       ripgrep
       fastfetch
       btop
@@ -114,6 +119,8 @@
       };
     };
   };
+
+  programs.zsh.enable = true;
 
   programs.hyprland = {
     enable = true;

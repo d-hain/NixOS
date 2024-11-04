@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/51b85c5d18065941b05be44852034017279e28ec";
-    # wezterm.url = "github:wez/wezterm?dir=nix";
   };
 
   outputs = {
