@@ -18,5 +18,5 @@ Here lies my NixOS configuration.
 
 After `stow`ing the dotfiles run this command:
 ```shell
-sudo nixos-rebuild switch --flake $(realpath /home/USER/nixos)
+sudo nixos-rebuild switch --flake $(realpath /home/USER/nixos)#default
 ```

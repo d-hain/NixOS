@@ -77,6 +77,7 @@
     shell = pkgs.zsh;
 
     packages = with pkgs; [
+      # Utilities
       gcc14
       eza
       sl
@@ -85,20 +86,34 @@
       btop
       stow
       killall
+      gamescope
 
+      # Terminal Programs
       wezterm
       neovim
 
+      # "Desktop" Stuff
       wofi
+      clipmenu
+      flameshot
       pavucontrol
       gnome.nautilus
-      flameshot
-      clipmenu
+      # Cursor theme
+      hyprcursor
+      banana-cursor
+      glib
 
+      # Normal Programs
       firefox
       brave
       vesktop
       gimp
+      anki
+      # Libreoffice + Spellchecking
+      libreoffice-qt6-fresh
+      hunspell
+      hunspellDicts.de_AT
+      hunspellDicts.en_US
     ];
   };
 
@@ -117,7 +132,31 @@
     };
   };
 
-  programs.zsh.enable = true;
+  # Shell
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "strug";
+    };
+
+    shellInit = "clear";
+
+    shellAliases = {
+      cls = "clear";
+      csl = "sl";
+      ls = "eza";
+      ll = "eza -la --icons";
+      cdp = "cd ~/NAS-David/Programming/";
+      cdd = "cd ~/Downloads/";
+      enc = "nvim ~/dotfiles/.config/nvim/";
+      enx = "nvim ~/dotfiles/nixos/";
+      enxc = "nvim ~/dotfiles/nixos/hosts/default/configuration.nix";
+    };
+  };
 
   # Window Manager
   programs.hyprland = {
@@ -152,6 +191,10 @@
   };
 
   fonts.packages = with pkgs; [
+    # Japanese fonts
+    ipafont
+    kochi-substitute
+
     jetbrains-mono
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
