@@ -24,6 +24,7 @@
       "steam"
       "steam-original"
       "steam-run"
+      "spotify"
     ];
 
   ################################
@@ -38,7 +39,14 @@
   # services.printing.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  services.libinput.enable = true;
+  environment.etc = {
+    "libinput/local-overrides.quirks".text = ''
+      [DisableThatShitHighResolution]
+      MatchName=*
+      AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;
+    '';
+  };
 
   # Graphics Stuff - https://nixos.wiki/wiki/AMD_GPU
   hardware.amdgpu.initrd.enable = true;
@@ -94,10 +102,14 @@
 
       # "Desktop" Stuff
       wofi
-      clipmenu
+      waybar
       flameshot
       pavucontrol
       gnome.nautilus
+      xorg.xrandr
+      # Clipboard
+      wl-clipboard
+      cliphist
       # Cursor theme
       hyprcursor
       banana-cursor
@@ -109,6 +121,7 @@
       vesktop
       gimp
       anki
+      spotify
       # Libreoffice + Spellchecking
       libreoffice-qt6-fresh
       hunspell
@@ -155,6 +168,7 @@
       enc = "nvim ~/dotfiles/.config/nvim/";
       enx = "nvim ~/dotfiles/nixos/";
       enxc = "nvim ~/dotfiles/nixos/hosts/default/configuration.nix";
+      ehc = "nvim ~/dotfiles/.config/hypr/hyprland.conf";
     };
   };
 
@@ -208,6 +222,7 @@
   environment.systemPackages = with pkgs; [
     tree
     wget
+    unzip
     vim
     git
   ];
@@ -258,4 +273,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-}
+    }
