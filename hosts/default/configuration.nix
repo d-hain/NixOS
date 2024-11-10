@@ -25,6 +25,7 @@
       "steam-original"
       "steam-run"
       "spotify"
+      "synology-drive-client"
     ];
 
   ################################
@@ -85,7 +86,10 @@
     shell = pkgs.zsh;
 
     packages = with pkgs; [
-      # Utilities
+      #################
+      ### Utilities ###
+      #################
+
       gcc14
       eza
       sl
@@ -100,28 +104,38 @@
       wezterm
       neovim
 
-      # "Desktop" Stuff
+      #######################
+      ### "Desktop" Stuff ###
+      #######################
+
       wofi
       waybar
       flameshot
       pavucontrol
       gnome.nautilus
       xorg.xrandr
+
       # Clipboard
       wl-clipboard
       cliphist
+
       # Cursor theme
       hyprcursor
       banana-cursor
       glib
 
-      # Normal Programs
+      #######################
+      ### Normal Programs ###
+      #######################
+
       firefox
       brave
       vesktop
       gimp
       anki
       spotify
+      synology-drive-client
+
       # Libreoffice + Spellchecking
       libreoffice-qt6-fresh
       hunspell
