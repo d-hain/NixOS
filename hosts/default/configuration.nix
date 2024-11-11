@@ -7,7 +7,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -111,6 +113,7 @@
       wofi
       waybar
       flameshot
+      (pkgs-unstable.hyprshot)
       pavucontrol
       gnome.nautilus
       xorg.xrandr
