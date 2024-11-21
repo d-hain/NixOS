@@ -83,7 +83,10 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dhain = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"     # Enable ‘sudo’ for the user
+      "libvirtd"  # Virtualisation using libvirt
+    ];
 
     shell = pkgs.zsh;
 
@@ -93,6 +96,7 @@ in {
       #################
 
       gcc14
+      clang_18
       eza
       sl
       ripgrep
@@ -101,10 +105,14 @@ in {
       stow
       killall
       gamescope
+      gnumake
+      # (nearly) Up to date Odin compiler
+      (pkgs-unstable.odin)
 
       # Terminal Programs
       wezterm
       neovim
+      kakoune
 
       #######################
       ### "Desktop" Stuff ###
@@ -112,6 +120,7 @@ in {
 
       wofi
       waybar
+      hyprshot
       flameshot
       (pkgs-unstable.hyprshot)
       pavucontrol
@@ -133,6 +142,7 @@ in {
 
       firefox
       brave
+      ungoogled-chromium
       vesktop
       gimp
       anki
@@ -144,6 +154,13 @@ in {
       hunspell
       hunspellDicts.de_AT
       hunspellDicts.en_US
+
+      #############
+      ### Games ###
+      #############
+
+      # Minecraft
+      prismlauncher
     ];
   };
 
@@ -196,12 +213,17 @@ in {
   };
   programs.hyprlock.enable = true;
 
+  # Steam
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   ###############################
   ### System-wide environment ###
