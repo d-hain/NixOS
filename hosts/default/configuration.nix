@@ -34,6 +34,9 @@ in {
   ### Hardware Stuff / Booting ###
   ################################
 
+  # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -120,10 +123,13 @@ in {
 
       wofi
       waybar
-      hyprshot
       flameshot
       (pkgs-unstable.hyprshot)
       pavucontrol
+      # Bluetooth GUI (doesn't work but makes it work) see: 
+      # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
+      # https://wiki.nixos.org/wiki/Bluetooth
+      blueman # basically the same as `services.blueman.enable = true;`
       gnome.nautilus
       xorg.xrandr
 
