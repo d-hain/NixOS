@@ -30,6 +30,18 @@ in {
       "synology-drive-client"
     ];
 
+  ########################
+  ### Network Mounting ###
+  ########################
+
+  fileSystems."/home/dhain/NAS-Hain" = {
+    device = "192.168.1.22:/volume1/Hain";
+    fsType = "nfs";
+    options = [
+      "nofail" # Don't require to mount for successful boot
+    ];
+  };
+
   ################################
   ### Hardware Stuff / Booting ###
   ################################
@@ -154,6 +166,7 @@ in {
       anki
       spotify
       synology-drive-client
+      mpv
 
       # Libreoffice + Spellchecking
       libreoffice-qt6-fresh
@@ -177,9 +190,11 @@ in {
   # Greeter
   services.greetd = {
     enable = true;
+    vt = 2;
+
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
         user = "greeter";
       };
     };
@@ -203,6 +218,7 @@ in {
       csl = "sl";
       ls = "eza";
       ll = "eza -la --icons";
+      cda = "cd ~/NAS-David/anime-manga-notes";
       cdp = "cd ~/NAS-David/Programming/";
       cdd = "cd ~/Downloads/";
       enc = "nvim ~/dotfiles/.config/nvim/";
