@@ -20,10 +20,11 @@ in {
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Allow Steam Unfree Package
+  # Allow Unfree Packages explicitly
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
+      "steam-unwrapped"
       "steam-original"
       "steam-run"
       "spotify"
@@ -76,8 +77,7 @@ in {
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
-  hardware.opengl = {
-    # WARN: Will be changed to "hardware.graphics" after NixOS 24.11
+  hardware.graphics = {
     enable = true;
 
     extraPackages = [
@@ -86,7 +86,7 @@ in {
     ];
 
     # 32bit Support (eg. Steam)
-    driSupport32Bit = true; # WARN: Will soon be changed to "enable32Bit"
+    enable32Bit = true;
     extraPackages32 = [pkgs.driversi686Linux.amdvlk];
   };
   services.xserver.videoDrivers = ["amdgpu"]; # Amazing naming. This is for Xorg and Wayland
@@ -142,7 +142,7 @@ in {
       # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
       # https://wiki.nixos.org/wiki/Bluetooth
       blueman # basically the same as `services.blueman.enable = true;`
-      gnome.nautilus
+      nautilus
       xorg.xrandr
 
       # Clipboard
