@@ -137,7 +137,7 @@ in {
 
       # Neovim and LSPs
       neovim
-      lua53Packages.lua-lsp
+      lua-language-server
       rust-analyzer
       clang-tools
       ols
