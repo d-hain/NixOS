@@ -27,6 +27,7 @@ in {
       "steam-unwrapped"
       "steam-original"
       "steam-run"
+      "discord-canary"
       "spotify"
       "synology-drive-client"
     ];
@@ -55,7 +56,13 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+  # Autodiscovery of network printers
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -99,8 +106,8 @@ in {
   users.users.dhain = {
     isNormalUser = true;
     extraGroups = [
-      "wheel"     # Enable ‘sudo’ for the user
-      "libvirtd"  # Virtualisation using libvirt
+      "wheel" # Enable ‘sudo’ for the user
+      "libvirtd" # Virtualisation using libvirt
     ];
 
     shell = pkgs.zsh;
@@ -118,16 +125,23 @@ in {
       fastfetch
       btop
       stow
-      killall
       gamescope
       gnumake
       # (nearly) Up to date Odin compiler
       (pkgs-unstable.odin)
+      rustup
 
       # Terminal Programs
       wezterm
-      neovim
       kakoune
+
+      # Neovim and LSPs
+      neovim
+      lua53Packages.lua-lsp
+      rust-analyzer
+      clang-tools
+      ols
+      zls
 
       #######################
       ### "Desktop" Stuff ###
@@ -138,7 +152,7 @@ in {
       flameshot
       (pkgs-unstable.hyprshot)
       pavucontrol
-      # Bluetooth GUI (doesn't work but makes it work) see: 
+      # Bluetooth GUI (doesn't work but makes it work) see:
       # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
       # https://wiki.nixos.org/wiki/Bluetooth
       blueman # basically the same as `services.blueman.enable = true;`
@@ -162,17 +176,35 @@ in {
       brave
       ungoogled-chromium
       vesktop
+      discord-canary
       gimp
       anki
       spotify
       synology-drive-client
       mpv
 
+      # Password Store
+      # only for importing from SafeInCloud
+      # (pkgs.pass.withExtensions (p: [p.pass-import]))
+      pass
+      wofi-pass
+
       # Libreoffice + Spellchecking
       libreoffice-qt6-fresh
       hunspell
       hunspellDicts.de_AT
       hunspellDicts.en_US
+
+      ################
+      ### Libaries ###
+      ################
+
+      # Needed for Virt-manager filesystem sharing
+      virtiofsd
+
+      # iPhone Mounting
+      libimobiledevice
+      ifuse
 
       #############
       ### Games ###
@@ -218,6 +250,7 @@ in {
       csl = "sl";
       ls = "eza";
       ll = "eza -la --icons";
+      la = "eza -a";
       cda = "cd ~/NAS-David/anime-manga-notes";
       cdp = "cd ~/NAS-David/Programming/";
       cdd = "cd ~/Downloads/";
@@ -246,6 +279,12 @@ in {
   # Virtualisation
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+
+  # iPhone Mounting
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
 
   ###############################
   ### System-wide environment ###
@@ -286,6 +325,7 @@ in {
     unzip
     vim
     git
+    killall
   ];
 
   # Enable sound.
@@ -334,4 +374,4 @@ in {
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-    }
+}
