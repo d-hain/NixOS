@@ -133,6 +133,7 @@ in {
 
       # Terminal Programs
       wezterm
+      (inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default)
       kakoune
 
       # Neovim and LSPs
@@ -182,6 +183,7 @@ in {
       spotify
       synology-drive-client
       mpv
+      obs-studio
 
       # Password Store
       # only for importing from SafeInCloud
@@ -254,10 +256,10 @@ in {
       cda = "cd ~/NAS-David/anime-manga-notes";
       cdp = "cd ~/NAS-David/Programming/";
       cdd = "cd ~/Downloads/";
-      enc = "nvim ~/dotfiles/.config/nvim/";
-      enx = "nvim ~/dotfiles/nixos/";
-      enxc = "nvim ~/dotfiles/nixos/hosts/default/configuration.nix";
-      ehc = "nvim ~/dotfiles/.config/hypr/hyprland.conf";
+      enc = "cd ~/dotfiles/.config/nvim && nvim .";
+      enx = "cd ~/dotfiles/nixos/ && nvim .";
+      enxc = "cd ~/dotfiles/nixos/ && nvim ./hosts/default/configuration.nix";
+      ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
     };
   };
 
