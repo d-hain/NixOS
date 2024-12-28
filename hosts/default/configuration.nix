@@ -23,10 +23,14 @@ in {
   # Allow Unfree Packages explicitly
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+
       "steam"
       "steam-unwrapped"
       "steam-original"
       "steam-run"
+
       "discord-canary"
       "spotify"
       "synology-drive-client"
@@ -96,7 +100,8 @@ in {
     enable32Bit = true;
     extraPackages32 = [pkgs.driversi686Linux.amdvlk];
   };
-  services.xserver.videoDrivers = ["amdgpu"]; # Amazing naming. This is for Xorg and Wayland
+  hardware.nvidia.open = false; # Open source drivers do not support Pascal GPUs
+  services.xserver.videoDrivers = ["amdgpu" "nvidia"]; # Amazing naming. This is for Xorg and Wayland
 
   ###################
   ### User Config ###
@@ -143,6 +148,7 @@ in {
       clang-tools
       ols
       zls
+      glsl_analyzer
 
       #######################
       ### "Desktop" Stuff ###
