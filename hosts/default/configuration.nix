@@ -292,16 +292,21 @@ in {
     shellAliases = {
       cls = "clear";
       csl = "sl";
+
       ls = "eza";
       ll = "eza -la --icons";
       la = "eza -a";
+
       cda = "cd ~/NAS-David/anime-manga-notes";
       cdp = "cd ~/NAS-David/Programming/";
       cdd = "cd ~/Downloads/";
+
       enc = "cd ~/dotfiles/.config/nvim && nvim .";
       enx = "cd ~/dotfiles/nixos/ && nvim .";
       enxc = "cd ~/dotfiles/nixos/ && nvim ./hosts/default/configuration.nix";
       ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
+
+      fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
     };
   };
 
