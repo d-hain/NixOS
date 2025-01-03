@@ -124,6 +124,7 @@ in {
 
       gcc14
       clang_18
+      gdb
       eza
       sl
       ripgrep
