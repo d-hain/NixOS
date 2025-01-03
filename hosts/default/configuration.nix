@@ -141,6 +141,8 @@ in {
       wezterm
       (inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default)
       kakoune
+      typst
+      tinymist
 
       # Neovim and LSPs
       neovim
@@ -150,6 +152,7 @@ in {
       ols
       zls
       glsl_analyzer
+      superhtml
 
       #######################
       ### "Desktop" Stuff ###
