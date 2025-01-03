@@ -287,10 +287,10 @@ in {
     syntaxHighlighting.enable = true;
 
     ohMyZsh = {
-      enable = true;
-      theme = "strug";
+        enable = true;
     };
 
+    promptInit = ''source "/home/dhain/.strug.zsh-theme"'';
     shellInit = "clear";
 
     shellAliases = {
@@ -313,6 +313,12 @@ in {
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
     };
   };
+  # environment.home.dhain = {
+  #   "/home/dhain/.zshrc".text = ''
+  #     eval "$(direnv hook zsh)"
+  #   '';
+  # };
+  programs.direnv.enable = true;
 
   # Window Manager
   programs.hyprland = {
