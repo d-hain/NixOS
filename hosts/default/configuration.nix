@@ -143,7 +143,7 @@ in {
 
       # Terminal Programs
       wezterm
-      (inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default)
+      (inputs.ghostty.packages.${pkgs.system}.default)
       kakoune
       typst
       tinymist
@@ -359,7 +359,14 @@ in {
   time.timeZone = "Europe/Vienna";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5.addons = [pkgs.fcitx5-mozc];
+    };
+  };
   console = lib.mkDefault {
     font = "Lat2-Terminus16";
     keyMap = "de";
