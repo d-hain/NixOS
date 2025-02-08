@@ -34,6 +34,7 @@ in {
       "discord-canary"
       "spotify"
       "synology-drive-client"
+      "osu-lazer-bin"
     ];
 
   ########################
@@ -161,6 +162,7 @@ in {
       ### "Desktop" Stuff ###
       #######################
 
+      opentabletdriver
       wofi
       waybar
       flameshot
@@ -225,6 +227,8 @@ in {
       #############
       ### Games ###
       #############
+
+      osu-lazer-bin
 
       # Minecraft
       prismlauncher
