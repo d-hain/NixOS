@@ -8,7 +8,7 @@
   pkgs,
   ...
 }: let
-  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 in {
   imports = [
     ./hardware-configuration.nix
@@ -79,7 +79,10 @@ in {
   };
 
   # Graphics Stuff - https://nixos.wiki/wiki/AMD_GPU
-  hardware.amdgpu.initrd.enable = true;
+  hardware.amdgpu = {
+    initrd.enable = true;
+    opencl.enable = true;
+  };
   boot.initrd.kernelModules = ["amdgpu"];
   boot.kernelParams = [
     "video=DP-2:2560x1440@165"
@@ -117,6 +120,7 @@ in {
 
     shell = pkgs.zsh;
 
+    # :packages
     packages = with pkgs; [
       #################
       ### Utilities ###
@@ -150,7 +154,6 @@ in {
       rust-analyzer
       clang-tools
       ols
-      zls
       glsl_analyzer
       superhtml
 
@@ -234,37 +237,37 @@ in {
 
   # Start Hyprsunset at 18:00:00 every day and turn it off at 8:00:00
   systemd.user.services.hyprsunset = {
-      enable = true;
-      wantedBy = ["default.target"];
-      description = "Starts Hyprsunset";
-      serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.hyprsunset}/bin/hyprsunset -t 5555";
-      };
+    enable = true;
+    wantedBy = ["default.target"];
+    description = "Starts Hyprsunset";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.hyprsunset}/bin/hyprsunset -t 5555";
+    };
   };
   systemd.user.timers.hyprsunset-evening = {
-      wantedBy = ["timers.target"];
-      after = ["hyprsunset-morning.service"];
-      timerConfig = {
-          OnCalendar = "*-*-* 18:00:00";
-          Persistent = true;
-          Unit = "hyprsunset.service";
-      };
+    wantedBy = ["timers.target"];
+    after = ["hyprsunset-morning.service"];
+    timerConfig = {
+      OnCalendar = "*-*-* 18:00:00";
+      Persistent = true;
+      Unit = "hyprsunset.service";
+    };
   };
   systemd.user.services.hyprsunset-off = {
-      description = "Stops 'hyprsunset.service'";
-      serviceConfig = {
-          Type = "oneshot";
-          ExecStart = "systemctl --user stop hyprsunset.service";
-      };
+    description = "Stops 'hyprsunset.service'";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "systemctl --user stop hyprsunset.service";
+    };
   };
   systemd.user.timers.hyprsunset-morning = {
-      wantedBy = ["timers.target"];
-      timerConfig = {
-          OnCalendar = "*-*-* 8:00:00";
-          Persistent = true;
-          Unit = "hyprsunset-off.service";
-      };
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "*-*-* 8:00:00";
+      Persistent = true;
+      Unit = "hyprsunset-off.service";
+    };
   };
 
   # Greeter
@@ -287,7 +290,7 @@ in {
     syntaxHighlighting.enable = true;
 
     ohMyZsh = {
-        enable = true;
+      enable = true;
     };
 
     promptInit = ''source "/home/dhain/.strug.zsh-theme"'';
@@ -364,12 +367,13 @@ in {
   };
 
   fonts.packages = with pkgs; [
+    font-awesome
+    jetbrains-mono
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+
     # Japanese fonts
     ipafont
     kochi-substitute
-
-    jetbrains-mono
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
 
   # Hint to Electron Apps to use Wayland

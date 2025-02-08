@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     ghostty = {
-        url = "github:ghostty-org/ghostty";
+      url = "github:ghostty-org/ghostty";
     };
   };
 
