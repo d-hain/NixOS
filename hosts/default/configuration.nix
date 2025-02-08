@@ -150,6 +150,9 @@ in {
       kakoune
       typst
       tinymist
+      typst-live
+      ffmpeg
+      imagemagick
 
       # Neovim and LSPs
       neovim
