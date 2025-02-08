@@ -129,6 +129,8 @@ in {
 
       gcc14
       clang_18
+      man-pages
+      man-pages-posix
       gdb
       eza
       sl
