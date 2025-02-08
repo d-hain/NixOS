@@ -202,6 +202,7 @@ in {
       synology-drive-client
       mpv
       obs-studio
+      blender-hip # "-hip" makes performance on AMD better
 
       # Password Store
       # only for importing from SafeInCloud
