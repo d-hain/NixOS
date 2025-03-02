@@ -153,9 +153,10 @@ in {
       typst-live
       ffmpeg
       imagemagick
+      sendme # Ultimate magic and just the best thing ever
 
       # Neovim and LSPs
-      neovim
+      (pkgs-unstable.neovim)
       lua-language-server
       rust-analyzer
       clang-tools
@@ -178,8 +179,10 @@ in {
       # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
       # https://wiki.nixos.org/wiki/Bluetooth
       blueman # basically the same as `services.blueman.enable = true;`
-      nautilus
-      xorg.xrandr
+      # Dolphin with Wayland and SVG Icon support
+      kdePackages.qtwayland
+      kdePackages.qtsvg
+      kdePackages.dolphin
 
       # Clipboard
       wl-clipboard
@@ -338,7 +341,7 @@ in {
     enable = true;
     xwayland.enable = true;
   };
-  programs.hyprlock.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
 
   # Steam
   programs.steam = {
@@ -373,8 +376,8 @@ in {
     defaultLocale = "en_US.UTF-8";
     inputMethod = {
       enable = true;
-      type = "fcitx5";
-      fcitx5.addons = [pkgs.fcitx5-mozc];
+      type = "uim";
+      # ibus.engines = with pkgs.ibus-engines; [mozc];
     };
   };
   console = lib.mkDefault {
