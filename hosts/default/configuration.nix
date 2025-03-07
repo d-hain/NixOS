@@ -145,7 +145,6 @@ in {
       rustup
 
       # Terminal Programs
-      wezterm
       (inputs.ghostty.packages.${pkgs.system}.default)
       kakoune
       typst
