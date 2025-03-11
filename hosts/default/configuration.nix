@@ -31,7 +31,6 @@ in {
       "steam-original"
       "steam-run"
 
-      "discord-canary"
       "spotify"
       "synology-drive-client"
       "osu-lazer-bin"
@@ -200,7 +199,6 @@ in {
       brave
       ungoogled-chromium
       vesktop
-      discord-canary
       gimp
       anki
       spotify
