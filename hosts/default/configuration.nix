@@ -56,8 +56,13 @@ in {
   hardware.bluetooth.enable = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 99;
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
