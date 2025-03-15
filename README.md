@@ -9,7 +9,10 @@ Here lies my NixOS configuration.
 ├── flake.lock
 ├── flake.nix
 └── hosts
-    └── default # My Home PC
+    ├── default # My Home PC
+    │   ├── configuration.nix
+    │   └── hardware-configuration.nix
+    └── server # My Home Server
         ├── configuration.nix
         └── hardware-configuration.nix
 ```
@@ -18,5 +21,7 @@ Here lies my NixOS configuration.
 
 After `stow`ing the dotfiles run this command:
 ```shell
-sudo nixos-rebuild switch --flake $(realpath /home/USER/nixos)#default
+sudo nixos-rebuild switch --flake /home/USER/dotfiles/nixos#default
 ```
+
+and `#server` instead of `#default` for the server.

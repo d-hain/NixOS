@@ -28,6 +28,15 @@
       ];
     };
 
+    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      system = system;
+      specialArgs = {inherit inputs;};
+
+      modules = [
+        ./hosts/server/configuration.nix
+      ];
+    };
+
     formatter.${system} = pkgs.alejandra;
   };
 }
