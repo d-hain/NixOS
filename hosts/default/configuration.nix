@@ -147,7 +147,6 @@ in {
       (inputs.ghostty.packages.${pkgs.system}.default)
       kakoune
       typst
-      tinymist
       typst-live
       ffmpeg
       imagemagick
@@ -161,6 +160,7 @@ in {
       ols
       glsl_analyzer
       superhtml
+      tinymist
 
       #######################
       ### "Desktop" Stuff ###
@@ -169,7 +169,6 @@ in {
       opentabletdriver
       wofi
       waybar
-      flameshot
       (pkgs-unstable.hyprshot)
       hyprsunset
       pavucontrol
@@ -206,6 +205,7 @@ in {
       mpv
       obs-studio
       blender-hip # "-hip" makes performance on AMD better
+      teams-for-linux
 
       # Password Store
       # only for importing from SafeInCloud
@@ -326,11 +326,6 @@ in {
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
     };
   };
-  # environment.home.dhain = {
-  #   "/home/dhain/.zshrc".text = ''
-  #     eval "$(direnv hook zsh)"
-  #   '';
-  # };
   programs.direnv.enable = true;
 
   # Window Manager
