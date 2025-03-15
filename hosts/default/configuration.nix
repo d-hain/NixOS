@@ -56,8 +56,13 @@ in {
   hardware.bluetooth.enable = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 99;
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -147,7 +152,6 @@ in {
       (inputs.ghostty.packages.${pkgs.system}.default)
       kakoune
       typst
-      tinymist
       typst-live
       ffmpeg
       imagemagick
@@ -161,6 +165,7 @@ in {
       ols
       glsl_analyzer
       superhtml
+      tinymist
 
       #######################
       ### "Desktop" Stuff ###
@@ -169,7 +174,6 @@ in {
       opentabletdriver
       wofi
       waybar
-      flameshot
       (pkgs-unstable.hyprshot)
       hyprsunset
       pavucontrol
@@ -206,6 +210,7 @@ in {
       mpv
       obs-studio
       blender-hip # "-hip" makes performance on AMD better
+      teams-for-linux
 
       # Password Store
       # only for importing from SafeInCloud
@@ -326,11 +331,6 @@ in {
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
     };
   };
-  # environment.home.dhain = {
-  #   "/home/dhain/.zshrc".text = ''
-  #     eval "$(direnv hook zsh)"
-  #   '';
-  # };
   programs.direnv.enable = true;
 
   # Window Manager
@@ -338,7 +338,7 @@ in {
     enable = true;
     xwayland.enable = true;
   };
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
 
   # Steam
   programs.steam = {
@@ -380,7 +380,6 @@ in {
   console = lib.mkDefault {
     font = "Lat2-Terminus16";
     keyMap = "de";
-    useXkbConfig = true; # use xkb.options in tty.
   };
 
   fonts.packages = with pkgs; [
@@ -405,7 +404,6 @@ in {
     unzip
     vim
     git
-    killall
   ];
 
   # Enable sound.
@@ -418,6 +416,9 @@ in {
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Automount USB devices
+  services.udisks2.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

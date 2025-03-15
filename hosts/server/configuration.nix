@@ -18,8 +18,13 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 99;
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   networking.hostName = "server"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
