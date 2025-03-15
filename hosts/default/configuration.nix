@@ -333,7 +333,7 @@ in {
     enable = true;
     xwayland.enable = true;
   };
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
 
   # Steam
   programs.steam = {
