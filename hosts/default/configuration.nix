@@ -399,7 +399,6 @@ in {
     unzip
     vim
     git
-    killall
   ];
 
   # Enable sound.
