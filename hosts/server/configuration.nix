@@ -38,13 +38,24 @@
   ### User Stuff ###
   ##################
 
+  # To make SSH work with any terminal (including ghostty)
+  environment.variables.TERM = "xterm-256color";
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.doce = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+
     packages = with pkgs; [
       stow
     ];
+  };
+
+  # Shell
+  programs.bash = {
+    shellAliases = {
+      cls = "clear";
+    };
   };
 
   # List packages installed in system profile. To search, run:
