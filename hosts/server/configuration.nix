@@ -2,13 +2,17 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
+  inputs,
   config,
   lib,
   pkgs,
   ...
-}: {
+}: let
+  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+in {
   imports = [
     ./hardware-configuration.nix
+    ./qbittorrent.nix
   ];
 
   ##################
@@ -87,6 +91,81 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
+  };
+
+  ##################
+  ### Home Media ###
+  ##################
+
+  # Media group for all media services
+  users.groups.media = {};
+
+  services.jackett = {
+    enable = true;
+    openFirewall = true;
+    dataDir = "/media/jackett/config";
+
+    package = pkgs-unstable.jackett;
+  };
+
+  services.qbittorrent = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+    profileDir = "/media/qbittorrent";
+
+    serverConfig = {
+      LegalNotice.Accepted = true;
+      Preferences = {
+        WebUI = {
+          Username = "doce";
+          Password_PBKDF2 = "@ByteArray(kamRomhFGYgDZ522gepLyw==:iW6xBEfpcJ2GRqOHtqAGFsIZLKwJxtc4YKieIK8rCk0yzIe7aVRzaIVuKFLS4KWa5UPI8L7RHcrwTXTUcLaZMQ==)";
+        };
+        General.Locale = "en";
+      };
+    };
+  };
+
+  services.radarr = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+    dataDir = "/media/radarr/config";
+  };
+
+  # WARN: .NET 6 is EOL and should not be used. If Sonarr V5 is out this should be removed!
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-sdk-6.0.428"
+    "aspnetcore-runtime-6.0.36"
+  ];
+  services.sonarr = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+    dataDir = "/media/sonarr/config";
+  };
+
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+    dataDir = "/media/jellyfin";
+  };
+
+  services.jellyseerr = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  systemd.services.jellyseerr-restarter = {
+    enable = true;
+    description = "Restarts Jellyseerr on startup as that fixes it not loading anything and not recognizing anything for whatever reason.";
+    wantedBy = ["default.target"];
+    after = ["jellyseerr.service"];
+    script = ''
+      sleep 10
+      systemctl restart jellyseerr.service
+    '';
   };
 
   #############################
