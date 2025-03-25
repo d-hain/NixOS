@@ -162,7 +162,7 @@ in {
       lua-language-server
       rust-analyzer
       clang-tools
-      ols
+      (pkgs-unstable.ols)
       glsl_analyzer
       superhtml
       tinymist
@@ -315,6 +315,7 @@ in {
       cls = "clear";
       csl = "sl";
 
+      l = "eza -lah --icons";
       ls = "eza";
       ll = "eza -la --icons";
       la = "eza -a";

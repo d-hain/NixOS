@@ -1,5 +1,5 @@
 {
-  description = "DocE PC";
+  description = "DocE";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -7,6 +7,7 @@
 
     ghostty = {
       url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
   };
 
