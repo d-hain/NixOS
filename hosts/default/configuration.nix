@@ -2,13 +2,14 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  inputs,
   config,
   lib,
   pkgs,
+  nixpkgs-unstable,
+  ghostty,
   ...
 }: let
-  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+  pkgs-unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
 in {
   imports = [
     ./hardware-configuration.nix
@@ -149,7 +150,7 @@ in {
       rustup
 
       # Terminal Programs
-      (inputs.ghostty.packages.${pkgs.system}.default)
+      (ghostty.packages.${pkgs.system}.default)
       kakoune
       typst
       typst-live
