@@ -214,18 +214,13 @@ in {
       obs-studio
       blender-hip # "-hip" makes performance on AMD better
       teams-for-linux
+      onlyoffice-desktopeditors
 
       # Password Store
       # only for importing from SafeInCloud
       # (pkgs.pass.withExtensions (p: [p.pass-import]))
       pass
       wofi-pass
-
-      # Libreoffice + Spellchecking
-      libreoffice-qt6-fresh
-      hunspell
-      hunspellDicts.de_AT
-      hunspellDicts.en_US
 
       ################
       ### Libaries ###
