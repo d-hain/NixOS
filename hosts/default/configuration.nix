@@ -149,6 +149,7 @@ in {
       # (nearly) Up to date Odin compiler
       (pkgs-unstable.odin)
       rustup
+      python3
 
       # Terminal Programs
       (ghostty.packages.${pkgs.system}.default)
@@ -413,6 +414,7 @@ in {
   environment.systemPackages = with pkgs; [
     tree
     wget
+    zip
     unzip
     vim
     git
