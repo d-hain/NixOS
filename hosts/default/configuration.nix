@@ -169,6 +169,7 @@ in {
       glsl_analyzer
       superhtml
       tinymist
+      yazi # For yazi.nvim but also for outside use ig
 
       #######################
       ### "Desktop" Stuff ###
