@@ -206,6 +206,7 @@ in {
       brave
       ungoogled-chromium
       vesktop
+      element-desktop
       gimp
       anki
       spotify
