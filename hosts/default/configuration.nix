@@ -122,6 +122,7 @@ in {
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user
       "libvirtd" # Virtualisation using libvirt
+      "docker" # I hate docker with a passion
     ];
 
     shell = pkgs.zsh;
@@ -353,6 +354,15 @@ in {
   # Virtualisation
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   # iPhone Mounting
   services.usbmuxd = {
