@@ -5,11 +5,11 @@
   config,
   lib,
   pkgs,
-  nixpkgs-unstable,
+  hyprland,
   ghostty,
   ...
 }: let
-  pkgs-unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
+  hypr-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
 in {
   imports = [
     ./hardware-configuration.nix
@@ -19,7 +19,13 @@ in {
   ### Nix Config ###
   ##################
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+
+    # Enable Hyprland Cachix for installing via the Flake
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   # Allow Unfree Packages explicitly
   nixpkgs.config.allowUnfreePredicate = pkg:
@@ -108,6 +114,9 @@ in {
     # 32bit Support (eg. Steam)
     enable32Bit = true;
     extraPackages32 = [pkgs.driversi686Linux.amdvlk];
+
+    package = hypr-unstable.mesa;
+    package32 = hypr-unstable.pkgsi686Linux.mesa;
   };
   hardware.nvidia.open = false; # Open source drivers do not support Pascal GPUs
   services.xserver.videoDrivers = ["amdgpu" "nvidia"]; # Amazing naming. This is for Xorg and Wayland
@@ -147,12 +156,13 @@ in {
       gamescope
       gnumake
       # (nearly) Up to date Odin compiler
-      (pkgs-unstable.odin)
+      odin
       rustup
       python3
 
       # Terminal Programs
       (ghostty.packages.${pkgs.system}.default)
+      kdePackages.konsole # Fallback terminal
       kakoune
       typst
       typst-live
@@ -161,11 +171,11 @@ in {
       sendme # Ultimate magic and just the best thing ever
 
       # Neovim and LSPs
-      (pkgs-unstable.neovim)
+      neovim
       lua-language-server
       rust-analyzer
       clang-tools
-      (pkgs-unstable.ols)
+      ols
       glsl_analyzer
       superhtml
       tinymist
@@ -178,7 +188,7 @@ in {
       opentabletdriver
       wofi
       waybar
-      (pkgs-unstable.hyprshot)
+      hyprshot
       hyprsunset
       pavucontrol
       # Bluetooth GUI (doesn't work but makes it work) see:
@@ -338,8 +348,11 @@ in {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+
+    package = hyprland.packages.${pkgs.system}.hyprland;
+    portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-kde];
+  xdg.portal.extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];
 
   # Steam
   programs.steam = {
@@ -395,7 +408,7 @@ in {
   fonts.packages = with pkgs; [
     font-awesome
     jetbrains-mono
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    nerd-fonts.jetbrains-mono
 
     # Japanese fonts
     ipafont

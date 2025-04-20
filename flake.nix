@@ -2,11 +2,14 @@
   description = "DocE";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ghostty = {
       url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
     };
 
     server-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -16,7 +19,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
+    hyprland,
     ghostty,
     server-nixpkgs,
     server-nixpkgs-unstable,
@@ -27,8 +30,8 @@
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {
+        hyprland = hyprland;
         ghostty = ghostty;
-        nixpkgs-unstable = nixpkgs-unstable;
       };
 
       modules = [
