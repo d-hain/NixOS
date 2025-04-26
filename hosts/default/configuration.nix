@@ -227,6 +227,7 @@ in {
       blender-hip # "-hip" makes performance on AMD better
       teams-for-linux
       onlyoffice-desktopeditors
+      thunderbird
 
       # Password Store
       # only for importing from SafeInCloud
@@ -240,10 +241,6 @@ in {
 
       # Needed for Virt-manager filesystem sharing
       virtiofsd
-
-      # iPhone Mounting
-      libimobiledevice
-      ifuse
 
       #############
       ### Games ###
