@@ -415,7 +415,7 @@ in {
   # Hint to Electron Apps to use Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # Default editor
-  environment.variables.EDITOR = "vim";
+  environment.variables.EDITOR = "nvim";
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
