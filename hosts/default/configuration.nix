@@ -333,7 +333,7 @@ in {
 
       enc = "cd ~/dotfiles/.config/nvim && nvim .";
       enx = "cd ~/dotfiles/nixos/ && nvim .";
-      enxc = "cd ~/dotfiles/nixos/ && nvim ./hosts/default/configuration.nix";
+      enxc = "cd ~/NixOS/ && nvim ./hosts/default/configuration.nix";
       ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
