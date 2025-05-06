@@ -173,7 +173,6 @@ in {
       # Neovim and LSPs
       neovim
       lua-language-server
-      rust-analyzer
       clang-tools
       ols
       glsl_analyzer
@@ -414,8 +413,12 @@ in {
 
   # Hint to Electron Apps to use Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # Default editor
-  environment.variables.EDITOR = "nvim";
+
+  # Environment variables
+  environment.variables = {
+    EDITOR = "nvim";
+    TERMINAL = "ghostty";
+  };
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
