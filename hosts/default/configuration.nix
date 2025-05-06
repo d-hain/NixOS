@@ -185,7 +185,7 @@ in {
       #######################
 
       opentabletdriver
-      wofi
+      fuzzel
       waybar
       hyprshot
       hyprsunset
