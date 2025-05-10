@@ -187,6 +187,7 @@ in {
 
       opentabletdriver
       fuzzel
+      bemoji
       waybar
       hyprshot
       hyprsunset
