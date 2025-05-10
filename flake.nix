@@ -11,6 +11,10 @@
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs-unstable.follows = "nixpkgs";
     };
+    fuzzel-pass = {
+      url = "github:d-hain/fuzzel-pass";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     server-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     server-nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -21,6 +25,7 @@
     nixpkgs,
     hyprland,
     ghostty,
+    fuzzel-pass,
     server-nixpkgs,
     server-nixpkgs-unstable,
   }: let
@@ -32,6 +37,7 @@
       specialArgs = {
         hyprland = hyprland;
         ghostty = ghostty;
+        fuzzel-pass = fuzzel-pass;
       };
 
       modules = [

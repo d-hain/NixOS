@@ -7,6 +7,7 @@
   pkgs,
   hyprland,
   ghostty,
+  fuzzel-pass,
   ...
 }: let
   hypr-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
@@ -232,14 +233,7 @@ in {
       # only for importing from SafeInCloud
       # (pkgs.pass.withExtensions (p: [p.pass-import]))
       pass
-      wofi-pass
-
-      ################
-      ### Libaries ###
-      ################
-
-      # Needed for Virt-manager filesystem sharing
-      virtiofsd
+      (fuzzel-pass.packages.${pkgs.system}.default)
 
       #############
       ### Games ###
