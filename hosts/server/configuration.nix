@@ -173,6 +173,12 @@
     dataDir = "/media/sonarr/config";
   };
 
+  services.bazarr = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;
