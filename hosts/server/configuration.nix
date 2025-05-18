@@ -7,9 +7,7 @@
   lib,
   pkgs,
   ...
-}: let
-  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
     ./qbittorrent.nix
@@ -104,8 +102,6 @@ in {
     enable = true;
     openFirewall = true;
     dataDir = "/media/jackett/config";
-
-    package = pkgs-unstable.jackett;
   };
 
   services.qbittorrent = {
@@ -122,6 +118,38 @@ in {
           Password_PBKDF2 = "@ByteArray(kamRomhFGYgDZ522gepLyw==:iW6xBEfpcJ2GRqOHtqAGFsIZLKwJxtc4YKieIK8rCk0yzIe7aVRzaIVuKFLS4KWa5UPI8L7RHcrwTXTUcLaZMQ==)";
         };
         General.Locale = "en";
+      };
+      AutoRun = {
+        enabled = true;
+        program = "chmod -R 755 %F";
+        OnTorrentAdded = {
+          Enabled = true;
+          Program = "chmod -R 755 %F";
+        };
+      };
+      BitTorrent = {
+        Session = {
+          Preallocation = true;
+          DisableAutoTMMByDefault = false;
+          DisableAutoTMMTriggers = {
+            DefaultSavePathChanged = false;
+            CategorySavePathChanged = false;
+          };
+
+          BTProtocol = "TCP";
+          UseAlternativeGlobalSpeedLimit = true;
+          AlternativeGlobalDLSpeedLimit = 40000;
+          AlternativeGlobalULSpeedLimit = 10000;
+          BandwidthSchedulerEnabled = true;
+
+          QueueingSystemEnabled = true;
+
+          # No idea what these three do?!
+          AddTorrentStopped = false;
+          ExcludedFileNames = "";
+          ShareLimitAction = "Stop";
+        };
+        Core.AutoDeleteAddedTorrentFile = "IfAdded";
       };
     };
   };

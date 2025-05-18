@@ -16,8 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    server-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    server-nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    server-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = {
@@ -27,7 +26,6 @@
     ghostty,
     fuzzel-pass,
     server-nixpkgs,
-    server-nixpkgs-unstable,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -47,9 +45,6 @@
 
     nixosConfigurations.server = server-nixpkgs.lib.nixosSystem {
       system = system;
-      specialArgs = {
-        nixpkgs-unstable = server-nixpkgs-unstable;
-      };
 
       modules = [
         ./hosts/server/configuration.nix
