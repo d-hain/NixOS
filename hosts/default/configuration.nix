@@ -229,6 +229,7 @@ in {
       teams-for-linux
       onlyoffice-desktopeditors
       thunderbird
+      signal-desktop
 
       # Password Store
       # only for importing from SafeInCloud
