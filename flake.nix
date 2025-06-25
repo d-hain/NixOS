@@ -9,7 +9,7 @@
     };
     ghostty = {
       url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     fuzzel-pass = {
       url = "github:d-hain/fuzzel-pass";
