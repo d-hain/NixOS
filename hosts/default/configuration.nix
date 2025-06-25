@@ -234,6 +234,7 @@ in {
       onlyoffice-desktopeditors
       thunderbird
       signal-desktop
+      freerdp
 
       # Password Store
       # only for importing from SafeInCloud
@@ -376,6 +377,12 @@ in {
     enable = true;
     package = pkgs.usbmuxd2;
   };
+
+  # Work
+  networking.wg-quick.interfaces = (
+    (import ./work-wireguard.nix { inherit config pkgs; })
+    # (import ./example-wireguard.nix { inherit config pkgs; })
+  );
 
   ###############################
   ### System-wide environment ###
