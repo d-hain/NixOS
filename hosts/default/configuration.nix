@@ -219,7 +219,7 @@ in {
       ungoogled-chromium
       vesktop
       element-desktop
-      gimp
+      gimp3
       anki
       spotify
       synology-drive-client
