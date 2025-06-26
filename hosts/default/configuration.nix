@@ -379,10 +379,13 @@ in {
   };
 
   # Work
-  networking.wg-quick.interfaces = (
-    (import ./work-wireguard.nix { inherit config pkgs; })
-    # (import ./example-wireguard.nix { inherit config pkgs; })
-  );
+  networking.wg-quick.interfaces = {
+    work = {
+      autostart = false;
+
+      configFile = "./work.conf";
+    };
+  };
 
   ###############################
   ### System-wide environment ###
