@@ -383,7 +383,7 @@ in {
     work = {
       autostart = false;
 
-      configFile = "./work.conf";
+      configFile = "./work-wireguard.conf";
     };
   };
 
