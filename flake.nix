@@ -15,7 +15,6 @@
       url = "github:d-hain/fuzzel-pass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    jai-temp.url = "github:samestep/nixpkgs/jai-beta-0.2.014";
 
     server-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
@@ -26,22 +25,15 @@
     hyprland,
     ghostty,
     fuzzel-pass,
-    jai-temp,
     server-nixpkgs,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-
-    jaiPkgs = import jai-temp {
-      inherit system;
-      config.allowUnfree = true;
-    };
   in {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {
         inherit hyprland ghostty fuzzel-pass;
-        jai-temp = jaiPkgs;
       };
 
       modules = [

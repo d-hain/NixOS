@@ -410,22 +410,6 @@
         "type": "github"
       }
     },
-    "jai-temp": {
-      "locked": {
-        "lastModified": 1748164530,
-        "narHash": "sha256-8q++JtjNTPgKv3E6QrAOI1X4MRFVdBkXCmsOIHeztbk=",
-        "owner": "samestep",
-        "repo": "nixpkgs",
-        "rev": "de22535ab293a7cfaea947b9956824ed2d233ad5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "samestep",
-        "ref": "jai-beta-0.2.014",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1750776420,
@@ -470,7 +454,6 @@
         "fuzzel-pass": "fuzzel-pass",
         "ghostty": "ghostty",
         "hyprland": "hyprland",
-        "jai-temp": "jai-temp",
         "nixpkgs": "nixpkgs",
         "server-nixpkgs": "server-nixpkgs"
       }

@@ -8,7 +8,6 @@
   hyprland,
   ghostty,
   fuzzel-pass,
-  jai-temp,
   ...
 }: let
   hypr-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
@@ -43,8 +42,6 @@ in {
       "spotify"
       "synology-drive-client"
       "osu-lazer-bin"
-
-      "jai"
     ];
 
   ########################
@@ -159,16 +156,13 @@ in {
       stow
       gamescope
       gnumake
-      # (nearly) Up to date Odin compiler
-      odin
+      odin # (nearly) Up to date Odin compiler
       rustup
       python3
-      (jai-temp.jai)
 
       # Terminal Programs
       (ghostty.packages.${pkgs.system}.default)
       kdePackages.konsole # Fallback terminal
-      kakoune
       typst
       typst-live
       ffmpeg
