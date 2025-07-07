@@ -169,6 +169,7 @@ in {
       imagemagick
       sendme # Ultimate magic and just the best thing ever
       comma
+      wireguard-tools
 
       # Neovim and LSPs
       neovim
@@ -178,7 +179,7 @@ in {
       glsl_analyzer
       superhtml
       tinymist
-      yazi # For yazi.nvim but also for outside use ig
+      yazi # mainly for yazi.nvim
 
       #######################
       ### "Desktop" Stuff ###
@@ -229,7 +230,7 @@ in {
       onlyoffice-desktopeditors
       thunderbird
       signal-desktop
-      freerdp
+      kdePackages.krdc
 
       # Password Store
       # only for importing from SafeInCloud
@@ -371,15 +372,6 @@ in {
   services.usbmuxd = {
     enable = true;
     package = pkgs.usbmuxd2;
-  };
-
-  # Work
-  networking.wg-quick.interfaces = {
-    work = {
-      autostart = false;
-
-      configFile = "./work-wireguard.conf";
-    };
   };
 
   ###############################
