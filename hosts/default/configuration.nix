@@ -168,6 +168,7 @@ in {
       ffmpeg
       imagemagick
       sendme # Ultimate magic and just the best thing ever
+      comma
 
       # Neovim and LSPs
       neovim
