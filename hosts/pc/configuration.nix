@@ -2,10 +2,16 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
+  config,
   lib,
   pkgs,
+  hyprland,
+  ghostty,
+  fuzzel-pass,
   ...
-}: {
+}: let
+  hypr-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
+in {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nix.nix
@@ -21,19 +27,82 @@
   # Allow Unfree Packages explicitly
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+
       "steam"
       "steam-unwrapped"
       "steam-original"
       "steam-run"
 
+      "spotify"
       "synology-drive-client"
+      "osu-lazer-bin"
     ];
 
-  networking.hostName = "portable"; # Define your hostname.
+  ########################
+  ### Network Mounting ###
+  ########################
+
+  fileSystems."/home/dhain/NAS-Hain" = {
+    device = "192.168.1.22:/volume1/Hain";
+    fsType = "nfs";
+    options = [
+      "nofail" # Don't require to mount for successful boot
+    ];
+  };
+
+  ######################
+  ### Hardware Stuff ###
+  ######################
+
+  # "amdgpu" is already set in the hardware module
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.open = false;
+
+  # iPhone Mounting
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
+
+  ##############
+  ### Config ###
+  ##############
+
+  networking.hostName = "doce-pc"; # Define your hostname.
 
   user = {
     enable = true;
     username = "dhain";
+
+    # :packages
+    packages = with pkgs; [
+      opentabletdriver
+
+      #########################
+      ### Terminal programs ###
+      #########################
+
+      gamescope
+      wireguard-tools
+
+      ############
+      ### Apps ###
+      ############
+
+      element-desktop
+      spotify
+      obs-studio
+      blender-hip
+      kdePackages.krdc
+
+      #############
+      ### Games ###
+      #############
+
+      osu-lazer-bin
+    ];
   };
 
   #############################
@@ -63,5 +132,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }

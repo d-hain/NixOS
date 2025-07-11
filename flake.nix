@@ -30,19 +30,19 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      system = system;
+    nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
+      inherit system;
       specialArgs = {
         inherit hyprland ghostty fuzzel-pass;
       };
 
       modules = [
-        ./hosts/default/configuration.nix
+        ./hosts/pc/configuration.nix
       ];
     };
 
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      system = system;
+      inherit system;
       specialArgs = {
         inherit hyprland ghostty fuzzel-pass;
       };
@@ -53,7 +53,7 @@
     };
 
     nixosConfigurations.server = server-nixpkgs.lib.nixosSystem {
-      system = system;
+      inherit system;
 
       modules = [
         ./hosts/server/configuration.nix

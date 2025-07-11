@@ -13,6 +13,11 @@
       default = "luffy";
       description = "Username";
     };
+
+    packages = lib.mkOption {
+      default = [];
+      description = "Additional system specific packages";
+    };
   };
 
   config = lib.mkIf config.user.enable {
@@ -121,7 +126,7 @@
 
         # Minecraft
         prismlauncher
-      ];
+      ] ++ config.user.packages;
     };
   };
 }
