@@ -41,6 +41,17 @@
       ];
     };
 
+    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+      system = system;
+      specialArgs = {
+        inherit hyprland ghostty fuzzel-pass;
+      };
+
+      modules = [
+        ./hosts/laptop/configuration.nix
+      ];
+    };
+
     nixosConfigurations.server = server-nixpkgs.lib.nixosSystem {
       system = system;
 
