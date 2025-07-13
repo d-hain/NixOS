@@ -177,7 +177,12 @@
     enable = true;
     openFirewall = true;
     group = "media";
+    dataDir = "/media/bazarr";
   };
+  systemd.tmpfiles.rules = [
+    "d /media/sonarr/data 2775 sonarr media - -"
+    "d /media/radarr/data 2775 radarr media - -"
+  ];
 
   services.jellyfin = {
     enable = true;
