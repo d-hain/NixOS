@@ -8,6 +8,10 @@ in {
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  # Rust ftw
+  security.sudo.enable = false;
+  security.sudo-rs.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     systemd-boot = {
