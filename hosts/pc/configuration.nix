@@ -85,7 +85,6 @@ in {
       #########################
 
       gamescope
-      wireguard-tools
 
       ############
       ### Apps ###
@@ -123,6 +122,13 @@ in {
   environment.etc."ld.so.conf".text = ''
     /run/current-system/sw/share/nix-ld/lib
   '';
+
+  # Work Wireguard
+  networking.wg-quick.interfaces.work = {
+    configFile = "/home/dhain/NAS-David/Work/WireGuard.conf";
+    autostart = false;
+  };
+
   #############################
   ### "DO NOT CHANGE"-stuff ###
   #############################
