@@ -10,12 +10,14 @@
     ./hardware-configuration.nix
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
+    ../../modules/graphics.nix
     ../../modules/environment.nix
     ../../modules/user.nix
     ../../modules/shell.nix
     ../../modules/programs.nix
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
+    ../../modules/japanese.nix
   ];
 
   # Allow Unfree Packages explicitly
@@ -34,6 +36,10 @@
   user = {
     enable = true;
     username = "dhain";
+
+    # extra :packages
+    packages = with pkgs; [
+    ];
   };
 
   #############################

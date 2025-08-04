@@ -21,6 +21,22 @@
   };
 
   config = lib.mkIf config.user.enable {
+    # Environment variables
+    environment.variables = {
+      EDITOR = "nvim";
+      TERMINAL = "ghostty";
+    };
+
+    fonts.packages = with pkgs; [
+      font-awesome
+      jetbrains-mono
+      nerd-fonts.jetbrains-mono
+
+      # Japanese fonts
+      ipafont
+      kochi-substitute
+    ];
+
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${config.user.username} = {
       isNormalUser = true;

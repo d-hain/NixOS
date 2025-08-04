@@ -2,26 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  config,
   lib,
   pkgs,
-  hyprland,
-  ghostty,
-  fuzzel-pass,
   ...
-}: let
-  hypr-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
+    ../../modules/graphics.nix
     ../../modules/environment.nix
     ../../modules/user.nix
     ../../modules/shell.nix
     ../../modules/programs.nix
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
+    ../../modules/japanese.nix
   ];
 
   # Allow Unfree Packages explicitly
@@ -56,7 +52,21 @@ in {
   ### Hardware Stuff ###
   ######################
 
-  # "amdgpu" is already set in the hardware module
+  # Graphics Stuff - https://nixos.wiki/wiki/AMD_GPU
+  hardware.amdgpu = {
+    initrd.enable = true;
+    opencl.enable = true;
+  };
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.kernelParams = [
+    "video=DP-2:2560x1440@165"
+    "video=DP-3:1920x1080@60"
+  ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
+  # NOTE: "amdgpu" is already set in the hardware module
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = false;
 
@@ -76,7 +86,7 @@ in {
     enable = true;
     username = "dhain";
 
-    # :packages
+    # extra :packages
     packages = with pkgs; [
       opentabletdriver
 

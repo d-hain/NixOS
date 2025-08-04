@@ -2,22 +2,17 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  inputs,
-  config,
-  lib,
   pkgs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./qbittorrent.nix
+    ../../modules/nix.nix
+    ../../modules/environment.nix
+    ../../modules/nix.nix
+    ../../modules/nix.nix
+    ../../modules/nix.nix
   ];
-
-  ##################
-  ### Nix Config ###
-  ##################
-
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -29,17 +24,6 @@
   };
 
   networking.hostName = "server"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Vienna";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = lib.mkDefault {
-    font = "Lat2-Terminus16";
-    keyMap = "de";
-  };
 
   ##################
   ### User Stuff ###
@@ -64,15 +48,6 @@
       cls = "clear";
     };
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-    unzip
-    vim
-    git
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -189,22 +164,6 @@
     openFirewall = true;
     group = "media";
     dataDir = "/media/jellyfin";
-  };
-
-  services.jellyseerr = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  systemd.services.jellyseerr-restarter = {
-    enable = true;
-    description = "Restarts Jellyseerr on startup as that fixes it not loading anything and not recognizing anything for whatever reason.";
-    wantedBy = ["default.target"];
-    after = ["jellyseerr.service"];
-    script = ''
-      sleep 10
-      systemctl restart jellyseerr.service
-    '';
   };
 
   #############################
