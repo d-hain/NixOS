@@ -455,10 +455,10 @@
         "ghostty": "ghostty",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs",
-        "server-nixpkgs": "server-nixpkgs"
+        "servarr-nixpkgs": "servarr-nixpkgs"
       }
     },
-    "server-nixpkgs": {
+    "servarr-nixpkgs": {
       "locked": {
         "lastModified": 1754214453,
         "narHash": "sha256-Q/I2xJn/j1wpkGhWkQnm20nShYnG7TI99foDBpXm1SY=",

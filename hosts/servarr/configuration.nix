@@ -23,7 +23,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  networking.hostName = "server"; # Define your hostname.
+  networking.hostName = "servarr"; # Define your hostname.
 
   ##################
   ### User Stuff ###
