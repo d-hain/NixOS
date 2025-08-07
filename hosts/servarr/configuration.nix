@@ -9,16 +9,13 @@
     ./hardware-configuration.nix
     ../../modules/nix.nix
     ../../modules/environment.nix
-    ../../modules/nix.nix
-    ../../modules/nix.nix
-    ../../modules/nix.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     systemd-boot = {
       enable = true;
-      configurationLimit = 99;
+      configurationLimit = 15;
     };
     efi.canTouchEfiVariables = true;
   };
@@ -73,10 +70,33 @@
   # Media group for all media services
   users.groups.media = {};
 
-  services.jackett = {
+  services.prowlarr = {
     enable = true;
     openFirewall = true;
-    dataDir = "/media/jackett/config";
+
+    settings = {
+      # WARN: THIS OPTION KILLS PROWLARR COMPLETELY
+      # auth.enabled = true;
+      log = {
+        analyticsEnabled = true;
+      };
+      #  server = {
+      #  urlbase = "";
+      #  bindaddress = "0.0.0.0";
+      #  port = 1;
+      #  # enablessl = true;
+      #  # sslport = 6969;
+      #  # sslcertpath = "";
+      #  # sslcertpassword = "";
+      #  };
+    };
+  };
+  systemd.services.prowlarr = {
+    serviceConfig = {
+      PrivateNetwork = false;
+      # ProtextSystem = "no";
+      # ProtextHome = false;
+    };
   };
 
   services.qbittorrent = {
@@ -154,6 +174,7 @@
     group = "media";
     dataDir = "/media/bazarr";
   };
+
   systemd.tmpfiles.rules = [
     "d /media/sonarr/data 2775 sonarr media - -"
     "d /media/radarr/data 2775 radarr media - -"
