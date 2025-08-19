@@ -102,7 +102,6 @@
 
       element-desktop
       spotify
-      obs-studio
       blender-hip
       kdePackages.krdc
 
@@ -112,6 +111,12 @@
 
       osu-lazer-bin
     ];
+  };
+
+  # OBS as programs because of virtual camera
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
   };
 
   # Make Jai work
