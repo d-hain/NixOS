@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    server-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    servarr-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = {
@@ -25,7 +25,7 @@
     hyprland,
     ghostty,
     fuzzel-pass,
-    server-nixpkgs,
+    servarr-nixpkgs,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -53,11 +53,11 @@
         ];
       };
 
-      server = server-nixpkgs.lib.nixosSystem {
+      servarr = servarr-nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
-          ./hosts/server/configuration.nix
+          ./hosts/servarr/configuration.nix
         ];
       };
     };
