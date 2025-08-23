@@ -70,12 +70,6 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = false;
 
-  # iPhone Mounting
-  services.usbmuxd = {
-    enable = true;
-    package = pkgs.usbmuxd2;
-  };
-
   ##############
   ### Config ###
   ##############
