@@ -112,6 +112,7 @@
           Username = "doce";
           Password_PBKDF2 = "@ByteArray(kamRomhFGYgDZ522gepLyw==:iW6xBEfpcJ2GRqOHtqAGFsIZLKwJxtc4YKieIK8rCk0yzIe7aVRzaIVuKFLS4KWa5UPI8L7RHcrwTXTUcLaZMQ==)";
         };
+	Scheduler.end_time = ''@Variant(\0\0\0\xf\0\x36\xee\x80)'';
         General.Locale = "en";
       };
       AutoRun = {
@@ -133,8 +134,8 @@
 
           BTProtocol = "TCP";
           UseAlternativeGlobalSpeedLimit = true;
-          AlternativeGlobalDLSpeedLimit = 40000;
-          AlternativeGlobalULSpeedLimit = 10000;
+          AlternativeGlobalDLSpeedLimit = 5000;
+          AlternativeGlobalULSpeedLimit = 1300;
           BandwidthSchedulerEnabled = true;
 
           QueueingSystemEnabled = true;
