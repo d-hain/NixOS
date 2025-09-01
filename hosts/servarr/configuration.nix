@@ -28,8 +28,12 @@
   ### User Stuff ###
   ##################
 
-  # To make SSH work with any terminal (including ghostty)
-  environment.variables.TERM = "xterm-256color";
+  environment.variables = {
+    # To make SSH work with any terminal (including ghostty)
+    TERM = "xterm-256color";
+    # Nano is my archenemy
+    EDITOR = "vim";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.doce = {
@@ -84,6 +88,20 @@
             "7575:7575"
           ];
           environmentFiles = [config.age.secrets.homarr.path];
+        };
+
+        dashdot = {
+          image = "mauricenino/dashdot:6.2.0";
+          privileged = true;
+          volumes = [
+            "/:/mnt/host:ro"
+          ];
+          ports = [
+            "80:3001"
+          ];
+          environment = {
+            DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
+          };
         };
       };
     };
