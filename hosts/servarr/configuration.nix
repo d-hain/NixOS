@@ -3,10 +3,12 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   pkgs,
+  config,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./secrets.nix
     ../../modules/nix.nix
     ../../modules/environment.nix
   ];
@@ -63,6 +65,30 @@
     settings.PermitRootLogin = "no";
   };
 
+  ########################
+  ### Server Dashboard ###
+  ########################
+
+  virtualisation = {
+    docker.enable = true;
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        homarr = {
+          image = "ghcr.io/homarr-labs/homarr:v1.34.0";
+          volumes = [
+            # "/var/run/docker.sock:/var/run/docker.sock" # Optional for docker integration. Whatever that means
+            "/media/homarr/appdata:/appdata"
+          ];
+          ports = [
+            "7575:7575"
+          ];
+          environmentFiles = [config.age.secrets.homarr.path];
+        };
+      };
+    };
+  };
+
   ##################
   ### Home Media ###
   ##################
@@ -112,7 +138,7 @@
           Username = "doce";
           Password_PBKDF2 = "@ByteArray(kamRomhFGYgDZ522gepLyw==:iW6xBEfpcJ2GRqOHtqAGFsIZLKwJxtc4YKieIK8rCk0yzIe7aVRzaIVuKFLS4KWa5UPI8L7RHcrwTXTUcLaZMQ==)";
         };
-	Scheduler.end_time = ''@Variant(\0\0\0\xf\0\x36\xee\x80)'';
+        Scheduler.end_time = ''@Variant(\0\0\0\xf\0\x36\xee\x80)'';
         General.Locale = "en";
       };
       AutoRun = {

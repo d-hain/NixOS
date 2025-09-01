@@ -17,6 +17,7 @@
     };
 
     servarr-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {
@@ -26,6 +27,7 @@
     ghostty,
     fuzzel-pass,
     servarr-nixpkgs,
+    agenix,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -58,8 +60,15 @@
 
         modules = [
           ./hosts/servarr/configuration.nix
+          agenix.nixosModules.default
         ];
       };
+    };
+
+    devShells.${system}.default = pkgs.mkShell {
+      packages = [
+        agenix.packages.${system}.default
+      ];
     };
 
     formatter.${system} = pkgs.alejandra;

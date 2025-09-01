@@ -9,25 +9,11 @@ Here lies my NixOS configuration.
 ├── flake.lock
 ├── flake.nix
 ├── hosts
-│   ├── default
-│   │   ├── configuration.nix
-│   │   └── hardware-configuration.nix
+│   ├── pc
 │   ├── laptop
-│   │   ├── configuration.nix
-│   │   └── hardware-configuration.nix
-│   └── server
-│       ├── configuration.nix
-│       ├── hardware-configuration.nix
-│       └── qbittorrent.nix
-└── modules
-    ├── environment.nix
-    ├── hardware-stuff.nix
-    ├── hyprsunset.nix
-    ├── nix.nix
-    ├── programs.nix
-    ├── services.nix
-    ├── shell.nix
-    └── user.nix
+│   └── servarr
+├── modules
+└── secrets
 ```
 
 ## How to rebuild the system
@@ -37,4 +23,9 @@ After cloning this repo to your home directory just run this command:
 sudo nixos-rebuild switch --flake /home/USER/NixOS#SYSTEM
 ```
 Replace `USER` and `SYSTEM` with something that makes sense.
-Options for `SYSTEM`: `pc` `laptop` `server`
+Options for `SYSTEM`: `pc` `laptop` `servarr`
+
+## How to add a secret
+
+Add an entry to `secrets/secrets.nix` with its keys.
+Write whatever it is in the env file using `agenix -e SECRET_NAME.age`. (to get `agenix` use `nix develop`)
