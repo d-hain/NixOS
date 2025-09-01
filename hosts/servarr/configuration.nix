@@ -97,7 +97,7 @@
             "/:/mnt/host:ro"
           ];
           ports = [
-            "80:3001"
+            "5421:3001"
           ];
           environment = {
             DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
