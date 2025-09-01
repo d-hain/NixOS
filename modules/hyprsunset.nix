@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Start Hyprsunset at 18:00:00 every day and turn it off at 8:00:00
   systemd.user.services.hyprsunset = {
     enable = true;
