@@ -31,6 +31,7 @@
       "steam-original"
       "steam-run"
 
+      "google-chrome"
       "spotify"
       "synology-drive-client"
       "osu-lazer-bin"
@@ -82,13 +83,11 @@
 
     # extra :packages
     packages = with pkgs; [
+      ###############
+      ### Drivers ###
+      ###############
+
       opentabletdriver
-
-      #########################
-      ### Terminal programs ###
-      #########################
-
-      gamescope
 
       ############
       ### Apps ###
@@ -98,11 +97,13 @@
       spotify
       blender-hip
       kdePackages.krdc
+      google-chrome
 
       #############
       ### Games ###
       #############
 
+      gamescope
       osu-lazer-bin
     ];
   };
