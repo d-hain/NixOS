@@ -96,6 +96,7 @@
       element-desktop
       spotify
       blender-hip
+      freecad-qt6
       kdePackages.krdc
       google-chrome
 
