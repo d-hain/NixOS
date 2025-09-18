@@ -178,8 +178,8 @@
 
           BTProtocol = "TCP";
           UseAlternativeGlobalSpeedLimit = true;
-          AlternativeGlobalDLSpeedLimit = 5000;
-          AlternativeGlobalULSpeedLimit = 1300;
+          AlternativeGlobalDLSpeedLimit = 3666; # ~30 Mbit/s
+          AlternativeGlobalULSpeedLimit = 1300; # ~10 Mbit/s
           BandwidthSchedulerEnabled = true;
 
           QueueingSystemEnabled = true;
