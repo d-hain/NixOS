@@ -28,6 +28,7 @@
       "steam-original"
       "steam-run"
 
+      "spotify"
       "synology-drive-client"
     ];
 

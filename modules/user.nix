@@ -130,6 +130,7 @@
           anki
           synology-drive-client
           mpv
+          spotify
           teams-for-linux
           onlyoffice-desktopeditors
           thunderbird
