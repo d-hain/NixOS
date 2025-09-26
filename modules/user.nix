@@ -124,6 +124,7 @@
 
           firefox
           brave
+          google-chrome
           ungoogled-chromium
           vesktop
           gimp3
