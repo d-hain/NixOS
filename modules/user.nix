@@ -70,6 +70,7 @@
           odin # (nearly) Up to date Odin compiler
           rustup
           python3
+          wireplumber
 
           # Terminal Programs
           (ghostty.packages.${pkgs.system}.default)
