@@ -98,6 +98,7 @@
           fuzzel
           bemoji
           waybar
+          quickshell
           hyprshot
           hyprsunset
           pavucontrol
