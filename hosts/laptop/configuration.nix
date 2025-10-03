@@ -18,6 +18,7 @@
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
     ../../modules/japanese.nix
+    ../../modules/work.nix
   ];
 
   # Allow Unfree Packages explicitly

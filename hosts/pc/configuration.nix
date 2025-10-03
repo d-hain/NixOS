@@ -18,6 +18,7 @@
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
     ../../modules/japanese.nix
+    ../../modules/work.nix
   ];
 
   # Allow Unfree Packages explicitly
@@ -96,7 +97,6 @@
       element-desktop
       blender-hip
       freecad-qt6
-      kdePackages.krdc
 
       #############
       ### Games ###
@@ -133,12 +133,6 @@
   environment.etc."ld.so.conf".text = ''
     /run/current-system/sw/share/nix-ld/lib
   '';
-
-  # Work Wireguard
-  networking.wg-quick.interfaces.work = {
-    configFile = "/home/dhain/NAS-David/Work/WireGuard.conf";
-    autostart = false;
-  };
 
   #############################
   ### "DO NOT CHANGE"-stuff ###
