@@ -4,6 +4,7 @@
   pkgs,
   ghostty,
   fuzzel-pass,
+  quickshell,
   ...
 }: {
   options.user = {
@@ -99,7 +100,7 @@
           fuzzel
           bemoji
           waybar
-          quickshell
+          (quickshell.packages.${pkgs.system}.default)
           hyprshot
           hyprsunset
           pavucontrol
