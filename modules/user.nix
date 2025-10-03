@@ -71,6 +71,7 @@
           rustup
           python3
           wireplumber
+          acpi
 
           # Terminal Programs
           (ghostty.packages.${pkgs.system}.default)
