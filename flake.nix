@@ -15,10 +15,6 @@
       url = "github:d-hain/fuzzel-pass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     servarr-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
@@ -30,7 +26,6 @@
     hyprland,
     ghostty,
     fuzzel-pass,
-    quickshell,
     servarr-nixpkgs,
     agenix,
   }: let
@@ -41,7 +36,7 @@
       pc = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit hyprland ghostty fuzzel-pass quickshell;
+          inherit hyprland ghostty fuzzel-pass;
         };
 
         modules = [
@@ -52,7 +47,7 @@
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit hyprland ghostty fuzzel-pass quickshell;
+          inherit hyprland ghostty fuzzel-pass;
         };
 
         modules = [
