@@ -27,7 +27,6 @@
       cdd = "cd ~/Downloads/";
 
       enc = "cd ~/dotfiles/.config/nvim && nvim .";
-      enx = "cd ~/dotfiles/nixos/ && nvim .";
       ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
