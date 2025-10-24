@@ -99,9 +99,9 @@
           fuzzel
           bemoji
           waybar
-          quickshell
           hyprshot
           hyprsunset
+          hyprlock
           pavucontrol
           # Bluetooth GUI (doesn't work but makes it work) see:
           # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
