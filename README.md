@@ -20,12 +20,16 @@ Here lies my NixOS configuration.
 
 After cloning this repo to your home directory just run this command:
 ```shell
-sudo nixos-rebuild switch --flake /home/USER/NixOS#SYSTEM
+sudo nixos-rebuild switch --flake /home/<USER>/NixOS#<SYSTEM>
 ```
-Replace `USER` and `SYSTEM` with something that makes sense.
-Options for `SYSTEM`: `pc` `laptop` `servarr`
+Replace `<USER>` and `<SYSTEM>` with something that makes sense.
+Options for `<SYSTEM>`: `pc` `laptop` `servarr`
 
 ## How to add a secret
 
-Add an entry to `secrets/secrets.nix` with its keys.
-Write whatever it is in the env file using `agenix -e SECRET_NAME.age`. (to get `agenix` use `nix develop`)
+1. Add an entry to `secrets/secrets.nix` with its keys.
+2. Write whatever it is in the env file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop`)
+3. To use that secret add it in the `hosts/<HOST>/secrets.nix` file.
+4. Then in the configuration use `config.age.secrets.<SECRET_NAME>.path` to get the path of the file.
+    - Or `builtin.readFile config.age.secrets.<SECRET_NAME>.path` to get its contents.
+ 
