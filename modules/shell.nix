@@ -22,11 +22,11 @@
 
       cda = "cd ~/NAS-David/anime-manga-notes";
       cdp = "cd ~/NAS-David/Programming/";
+      cdh = "cd ~/NAS-David/FH/";
+      cdw = "cd ~/NAS-David/Work/";
       cdd = "cd ~/Downloads/";
 
       enc = "cd ~/dotfiles/.config/nvim && nvim .";
-      enx = "cd ~/dotfiles/nixos/ && nvim .";
-      enxc = "cd ~/NixOS/ && nvim ./hosts/pc/configuration.nix";
       ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";

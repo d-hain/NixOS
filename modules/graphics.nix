@@ -9,13 +9,11 @@ in {
     enable = true;
 
     extraPackages = [
-      pkgs.amdvlk
       pkgs.rocmPackages.clr.icd
     ];
 
     # 32bit Support (eg. Steam)
     enable32Bit = true;
-    extraPackages32 = [pkgs.driversi686Linux.amdvlk];
 
     package = hypr-unstable.mesa;
     package32 = hypr-unstable.pkgsi686Linux.mesa;

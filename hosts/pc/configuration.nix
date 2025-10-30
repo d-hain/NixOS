@@ -18,6 +18,7 @@
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
     ../../modules/japanese.nix
+    ../../modules/work.nix
   ];
 
   # Allow Unfree Packages explicitly
@@ -94,10 +95,8 @@
       ############
 
       element-desktop
-      spotify
       blender-hip
-      kdePackages.krdc
-      google-chrome
+      freecad-qt6
 
       #############
       ### Games ###
@@ -107,6 +106,8 @@
       osu-lazer-bin
     ];
   };
+
+  programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/pc/configuration.nix";
 
   # OBS as programs because of virtual camera
   programs.obs-studio = {
@@ -132,12 +133,6 @@
   environment.etc."ld.so.conf".text = ''
     /run/current-system/sw/share/nix-ld/lib
   '';
-
-  # Work Wireguard
-  networking.wg-quick.interfaces.work = {
-    configFile = "/home/dhain/NAS-David/Work/WireGuard.conf";
-    autostart = false;
-  };
 
   #############################
   ### "DO NOT CHANGE"-stuff ###

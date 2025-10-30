@@ -18,6 +18,7 @@
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
     ../../modules/japanese.nix
+    ../../modules/work.nix
   ];
 
   # Allow Unfree Packages explicitly
@@ -28,6 +29,8 @@
       "steam-original"
       "steam-run"
 
+      "google-chrome"
+      "spotify"
       "synology-drive-client"
     ];
 
@@ -41,6 +44,8 @@
     packages = with pkgs; [
     ];
   };
+
+  programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/laptop/configuration.nix";
 
   #############################
   ### "DO NOT CHANGE"-stuff ###

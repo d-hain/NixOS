@@ -70,6 +70,8 @@
           odin # (nearly) Up to date Odin compiler
           rustup
           python3
+          wireplumber
+          acpi
 
           # Terminal Programs
           (ghostty.packages.${pkgs.system}.default)
@@ -99,6 +101,7 @@
           waybar
           hyprshot
           hyprsunset
+          hyprlock
           pavucontrol
           # Bluetooth GUI (doesn't work but makes it work) see:
           # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
@@ -124,12 +127,14 @@
 
           firefox
           brave
+          google-chrome
           ungoogled-chromium
           vesktop
           gimp3
           anki
           synology-drive-client
           mpv
+          spotify
           teams-for-linux
           onlyoffice-desktopeditors
           thunderbird
