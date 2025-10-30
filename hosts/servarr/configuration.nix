@@ -63,7 +63,6 @@
   services.openssh = {
     enable = true;
 
-    ports = [22 22222];
     openFirewall = true;
     # Require ssh key to authenticate
     settings.PasswordAuthentication = false;
@@ -77,7 +76,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 22222 80 443];
+    allowedTCPPorts = [80 443];
   };
 
   services.caddy = {
