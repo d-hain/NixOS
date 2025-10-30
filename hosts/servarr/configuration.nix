@@ -63,10 +63,31 @@
   services.openssh = {
     enable = true;
 
+    ports = [22 22222];
+    openFirewall = true;
     # Require ssh key to authenticate
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
+  };
+
+  ###############
+  ### Website ###
+  ###############
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [22 22222 80 443];
+  };
+
+  services.caddy = {
+    enable = true;
+    virtualHosts."doceys.computer".extraConfig = ''
+      respond "Hello, world!"
+    '';
+    virtualHosts."192.168.1.69".extraConfig = ''
+      respond "Hello, world!"
+    '';
   };
 
   ########################
