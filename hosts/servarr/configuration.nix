@@ -70,12 +70,13 @@
     settings.PermitRootLogin = "no";
   };
 
-	# DDNS
-	services.ddns-updater = {
-		enable = true;
-	};
-	# Thanks to https://github.com/joshuakb2/configuration.nix/blob/0284721889b4121f6cc361f8617eebbdbee43d07/JBaker-Area51/my-hardware-configs.nix#L97
-	systemd.services.ddns-updater.serviceConfig.LoadCredential = "config:${config.age.secrets.doceys-computer-ddns-config.path}";
+  # DDNS
+  services.ddns-updater = {
+    enable = true;
+    environment.CONFIG_FILEPATH = "%d/config";
+  };
+  # Thanks to https://github.com/joshuakb2/configuration.nix/blob/0284721889b4121f6cc361f8617eebbdbee43d07/JBaker-Area51/my-hardware-configs.nix#L97
+  systemd.services.ddns-updater.serviceConfig.LoadCredential = "config:${config.age.secrets.doceys-computer-ddns-config.path}";
 
   ###############
   ### Website ###
