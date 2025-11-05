@@ -4,8 +4,13 @@
 {
   pkgs,
   config,
+  lib,
   ...
-}: {
+}: let
+  url-local = "192.168.1.69";
+  url = "doceys.computer";
+  url-git = "git.doceys.computer";
+in {
   imports = [
     ./hardware-configuration.nix
     ./secrets.nix
@@ -78,22 +83,119 @@
   # Thanks to https://github.com/joshuakb2/configuration.nix/blob/0284721889b4121f6cc361f8617eebbdbee43d07/JBaker-Area51/my-hardware-configs.nix#L97
   systemd.services.ddns-updater.serviceConfig.LoadCredential = "config:${config.age.secrets.doceys-computer-ddns-config.path}";
 
+  ############################
+  ### Forgejo Git instance ###
+  ############################
+
+  services.postgresql = {
+    enable = true;
+    enableTCPIP = false;
+    authentication = lib.mkForce ''
+      local forgejo forgejo  peer
+      local all			postgres peer
+      local all			all			 reject
+    '';
+    ensureDatabases = ["forgejo"];
+    ensureUsers = [
+      {
+        name = "forgejo";
+        ensureDBOwnership = true;
+        ensureClauses = {
+          login = true;
+        };
+      }
+    ];
+  };
+
+  services.forgejo = {
+    enable = true;
+    stateDir = "/webserver/forgejo";
+    settings = {
+      DEFAULT = {
+        APP_NAME = "DocEys Forge";
+      };
+      repository = {
+        DEFAULT_PRIVATE = "private";
+        # TODO: DISABLED_REPO_UNITS = "";
+        # TODO: DEFAULT_REPO_UNITS = "";
+        DEFAULT_BRANCH = "master";
+      };
+      ui = {
+        DEFAULT_THEME = "forgejo-dark";
+        SHOW_USER_EMAIL = false;
+      };
+      "ui.meta" = {
+        AUTHOR = "DocE / DocEys";
+        DESCRIPTION = "DocEys's Git Forge";
+        KEYWORDS = "git,forge,forgejo,doce,doceys";
+      };
+      server = {
+        PROTOCOL = "http";
+				ROOT_URL = "https://" + url-git;
+        HTTP_ADDR = url-local;
+        HTTP_PORT = 3333;
+        SSH_DOMAIN = url-git;
+        LANDING_PAGE = "explore";
+      };
+      security = {
+        GLOBAL_TWO_FACTOR_REQUIREMENT = "all";
+        MIN_PASSWORD_LENGTH = 16;
+        PASSWORD_COMPLEXITY = "lower,upper,digit,spec";
+      };
+      service = {
+        # TODO: Setup Email Notifications ENABLE_NOTIFY_EMAIL = true;
+        DISABLE_REGISTRATION = true;
+      };
+      mailer = {
+        # TODO: MAILING!!! ENABLED = true;
+      };
+      # TODO: Do i need this?! "mailer.incoming" = {};
+      session.COOKIE_SECURE = true;
+      api.ENABLE_SWAGGER = false;
+      packages.ENABLED = false;
+      other.SHOW_FOOTER_TEMPLATE_LOAD_TIME = false;
+    };
+		secrets = {
+      security = {
+        SECRET_KEY = lib.mkForce config.age.secrets.forgejo-secret-key.path;
+        INTERNAL_TOKEN = lib.mkForce config.age.secrets.forgejo-internal-token.path;
+			};
+			oauth2.JWT_SECRET = lib.mkForce config.age.secrets.forgejo-oauth-jwt-secret.path;
+		};
+    dump = {
+      enable = true;
+      type = "tar.gz";
+      age = "2w";
+    };
+    database = {
+      type = "postgres";
+      socket = "/var/run/postgresql/";
+    };
+  };
+
   ###############
   ### Website ###
   ###############
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [80 443];
+    allowedTCPPorts = [
+      80
+      443 # HTTP + HTTPS for my Website
+      config.services.forgejo.settings.server.HTTP_PORT # Access forgejo locally
+    ];
   };
 
   services.caddy = {
     enable = true;
-    virtualHosts."doceys.computer".extraConfig = ''
+    virtualHosts.${url}.extraConfig = ''
       respond "Hello, world!"
     '';
-    virtualHosts."192.168.1.69".extraConfig = ''
+    virtualHosts.${url-local}.extraConfig = ''
       respond "Hello, world!"
+    '';
+    virtualHosts.${url-git}.extraConfig = ''
+      reverse_proxy http://${url-local}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}
     '';
   };
 
