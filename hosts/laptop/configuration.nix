@@ -51,6 +51,7 @@
         persistentKeepalive = 25;
       }
     ];
+    autostart = false;
   };
 
   user = {
