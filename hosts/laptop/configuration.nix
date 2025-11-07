@@ -43,7 +43,8 @@
     address = ["10.0.0.2/24"];
     privateKeyFile = config.age.secrets.wg-laptop-private-key.path;
     peers = [
-      { # Server
+      {
+        # Server
         publicKey = "pwps2Hs9J8PIVqLrtIn6lowZn657e6onLptaUm4jaAU=";
         allowedIPs = ["10.0.0.0/24"];
         endpoint = "doceys.computer:51820";
