@@ -52,6 +52,7 @@
 
         modules = [
           ./hosts/laptop/configuration.nix
+          agenix.nixosModules.default
         ];
       };
 

@@ -3,11 +3,13 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   lib,
+  config,
   pkgs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./secrets.nix
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
     ../../modules/graphics.nix
@@ -37,13 +39,12 @@
   networking.hostName = "portable"; # Define your hostname.
 
   # Wireguard to Server
-  networking.wireguard.interfaces.server = {
-    ips = ["10.0.0.2/24"];
-    privateKeyFile = config.age.secrets.wg-laptop-private-key;
+  networking.wg-quick.interfaces.server = {
+    address = ["10.0.0.2/24"];
+    privateKeyFile = config.age.secrets.wg-laptop-private-key.path;
     peers = [
-      {
-        name = "server";
-        publicKey = "pwps2Hs9J8PIVqLrtIn6lowZn657e6onLptaUm4jaU=";
+      { # Server
+        publicKey = "pwps2Hs9J8PIVqLrtIn6lowZn657e6onLptaUm4jaAU=";
         allowedIPs = ["10.0.0.0/24"];
         endpoint = "doceys.computer:51820";
         persistentKeepalive = 25;
