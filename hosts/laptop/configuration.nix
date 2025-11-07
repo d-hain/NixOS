@@ -36,6 +36,21 @@
 
   networking.hostName = "portable"; # Define your hostname.
 
+  # Wireguard to Server
+  networking.wireguard.interfaces.server = {
+    ips = ["10.0.0.2/24"];
+    privateKeyFile = config.age.secrets.wg-laptop-private-key;
+    peers = [
+      {
+        name = "server";
+        publicKey = "pwps2Hs9J8PIVqLrtIn6lowZn657e6onLptaUm4jaU=";
+        allowedIPs = ["10.0.0.0/24"];
+        endpoint = "doceys.computer:51820";
+        persistentKeepalive = 25;
+      }
+    ];
+  };
+
   user = {
     enable = true;
     username = "dhain";

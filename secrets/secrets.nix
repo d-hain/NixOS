@@ -7,4 +7,6 @@ in {
   "forgejo_internal_token.age".publicKeys = [servarr d-hain];
   "forgejo_oauth_jwt_secret.age".publicKeys = [servarr d-hain];
   "doceys.computer_ddns_config.age".publicKeys = [servarr d-hain];
+
+  "wg_laptop_private_key.age".publicKeys = [d-hain];
 }
