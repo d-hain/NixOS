@@ -64,6 +64,20 @@ in {
     enableSSHSupport = true;
   };
 
+  # Wireguard
+  networking.wireguard.interfaces.server = {
+    ips = ["10.0.0.1/24"];
+    listenPort = 51820;
+    privateKeyFile = config.age.secrets.wg-server-private-key.path;
+    peers = [
+      {
+        name = "laptop";
+        publicKey = "b8DBVzebaEz/ZuJAr28kilz9Ch8vIIPpXY5nrqjkT3k=";
+        allowedIPs = ["10.0.0.2/32"];
+      }
+    ];
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -131,7 +145,7 @@ in {
       };
       server = {
         PROTOCOL = "http";
-				ROOT_URL = "https://" + url-git;
+        ROOT_URL = "https://" + url-git;
         HTTP_ADDR = url-local;
         HTTP_PORT = 3333;
         SSH_DOMAIN = url-git;
@@ -155,13 +169,13 @@ in {
       packages.ENABLED = false;
       other.SHOW_FOOTER_TEMPLATE_LOAD_TIME = false;
     };
-		secrets = {
+    secrets = {
       security = {
         SECRET_KEY = lib.mkForce config.age.secrets.forgejo-secret-key.path;
         INTERNAL_TOKEN = lib.mkForce config.age.secrets.forgejo-internal-token.path;
-			};
-			oauth2.JWT_SECRET = lib.mkForce config.age.secrets.forgejo-oauth-jwt-secret.path;
-		};
+      };
+      oauth2.JWT_SECRET = lib.mkForce config.age.secrets.forgejo-oauth-jwt-secret.path;
+    };
     dump = {
       enable = true;
       type = "tar.gz";
