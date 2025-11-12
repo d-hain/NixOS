@@ -10,11 +10,6 @@
         owner = "doce";
         group = "users";
       };
-      wg-server-private-key = {
-        file = ../../secrets/wg_server_private_key.age;
-        owner = "doce";
-        group = "users";
-      };
       forgejo-secret-key = {
         file = ../../secrets/forgejo_secret_key.age;
         owner = "doce";

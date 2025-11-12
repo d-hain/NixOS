@@ -9,7 +9,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./secrets.nix
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
     ../../modules/graphics.nix
@@ -37,22 +36,6 @@
     ];
 
   networking.hostName = "portable"; # Define your hostname.
-
-  # Wireguard to Server
-  networking.wg-quick.interfaces.server = {
-    address = ["10.0.0.2/24"];
-    privateKeyFile = config.age.secrets.wg-laptop-private-key.path;
-    peers = [
-      {
-        # Server
-        publicKey = "pwps2Hs9J8PIVqLrtIn6lowZn657e6onLptaUm4jaAU=";
-        allowedIPs = ["10.0.0.0/24"];
-        endpoint = "doceys.computer:51820";
-        persistentKeepalive = 25;
-      }
-    ];
-    autostart = false;
-  };
 
   user = {
     enable = true;

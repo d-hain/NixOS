@@ -64,20 +64,6 @@ in {
     enableSSHSupport = true;
   };
 
-  # Wireguard
-  networking.wg-quick.interfaces.server = {
-    address = ["10.0.0.1/24"];
-    listenPort = 51820;
-    privateKeyFile = config.age.secrets.wg-server-private-key.path;
-    peers = [
-      {
-        # laptop
-        publicKey = "b8DBVzebaEz/ZuJAr28kilz9Ch8vIIPpXY5nrqjkT3k=";
-        allowedIPs = ["10.0.0.2/32"];
-      }
-    ];
-  };
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
