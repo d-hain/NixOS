@@ -139,6 +139,7 @@
           onlyoffice-desktopeditors
           thunderbird
           signal-desktop
+          wireshark
 
           # Password Store
           # only for importing from SafeInCloud
