@@ -70,18 +70,14 @@
           odin # (nearly) Up to date Odin compiler
           rustup
           python3
-          wireplumber
-          acpi
 
           # Terminal Programs
           (ghostty.packages.${pkgs.system}.default)
           kdePackages.konsole # Fallback terminal
           typst
-          typst-live
           ffmpeg
           imagemagick
           sendme # Ultimate magic and just the best thing ever
-          comma
 
           # Neovim and LSPs
           neovim

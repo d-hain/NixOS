@@ -38,18 +38,6 @@
       "osu-lazer-bin"
     ];
 
-  ########################
-  ### Network Mounting ###
-  ########################
-
-  fileSystems."/home/dhain/NAS-Hain" = {
-    device = "192.168.1.22:/volume1/Hain";
-    fsType = "nfs";
-    options = [
-      "nofail" # Don't require to mount for successful boot
-    ];
-  };
-
   ######################
   ### Hardware Stuff ###
   ######################
@@ -60,10 +48,6 @@
     opencl.enable = true;
   };
   boot.initrd.kernelModules = ["amdgpu"];
-  boot.kernelParams = [
-    "video=DP-2:2560x1440@165"
-    "video=DP-3:1920x1080@60"
-  ];
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
@@ -96,7 +80,6 @@
 
       element-desktop
       blender-hip
-      freecad-qt6
 
       #############
       ### Games ###
