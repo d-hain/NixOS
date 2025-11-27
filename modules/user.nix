@@ -72,7 +72,7 @@
           python3
 
           # Terminal Programs
-          (ghostty.packages.${pkgs.system}.default)
+          (ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default)
           kdePackages.konsole # Fallback terminal
           typst
           ffmpeg
@@ -141,7 +141,7 @@
           # only for importing from SafeInCloud
           # (pkgs.pass.withExtensions (p: [p.pass-import]))
           pass
-          (fuzzel-pass.packages.${pkgs.system}.default)
+          (fuzzel-pass.packages.${pkgs.stdenv.hostPlatform.system}.default)
 
           # Minecraft
           prismlauncher

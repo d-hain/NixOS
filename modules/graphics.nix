@@ -3,7 +3,7 @@
   hyprland,
   ...
 }: let
-  hypr-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
+  hypr-pkgs = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   hardware.graphics = {
     enable = true;
@@ -15,8 +15,8 @@ in {
     # 32bit Support (eg. Steam)
     enable32Bit = true;
 
-    package = hypr-unstable.mesa;
-    package32 = hypr-unstable.pkgsi686Linux.mesa;
+    package = hypr-pkgs.mesa;
+    package32 = hypr-pkgs.pkgsi686Linux.mesa;
   };
 
   services.xserver.videoDrivers = ["amdgpu"]; # Amazing naming. This is for Xorg and Wayland
@@ -31,8 +31,8 @@ in {
     enable = true;
     xwayland.enable = true;
 
-    package = hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   xdg.portal.extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];
 
