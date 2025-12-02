@@ -44,6 +44,7 @@
         "wheel" # Enable ‘sudo’ for the user
         "libvirtd" # Virtualisation using libvirt
         "docker" # I hate docker with a passion
+        "wireshark" # Capture all interfaces without superuser priviledges
       ];
 
       shell = pkgs.zsh;
