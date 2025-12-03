@@ -37,6 +37,12 @@
       kochi-substitute
     ];
 
+    # Create Groups if they don't exist already
+    users.groups = {
+      libvirtd = {};
+      docker = {};
+      wireshark = {};
+    };
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${config.user.username} = {
       isNormalUser = true;
