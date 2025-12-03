@@ -20,6 +20,7 @@
     ../../modules/services.nix
     ../../modules/japanese.nix
     ../../modules/work.nix
+    ../../modules/jai.nix
   ];
 
   # Allow Unfree Packages explicitly
