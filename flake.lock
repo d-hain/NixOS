@@ -133,11 +133,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760124858,
-        "narHash": "sha256-p0GEGW6EkF2S8fOcG4Mh04J0/JWnXw3MTuKKOvt8gDU=",
+        "lastModified": 1765318768,
+        "narHash": "sha256-raZTUcfI26/YHocqrQln4LEPOryRrZu1jQS/MirPbi0=",
         "owner": "d-hain",
         "repo": "fuzzel-pass",
-        "rev": "5349bd6ef6c1c2dc16ee17ee2732e36b7cc202c2",
+        "rev": "2ab5ae131614b3b2ee7e5e2a95414682671631c3",
         "type": "github"
       },
       "original": {
