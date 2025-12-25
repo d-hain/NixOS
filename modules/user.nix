@@ -71,6 +71,7 @@
           odin # (nearly) Up to date Odin compiler
           rustup
           python3
+          radicle-node
 
           # Terminal Programs
           (ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default)

@@ -31,5 +31,4 @@ Options for `<SYSTEM>`: `pc` `laptop` `servarr`
 2. Write whatever it is in the env file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop`)
 3. To use that secret add it in the `hosts/<HOST>/secrets.nix` file.
 4. Then in the configuration use `config.age.secrets.<SECRET_NAME>.path` to get the path of the file.
-    - Or `builtin.readFile config.age.secrets.<SECRET_NAME>.path` to get its contents.
  
