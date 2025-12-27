@@ -83,93 +83,36 @@ in {
   # Thanks to https://github.com/joshuakb2/configuration.nix/blob/0284721889b4121f6cc361f8617eebbdbee43d07/JBaker-Area51/my-hardware-configs.nix#L97
   systemd.services.ddns-updater.serviceConfig.LoadCredential = "config:${config.age.secrets.doceys-computer-ddns-config.path}";
 
-  ############################
-  ### Forgejo Git instance ###
-  ############################
+  ###############################
+  ### Radicle Seed Node (Git) ###
+  ###############################
 
-  services.postgresql = {
+  services.radicle = {
     enable = true;
-    enableTCPIP = false;
-    authentication = lib.mkForce ''
-      local forgejo forgejo  peer
-      local all			postgres peer
-      local all			all			 reject
-    '';
-    ensureDatabases = ["forgejo"];
-    ensureUsers = [
-      {
-        name = "forgejo";
-        ensureDBOwnership = true;
-        ensureClauses = {
-          login = true;
-        };
-      }
-    ];
-  };
-
-  services.forgejo = {
-    enable = true;
-    stateDir = "/webserver/forgejo";
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVQAWYc1m9vIBHknidQGhORM5hUTu/obR8+iMixsYJk";
+    privateKeyFile = config.age.secrets.radicle-servarr-private-key.path;
+    node = {
+      openFirewall = true;
+      listenAddress = "[::]";
+      listenPort = 8776;
+    };
     settings = {
-      DEFAULT = {
-        APP_NAME = "DocEys Forge";
+      node = {
+        alias = url-git;
+        seedingPolicy.default = "block";
+        externalAddresses = ["${url-git}:${builtins.toString config.services.radicle.node.listenPort}"];
       };
-      repository = {
-        DEFAULT_PRIVATE = "private";
-        # TODO: DISABLED_REPO_UNITS = "";
-        # TODO: DEFAULT_REPO_UNITS = "";
-        DEFAULT_BRANCH = "master";
+      web = {
+        pinned = {
+          repositories = [
+            "rad:z3VieV5aCudK3sWwvPjzxAZxBCWoT" # website
+          ];
+        };
       };
-      ui = {
-        DEFAULT_THEME = "forgejo-dark";
-        SHOW_USER_EMAIL = false;
-      };
-      "ui.meta" = {
-        AUTHOR = "DocE / DocEys";
-        DESCRIPTION = "DocEys's Git Forge";
-        KEYWORDS = "git,forge,forgejo,doce,doceys";
-      };
-      server = {
-        PROTOCOL = "http";
-        ROOT_URL = "https://" + url-git;
-        HTTP_ADDR = url-local;
-        HTTP_PORT = 3333;
-        SSH_DOMAIN = url-git;
-        LANDING_PAGE = "explore";
-      };
-      security = {
-        GLOBAL_TWO_FACTOR_REQUIREMENT = "all";
-        MIN_PASSWORD_LENGTH = 16;
-        PASSWORD_COMPLEXITY = "lower,upper,digit,spec";
-      };
-      service = {
-        # TODO: Setup Email Notifications ENABLE_NOTIFY_EMAIL = true;
-        DISABLE_REGISTRATION = true;
-      };
-      mailer = {
-        # TODO: MAILING!!! ENABLED = true;
-      };
-      # TODO: Do i need this?! "mailer.incoming" = {};
-      session.COOKIE_SECURE = true;
-      api.ENABLE_SWAGGER = false;
-      packages.ENABLED = false;
-      other.SHOW_FOOTER_TEMPLATE_LOAD_TIME = false;
     };
-    secrets = {
-      security = {
-        SECRET_KEY = lib.mkForce config.age.secrets.forgejo-secret-key.path;
-        INTERNAL_TOKEN = lib.mkForce config.age.secrets.forgejo-internal-token.path;
-      };
-      oauth2.JWT_SECRET = lib.mkForce config.age.secrets.forgejo-oauth-jwt-secret.path;
-    };
-    dump = {
+    httpd = {
       enable = true;
-      type = "tar.gz";
-      age = "2w";
-    };
-    database = {
-      type = "postgres";
-      socket = "/var/run/postgresql/";
+      listenPort = 8777;
     };
   };
 
@@ -180,23 +123,31 @@ in {
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      80
-      443 # HTTP + HTTPS for my Website
-      config.services.forgejo.settings.server.HTTP_PORT # Access forgejo locally
+      80 # HTTP for my Website
+      443 # HTTPS for my Website
+      config.services.radicle.httpd.listenPort # Radicle HTTP Daemon
     ];
   };
 
   services.caddy = {
     enable = true;
-    virtualHosts.${url}.extraConfig = ''
-      respond "Hello, world!"
-    '';
-    virtualHosts.${url-local}.extraConfig = ''
-      respond "Hello, world!"
-    '';
-    virtualHosts.${url-git}.extraConfig = ''
-      reverse_proxy http://${url-local}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}
-    '';
+    virtualHosts = {
+      # Website
+      ${url}.extraConfig = ''
+        respond "Hello, world!"
+      '';
+      ${url-local}.extraConfig = ''
+        respond "Hello, world!"
+      '';
+
+      # Radicle & Radicle HTTPD
+      ${url-git}.extraConfig = ''
+        # Radicle
+        reverse_proxy ${url-git}:${builtins.toString config.services.radicle.httpd.listenPort}
+        # Radicle-HTTP Daemon
+        reverse_proxy ${url-local}:${builtins.toString config.services.radicle.node.listenPort}
+      '';
+    };
   };
 
   ########################

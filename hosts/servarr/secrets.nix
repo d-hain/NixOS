@@ -10,18 +10,8 @@
         owner = "doce";
         group = "users";
       };
-      forgejo-secret-key = {
-        file = ../../secrets/forgejo_secret_key.age;
-        owner = "doce";
-        group = "users";
-      };
-      forgejo-internal-token = {
-        file = ../../secrets/forgejo_internal_token.age;
-        owner = "doce";
-        group = "users";
-      };
-      forgejo-oauth-jwt-secret = {
-        file = ../../secrets/forgejo_oauth_jwt_secret.age;
+      radicle-servarr-private-key = {
+        file = ../../secrets/radicle-servarr-private-key.age;
         owner = "doce";
         group = "users";
       };
