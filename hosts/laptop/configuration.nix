@@ -47,7 +47,7 @@
     ];
   };
 
-  programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/laptop/configuration.nix";
+  programs.zsh.shellAliases.enxc = "nvim +'cd ~/NixOS/' ~/NixOS/hosts/laptop/configuration.nix";
 
   #############################
   ### "DO NOT CHANGE"-stuff ###

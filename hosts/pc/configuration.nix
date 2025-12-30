@@ -91,7 +91,7 @@
     ];
   };
 
-  programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/pc/configuration.nix";
+  programs.zsh.shellAliases.enxc = "nvim +'cd ~/NixOS/' ~/NixOS/hosts/pc/configuration.nix";
 
   # OBS as programs because of virtual camera
   programs.obs-studio = {
