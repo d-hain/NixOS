@@ -93,12 +93,6 @@
 
   programs.zsh.shellAliases.enxc = "nvim +'cd ~/NixOS/' ~/NixOS/hosts/pc/configuration.nix";
 
-  # OBS as programs because of virtual camera
-  programs.obs-studio = {
-    enable = true;
-    enableVirtualCamera = true;
-  };
-
   #############################
   ### "DO NOT CHANGE"-stuff ###
   #############################

@@ -17,6 +17,12 @@
     enable = true;
   };
 
+  # OBS as programs because of virtual camera
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+  };
+
   ######################
   ### Virtualisation ###
   ######################
