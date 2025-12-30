@@ -113,6 +113,9 @@
       autoload -Uz add-zsh-hook
       add-zsh-hook chpwd auto_nix
       add-zsh-hook chpwd auto_venv
+
+      # Set zsh to Emacs mode so that Ctrl+R works
+      bindkey -e
     '';
 
     shellAliases = {
