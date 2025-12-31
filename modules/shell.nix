@@ -133,7 +133,7 @@
       cdw = "cd ~/NAS-David/Work/";
       cdd = "cd ~/Downloads/";
 
-      enc = "nvim +'cd ~/dotfiles/.config/nvim/'";
+      enc = "nvim +'cd ~/dotfiles/.config/nvim/' ~/dotfiles/.config/nvim/";
       ehc = "nvim +'cd ~/dotfiles/.config/hypr/' ~/dotfiles/.config/hypr/hyprland.conf";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
