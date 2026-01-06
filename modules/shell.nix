@@ -1,6 +1,8 @@
 {
   programs.zsh = {
     enable = true;
+    enableLsColors = true;
+    enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -84,39 +86,48 @@
 
       PROMPT=$'%F{green}╭─%n@%m%f$(status_line) %F{yellow}in %~%f$(git_line) $(shell_level)\n%F{green}╰$ %f'
     '';
-    # Who even needs direnv
+
     interactiveShellInit = ''
-      auto_nix() {
-        # if a shell is active, do nothing
-        [[ -n "$IN_NIX_SHELL" ]] && return
-
-        # command depending on which file exists
-        if   [[ -f flake.nix ]]; then
-          nix develop . --command zsh
-        elif [[ -f shell.nix || -f default.nix ]]; then
-          nix-shell . --command zsh
-        fi
-      }
-
-      auto_venv() {
-        # if venv if already active, do nothing
-        if [[ -n "$VIRTUAL_ENV" && ! -f "$VIRTUAL_ENV/bin/activate" ]]; then
-          deactivate
-        fi
-        [[ -n "$VIRTUAL_ENV" ]] && return
-
-        if [[ -f "./.venv/bin/activate" ]]; then
-          source "./.venv/bin/activate"
-        fi
-      }
-
-      autoload -Uz add-zsh-hook
-      add-zsh-hook chpwd auto_nix
-      add-zsh-hook chpwd auto_venv
+      # Case-Insensitive Matching
+      zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}"
 
       # Set zsh to Emacs mode so that Ctrl+R works
       bindkey -e
+
+      # Keybinds for Navigation
+
+      # Ctrl+Arrows for word navigation
+      bindkey '^[[1;5C' forward-word
+      bindkey '^[[1;5D' backward-word
+      # Ctrl+Backspace delete word
+      bindkey '^H' backward-kill-word
+      bindkey '^?' backward-kill-word
+      # Alt+Arrows
+      bindkey "^[[1;3C" forward-word
+      bindkey "^[[1;3D" backward-word
+      # Home/End
+      bindkey '^[[H' beginning-of-line
+      bindkey '^[[F' end-of-line
+      bindkey '^[[1~' beginning-of-line
+      bindkey '^[[4~' end-of-line
+      # Del Key actually delete char
+      bindkey '\e[3~' delete-char
     '';
+
+    setOptions = [
+      "AUTO_CD"
+      "AUTO_MENU"
+      "COMPLETE_IN_WORD"
+      "COMPLETE_ALIASES"
+      "ALWAYS_TO_END"
+      "HASH_LIST_ALL"
+
+      # History stuff
+      "APPEND_HISTORY"
+      "HIST_EXPIRE_DUPS_FIRST"
+      "HIST_IGNORE_DUPS"
+      "HIST_IGNORE_SPACE"
+    ];
 
     shellAliases = {
       cls = "clear";
@@ -133,10 +144,11 @@
       cdw = "cd ~/NAS-David/Work/";
       cdd = "cd ~/Downloads/";
 
-      enc = "nvim +'cd ~/dotfiles/.config/nvim/' ~/dotfiles/.config/nvim/";
-      ehc = "nvim +'cd ~/dotfiles/.config/hypr/' ~/dotfiles/.config/hypr/hyprland.conf";
+      enc = "cd ~/dotfiles/.config/nvim/ && nvim .";
+      ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
     };
   };
+  programs.direnv.enable = true;
 }
