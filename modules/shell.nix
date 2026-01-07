@@ -101,7 +101,6 @@
       bindkey '^[[1;5D' backward-word
       # Ctrl+Backspace delete word
       bindkey '^H' backward-kill-word
-      bindkey '^?' backward-kill-word
       # Alt+Arrows
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;3D" backward-word
