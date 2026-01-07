@@ -138,6 +138,7 @@
           thunderbird
           signal-desktop
           wireshark
+          kdePackages.kdenlive
 
           # Password Store
           # only for importing from SafeInCloud
