@@ -148,6 +148,8 @@
 
           # Minecraft
           prismlauncher
+          # Flatpak (only for Hytale)
+          flatpak
         ]
         ++ config.user.packages;
     };
