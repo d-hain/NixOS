@@ -80,7 +80,7 @@
       ############
 
       element-desktop
-      blender-hip
+      pkgsRocm.blender
 
       #############
       ### Games ###
