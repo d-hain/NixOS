@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  ghostty,
   fuzzel-pass,
   ...
 }: {
@@ -74,7 +73,7 @@
           radicle-node
 
           # Terminal Programs
-          (ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default)
+          ghostty
           kdePackages.konsole # Fallback terminal
           typst
           ffmpeg
