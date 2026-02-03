@@ -89,6 +89,7 @@
           glsl_analyzer
           superhtml
           tinymist
+          haskell-language-server
 
           #######################
           ### "Desktop" Stuff ###
