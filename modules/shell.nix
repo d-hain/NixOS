@@ -135,8 +135,8 @@
       ll = "eza -la --icons";
       la = "eza -a";
 
-      cda = "cd ~/NAS-David/anime-manga-notes";
-      cdp = "cd ~/NAS-David/Programming/";
+      cda = "cd ~/anime-manga-notes";
+      cdp = "cd ~/Programming/";
       cdh = "cd ~/NAS-David/FH/";
       cdw = "cd ~/NAS-David/Work/";
       cdd = "cd ~/Downloads/";
