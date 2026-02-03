@@ -7,10 +7,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     fuzzel-pass = {
       url = "github:d-hain/fuzzel-pass";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +23,6 @@
     self,
     nixpkgs,
     hyprland,
-    ghostty,
     fuzzel-pass,
     servarr-nixpkgs,
     servarr-agenix,
@@ -39,7 +34,7 @@
       pc = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit hyprland ghostty fuzzel-pass;
+          inherit hyprland fuzzel-pass;
         };
 
         modules = [
@@ -50,7 +45,7 @@
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit hyprland ghostty fuzzel-pass;
+          inherit hyprland fuzzel-pass;
         };
 
         modules = [
