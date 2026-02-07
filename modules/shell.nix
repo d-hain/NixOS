@@ -145,6 +145,7 @@
       ehc = "cd ~/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
+      shutdown = "hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown now'";
     };
   };
   programs.direnv.enable = true;
