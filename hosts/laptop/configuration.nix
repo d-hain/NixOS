@@ -21,6 +21,7 @@
     ../../modules/japanese.nix
     ../../modules/work.nix
     ../../modules/jai.nix
+    ./dotfiles.nix
   ];
 
   # Allow Unfree Packages explicitly
