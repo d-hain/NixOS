@@ -8,30 +8,33 @@
     sharedFile, # Dotfile shared across hosts
     hostFile, # host specific Dotfile
   }: let
+    ifExists = file: whatToDo: elseToDo:
+      if builtins.pathExists file
+      then whatToDo file
+      else elseToDo;
+
     # Nix-Store filename
     filename =
-      if builtins.pathExists hostFile
-      then builtins.baseNameOf hostFile
-      else if builtins.pathExists sharedFile
-      then builtins.baseNameOf sharedFile
-      else throw "One of sharedFile or hostFile MUST exist!";
+      ifExists hostFile builtins.baseNameOf (ifExists sharedFile builtins.baseNameOf (throw "One of sharedFile or hostFile MUST exist!"));
 
-    fileContents = builtins.filter (s: s != "") [
-      (
-        if builtins.pathExists sharedFile
-        then builtins.readFile sharedFile
-        else ""
-      )
-      (
-        if builtins.pathExists hostFile
-        then builtins.readFile hostFile
-        else ""
-      )
-    ];
-
-    mergedContent = builtins.concatStringsSep "\n\n" fileContents;
+    fileIsJson = (lib.hasSuffix ".json" filename) || (lib.hasSuffix ".jsonc" filename);
   in
-    pkgs.writeText filename mergedContent;
+    if fileIsJson
+    then let
+      shared = builtins.fromJSON (ifExists sharedFile builtins.readFile "{}");
+      host = builtins.fromJSON (ifExists hostFile builtins.readFile "{}");
+      merged = shared // host;
+    in
+      pkgs.writeText filename (builtins.toJSON merged)
+    else
+      pkgs.writeText filename (
+        builtins.concatStringsSep "\n\n" (
+          builtins.filter (str: str != "") [
+            (ifExists sharedFile builtins.readFile "")
+            (ifExists hostFile builtins.readFile "")
+          ]
+        )
+      );
 
   getFiles = dir:
     if ! builtins.pathExists dir
@@ -77,7 +80,7 @@ in {
     );
 
     # mkdir commands
-    mkdirCmds = lib.filter (dir: dir != "") (builtins.map (dir: "mkdir -p \"${dir}\"") dirList);
+    mkdirCmds = lib.filter (dir: dir != "") (builtins.map (dir: "runuser -u ${config.user.username} -- mkdir -p \"${dir}\"") dirList);
 
     # symlink commands
     symlinkCmds =
@@ -88,7 +91,7 @@ in {
           merged = mergeDotfile {inherit sharedFile hostFile;};
         in
           # symlink as user
-          "runuser -u ${config.user.username} -- ln -sfn \"${merged}\" \"/home/${config.user.username}/${relPath}\""
+          "runuser -u ${config.user.username} -- ln -sfnT \"${merged}\" \"/home/${config.user.username}/${relPath}\""
       )
       allFiles;
 

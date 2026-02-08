@@ -1,0 +1,110 @@
+@define-color text #abb2bf;
+@define-color bg #21252b;
+@define-color bg-highlight #323844;
+@define-color purple #c678dd;
+@define-color green #98c379;
+
+* {
+    font-family: 'JetBrains Mono';
+    font-size: 13px;
+}
+
+window#waybar {
+    color: @text;
+
+    background-color: transparent;
+}
+
+#workspaces button,
+#window,
+#clock,
+#network,
+#pulseaudio,
+#tray,
+#battery,
+.wireguard {
+    color: @text;
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 5px;
+    border: 1px solid @bg-highlight;
+    border-radius: 0;
+
+    background-color: @bg;
+}
+
+#pulseaudio,
+#network,
+#tray,
+#battery,
+#clock {
+    border-right: 2px solid @purple;
+}
+
+#battery.critical {
+    border: 2px solid red;
+}
+
+.wireguard {
+    border-right: 2px solid @green;
+}
+
+#workspaces {
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    font-weight: bold;
+    color: @green;
+
+    border: 1px solid @purple;
+
+    background-color: @bg-highlight;
+}
+
+#workspaces button:hover {
+    border: 1px solid @bg;
+
+    background-color: @bg-highlight;
+
+    /* I hate GTK with a passion */
+    background-image: none;
+    box-shadow: none;
+    transition: none;
+}
+
+#workspaces button.active:hover {
+    font-weight: bold;
+    color: @green;
+
+    border: 1px solid @purple;
+
+    background-color: @bg-highlight;
+
+    /* I hate GTK with a passion */
+    background-image: none;
+    box-shadow: none;
+    transition: none;
+}
+
+#pulseaudio.muted {
+    font-weight: bold;
+    color: @purple;
+
+    background-color: @bg-highlight;
+}
+
+#network.disconnected {
+    font-weight: bold;
+    color: @purple;
+
+    background-color: @bg-highlight;
+}
+
+#clock {
+    font-weight: bold;
+    color: @green;
+}
