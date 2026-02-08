@@ -33,6 +33,6 @@
             "type": "localip",
             "showIpv6": true,
             "showAllIps": true
-        },
+        }
     ]
 }

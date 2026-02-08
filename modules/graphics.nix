@@ -50,13 +50,13 @@ in {
     NIXOS_OZONE_WL = "1";
 
     # XDG Variables
-    XDG_DESKTOP_DIR="";
-    XDG_DOWNLOAD_DIR="$HOME/Downloads";
-    XDG_TEMPLATES_DIR="";
-    XDG_PUBLICSHARE_DIR="";
-    XDG_DOCUMENTS_DIR="";
-    XDG_MUSIC_DIR="";
-    XDG_PICTURES_DIR="$HOME/Pictures";
-    XDG_VIDEOS_DIR="";
+    XDG_DESKTOP_DIR = "";
+    XDG_DOWNLOAD_DIR = "$HOME/Downloads";
+    XDG_TEMPLATES_DIR = "";
+    XDG_PUBLICSHARE_DIR = "";
+    XDG_DOCUMENTS_DIR = "";
+    XDG_MUSIC_DIR = "";
+    XDG_PICTURES_DIR = "$HOME/Pictures";
+    XDG_VIDEOS_DIR = "";
   };
 }

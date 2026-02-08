@@ -67,20 +67,23 @@ in {
     allFiles = lib.unique (sharedFiles ++ hostFiles);
 
     # Directory list
-    dirList = lib.unique (
-      builtins.map (
-        relPath: let
-          dir = builtins.dirOf relPath;
-        in
-          if dir == "."
-          then ""
-          else "home/${config.user.username}/${dir}"
-      )
-      allFiles
-    );
+    dirList = let
+      dirs = lib.unique (
+        builtins.map (
+          relPath: let
+            dir = builtins.dirOf relPath;
+          in
+            if dir == "."
+            then ""
+            else "home/${config.user.username}/${dir}"
+        )
+        allFiles
+      );
+    in
+      builtins.filter (dir: dir != "") dirs;
 
     # mkdir commands
-    mkdirCmds = lib.filter (dir: dir != "") (builtins.map (dir: "runuser -u ${config.user.username} -- mkdir -p \"${dir}\"") dirList);
+    mkdirCmds = builtins.map (dir: "runuser -u ${config.user.username} -- mkdir -p \"${dir}\"") dirList;
 
     # symlink commands
     symlinkCmds =
