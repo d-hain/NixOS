@@ -1,0 +1,54 @@
+theme = Atom One Dark
+
+window-theme = ghostty
+window-decoration = false
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-invert-fg-bg = true
+
+mouse-hide-while-typing = true
+unfocused-split-fill = #251825
+
+copy-on-select = false
+
+################
+### Keybinds ###
+################
+
+# Remove all default keybinds
+keybind = clear
+
+keybind = unconsumed:ctrl+shift+f=unbind
+
+# Copy & Paste
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# In- and decrease Font Size
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+-=decrease_font_size:1
+# Mouse wheel font size in- and decrease?!
+# keybind = ctrl+ScrollUp=increase_font_size
+
+# Tabs
+keybind = ctrl+t=new_tab
+keybind = ctrl+w=close_surface
+
+keybind = ctrl+1=goto_tab:1
+keybind = ctrl+2=goto_tab:2
+keybind = ctrl+3=goto_tab:3
+keybind = ctrl+4=goto_tab:4
+keybind = ctrl+5=goto_tab:5
+keybind = ctrl+6=goto_tab:6
+keybind = ctrl+7=goto_tab:7
+keybind = ctrl+8=goto_tab:8
+keybind = ctrl+9=goto_tab:9
+
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+keybind = ctrl+shift+alt+h=move_tab:-1
+keybind = ctrl+shift+alt+l=move_tab:+1
+
+# Reload Config
+keybind = ctrl+shift+r=reload_config

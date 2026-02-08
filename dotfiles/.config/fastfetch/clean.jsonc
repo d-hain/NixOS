@@ -1,0 +1,38 @@
+{
+    "logo": {
+        "padding": {
+            "top": 2
+        }
+    },
+    "modules": [
+        "title",
+        "separator",
+        "os",
+        "kernel",
+        "packages",
+        "shell",
+        "display",
+        "lm",
+        "wm",
+        "cursor",
+        "terminal",
+        "board",
+        {
+            "type": "cpu",
+            "showPeCoreCount": true,
+            "temp": true
+        },
+        {
+            "type": "gpu",
+            "temp": true
+        },
+        "memory",
+        "swap",
+        "disk",
+        {
+            "type": "localip",
+            "showIpv6": true,
+            "showAllIps": true
+        },
+    ]
+}
