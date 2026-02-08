@@ -34,8 +34,29 @@ in {
     package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
-  xdg.portal.extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];
+  xdg.portal = {
+    enable = true;
+    config = {
+      preferred = {
+        default = ["hyprland" "kde"];
+        "org.freedesktop.impl.portal.FileChooser" = "kde";
+      };
+    };
+    extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];
+  };
 
-  # Hint to Electron Apps to use Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    # Hint to Electron Apps to use Wayland
+    NIXOS_OZONE_WL = "1";
+
+    # XDG Variables
+    XDG_DESKTOP_DIR="";
+    XDG_DOWNLOAD_DIR="$HOME/Downloads";
+    XDG_TEMPLATES_DIR="";
+    XDG_PUBLICSHARE_DIR="";
+    XDG_DOCUMENTS_DIR="";
+    XDG_MUSIC_DIR="";
+    XDG_PICTURES_DIR="$HOME/Pictures";
+    XDG_VIDEOS_DIR="";
+  };
 }
