@@ -27,14 +27,16 @@
     in
       pkgs.writeText filename (builtins.toJSON merged)
     else
-      pkgs.writeText filename (
-        builtins.concatStringsSep "\n\n" (
+      pkgs.writeTextFile {
+        name = filename;
+        text = builtins.concatStringsSep "\n\n" (
           builtins.filter (str: str != "") [
             (ifExists sharedFile builtins.readFile "")
             (ifExists hostFile builtins.readFile "")
           ]
-        )
-      );
+        );
+        executable = lib.hasSuffix ".sh" filename;
+      };
 
   getFiles = dir:
     if ! builtins.pathExists dir
