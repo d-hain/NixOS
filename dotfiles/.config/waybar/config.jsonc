@@ -61,7 +61,7 @@
     },
 
     "network": {
-        "format-wifi": "Wifi: {essid} @ {ipaddr}",
+        "format-wifi": "Wifi: {ipaddr}",
         "format-ethernet": "Eth: {ipaddr}",
         "format-disconnected": "No internet",
         "tooltip-format": "Gateway: {gwaddr} at {ifname}"
