@@ -6,7 +6,7 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
 
-    promptInit = ''
+    promptInit = /* bash */ ''
       autoload -U colors
       colors
 
@@ -87,7 +87,7 @@
       PROMPT=$'%F{green}╭─%n@%m%f$(status_line) %F{yellow}in %~%f$(git_line) $(shell_level)\n%F{green}╰$ %f'
     '';
 
-    interactiveShellInit = ''
+    interactiveShellInit = /* bash */ ''
       # Case-Insensitive Matching
       zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}"
 
