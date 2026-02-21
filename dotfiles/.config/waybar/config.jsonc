@@ -35,8 +35,9 @@
 	},
 
     "custom/wireguard": {
-        "exec": "~/.config/waybar/wireguard.sh",
+        "exec": "systemctl is-active --quiet wg-quick-work && echo '{ \"text\": \"wg-work: UP\", \"class\": \"wireguard\" }'",
         "return-type": "json",
+	"interval": 5,
         "format": "{text}",
         "hide-empty-text": true
     },
