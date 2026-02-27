@@ -7,7 +7,7 @@
       zlib
       glibc
       libGL
-      xorg.libX11
+      libx11
     ];
   };
   # NOTE: straight up stolen from https://github.com/michaelsmiller/millerconfig/blob/7c8da2680f98a86025af9049f23d3ae664d62f50/nixos/configuration.nix#L149

@@ -10,5 +10,7 @@
     hostDir = ./dotfiles;
   };
 in {
-  system.activationScripts.dotfileLinks.text = dotfileScript;
+  system.activationScripts.dotfileLinks.text = ''
+    ${dotfileScript}
+  '';
 }
