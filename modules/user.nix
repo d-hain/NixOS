@@ -15,7 +15,7 @@
 
     packages = lib.mkOption {
       default = [];
-      description = "Additional system specific packages";
+      description = "Additional user specific packages";
     };
   };
 
@@ -101,6 +101,7 @@
           hyprsunset
           hyprlock
           hyprshutdown
+          brightnessctl
           pavucontrol
           # Bluetooth GUI (doesn't work but makes it work) see:
           # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
