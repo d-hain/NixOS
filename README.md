@@ -6,15 +6,32 @@ Here lies my NixOS configuration.
 
 ```shell
 .
+├── dotfiles
 ├── flake.lock
 ├── flake.nix
 ├── hosts
-│   ├── pc
-│   ├── laptop
-│   └── servarr
+│   ├── laptop
+│   │   └── dotfiles
+│   ├── pc
+│   │   └── dotfiles
+│   └── servarr
+├── lib
 ├── modules
 └── secrets
 ```
+
+- `dotfiles`
+  A directory for all shared non-nix dotfiles.
+- `hosts`
+  All subdirectories of `hosts` are all files specific to one host.
+  - `dotfiles`
+    Non-nix dotfiles that are specific to that host.
+- `lib`
+  Nix functions used throughout the config.
+- `modules`
+  Somewhat coherently organized files that many systems use.
+- `secrets`
+  Agenix secrets mostly used for my home server.
 
 ## How to rebuild the system
 
