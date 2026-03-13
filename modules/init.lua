@@ -154,7 +154,7 @@ vim.lsp.config("*", {
     vim.keymap.set("n", "<leader>da", function() trouble.open("document_diagnostics") end, opts)
     vim.keymap.set("n", "<leader>rr", function() trouble.open("lsp_references") end, opts)
   end
-}
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- TODO: cmp nvim

@@ -81,7 +81,6 @@
           sendme # Ultimate magic and just the best thing ever
 
           # Neovim and LSPs
-          neovim
           lua-language-server
           clang-tools
           ols
