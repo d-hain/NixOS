@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +26,7 @@
   outputs = {
     self,
     nixpkgs,
+    nix-wrapper-modules,
     hyprland,
     fuzzel-pass,
     servarr-nixpkgs,
@@ -34,7 +39,7 @@
       pc = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit hyprland fuzzel-pass;
+          inherit nix-wrapper-modules hyprland fuzzel-pass;
         };
 
         modules = [
@@ -45,7 +50,7 @@
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit hyprland fuzzel-pass;
+          inherit nix-wrapper-modules hyprland fuzzel-pass;
         };
 
         modules = [

@@ -455,6 +455,26 @@
         "type": "github"
       }
     },
+    "nix-wrapper-modules": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773360496,
+        "narHash": "sha256-AQN5UhIc2WHvELT4TWIsD1W05ksLXWRkS5NjPm3jkc0=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "8f1770c6d58a89a4757849713c0e6d9ace7b4ac3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1771188415,
@@ -498,6 +518,7 @@
       "inputs": {
         "fuzzel-pass": "fuzzel-pass",
         "hyprland": "hyprland",
+        "nix-wrapper-modules": "nix-wrapper-modules",
         "nixpkgs": "nixpkgs",
         "servarr-agenix": "servarr-agenix",
         "servarr-nixpkgs": "servarr-nixpkgs"
