@@ -134,7 +134,8 @@ in {
     virtualHosts = {
       # Website
       ${url}.extraConfig = ''
-        respond "Hello, world!"
+        root * ${./assets}
+            file_server
       '';
       ${url-local}.extraConfig = ''
         respond "Hello, world!"
