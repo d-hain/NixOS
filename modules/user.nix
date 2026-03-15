@@ -3,6 +3,7 @@
   config,
   pkgs,
   fuzzel-pass,
+  nix-wrapper-modules,
   ...
 }: {
   options.user = {
@@ -75,19 +76,11 @@
           # Terminal Programs
           ghostty
           kdePackages.konsole # Fallback terminal
+          (nix-wrapper-modules.lib.evalPackage [./nvim.nix {inherit pkgs;}])
           typst
           ffmpeg
           imagemagick
           sendme # Ultimate magic and just the best thing ever
-
-          # Neovim and LSPs
-          lua-language-server
-          clang-tools
-          ols
-          glsl_analyzer
-          superhtml
-          tinymist
-          haskell-language-server
 
           #######################
           ### "Desktop" Stuff ###

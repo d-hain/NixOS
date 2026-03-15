@@ -5,7 +5,6 @@
   lib,
   config,
   pkgs,
-  nix-wrapper-modules,
   ...
 }: {
   imports = [
@@ -46,7 +45,6 @@
 
     # extra :packages
     packages = with pkgs; [
-      (nix-wrapper-modules.lib.evalPackage [../../modules/nvim.nix {inherit pkgs;}])
     ];
   };
 
