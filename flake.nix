@@ -68,6 +68,11 @@
       };
     };
 
+    packages.${system} = {
+      default = self.packages.${system}.neovim;
+      neovim = nix-wrapper-modules.lib.evalPackage [./modules/nvim.nix {inherit pkgs;}];
+    };
+
     devShells.${system} = {
       default = self.devShells.${system}.servarr;
       servarr = pkgs.mkShell {
