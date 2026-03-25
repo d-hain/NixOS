@@ -21,6 +21,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "servarr-nixpkgs";
     };
+    servarr-nix-wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -31,6 +35,7 @@
     fuzzel-pass,
     servarr-nixpkgs,
     servarr-agenix,
+    servarr-nix-wrapper-modules,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -60,6 +65,9 @@
 
       servarr = servarr-nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = {
+          nix-wrapper-modules = servarr-nix-wrapper-modules;
+        };
 
         modules = [
           ./hosts/servarr/configuration.nix

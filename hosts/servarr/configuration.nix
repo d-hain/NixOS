@@ -2,9 +2,10 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  pkgs,
-  config,
   lib,
+  config,
+  pkgs,
+  nix-wrapper-modules,
   ...
 }: let
   url-local = "192.168.1.69";
@@ -46,7 +47,7 @@ in {
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
 
     packages = with pkgs; [
-      stow
+      (nix-wrapper-modules.lib.evalPackage [../../modules/nvim.nix {inherit pkgs;}])
     ];
   };
 
