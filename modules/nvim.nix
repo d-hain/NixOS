@@ -15,6 +15,17 @@
       hash = "sha256-VFNIcJmz44y/1TzJ8IpB5US5VYZwWL7FhjZC4vKOuoQ=";
     };
   };
+
+  # tree-sitter-jai = pkgs.tree-sitter.buildGrammar {
+  #   language = "jai";
+  #   version = "latest";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "constantitus";
+  #     repo = "tree-sitter-jai";
+  #     rev = "master";
+  #     sha256 = "sha256-JvlylDHTXdaqN9yH/0eyTFbEOF3BtC/2joHSb7alotE=";
+  #   };
+  # };
 in {
   imports = [
     wlib.wrapperModules.neovim
@@ -27,6 +38,12 @@ in {
       lualine-nvim
       gitsigns-nvim
 
+      # (
+      #   pkgs.vimPlugins.nvim-treesitter.withPlugins (p: let
+      #     allGrammars = builtins.attrValues p;
+      #   in
+      #     allGrammars ++ [tree-sitter-jai])
+      # )
       nvim-treesitter.withAllGrammars
       nvim-treesitter-context
       nvim-ts-context-commentstring
