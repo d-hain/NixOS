@@ -1,3 +1,6 @@
+-- NOTE: Jai is in Beta currently and not officially supported by nvim-treesitter
+vim.treesitter.language.register("jai", "jai")
+
 local treesitter = require("nvim-treesitter")
 -- Stolen from: https://github.com/BirdeeHub/nix-wrapper-modules/blob/main/templates/neovim/init.lua
 local function treesitter_try_attach(buf, language)
@@ -31,30 +34,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
     if not treesitter_try_attach(buf,language) then
       if vim.tbl_contains(installable_parsers, language) then
-	-- not already installed, so try to install them via nvim-treesitter if possible
-	treesitter.install(language):await(function()
-	  treesitter_try_attach(buf, language)
-	end)
+        -- not already installed, so try to install them via nvim-treesitter if possible
+        treesitter.install(language):await(function()
+          treesitter_try_attach(buf, language)
+        end)
       end
     end
   end,
-})
-
--- NOTE: Jai is in Beta currently and not officially supported by nvim-treesitter
-vim.api.nvim_create_autocmd("User", { pattern = "TSUpdate",
-  callback = function()
-    require("nvim-treesitter.parsers").jai = {
-      install_info = {
-        url = "https://github.com/constantitus/tree-sitter-jai.git",
-        files = { "src/parser.c", "src/scanner.c" },
-      },
-      filetype = "jai",
-      filetype_to_parsername = "jai",
-      indent = {
-        enable = true,
-      },
-    }
-  end
 })
 
 -- Long functions

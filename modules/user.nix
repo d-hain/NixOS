@@ -66,7 +66,6 @@
           ripgrep
           fastfetch
           btop
-          stow
           gnumake
           odin # (nearly) Up to date Odin compiler
           rustup
@@ -127,10 +126,8 @@
           synology-drive-client
           mpv
           spotify
-          teams-for-linux
-          onlyoffice-desktopeditors
+          libreoffice-fresh
           thunderbird
-          signal-desktop
           wireshark
           kdePackages.kdenlive
 

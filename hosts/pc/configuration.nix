@@ -80,7 +80,6 @@
       ### Apps ###
       ############
 
-      element-desktop
       pkgsRocm.blender
 
       #############
