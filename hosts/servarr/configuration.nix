@@ -136,7 +136,7 @@ in {
       # Website
       ${url}.extraConfig = ''
         root * ${./assets}
-            file_server
+        file_server
       '';
       ${url-local}.extraConfig = ''
         respond "Hello, world!"
