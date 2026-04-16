@@ -82,7 +82,7 @@ in {
     usev4 = "webv4,webv4=ifconfig.me/ip";
     usev6 = "";
     extraConfig = "root-domain=${url}";
-    domains = [ url url-git ];
+    domains = [url url-git];
     secretsFile = config.age.secrets.ddclient-secrets.path;
   };
 
@@ -93,7 +93,7 @@ in {
   services.radicle = {
     enable = true;
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVQAWYc1m9vIBHknidQGhORM5hUTu/obR8+iMixsYJk";
-    privateKeyFile = config.age.secrets.radicle-servarr-private-key.path;
+    privateKey = config.age.secrets.radicle-servarr-private-key.path;
     node = {
       openFirewall = true;
       listenAddress = "[::]";

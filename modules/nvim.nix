@@ -66,7 +66,8 @@ in {
   extraPackages = with pkgs; [
     lua-language-server
     clang-tools
-    ols
+    # WARN: currently broken in nixos-unstable
+    # ols
     glsl_analyzer
     superhtml
     tinymist
