@@ -37,8 +37,6 @@ in {
   environment.variables = {
     # To make SSH work with any terminal (including ghostty)
     TERM = "xterm-256color";
-    # Nano is my archenemy
-    EDITOR = "vim";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -77,12 +75,16 @@ in {
   };
 
   # DDNS
-  services.ddns-updater = {
+  services.ddclient = {
     enable = true;
-    environment.CONFIG_FILEPATH = "%d/config";
+    verbose = true;
+    protocol = "porkbun";
+    usev4 = "webv4,webv4=ifconfig.me/ip";
+    usev6 = "";
+    extraConfig = "root-domain=${url}";
+    domains = [ url url-git ];
+    secretsFile = config.age.secrets.ddclient-secrets.path;
   };
-  # Thanks to https://github.com/joshuakb2/configuration.nix/blob/0284721889b4121f6cc361f8617eebbdbee43d07/JBaker-Area51/my-hardware-configs.nix#L97
-  systemd.services.ddns-updater.serviceConfig.LoadCredential = "config:${config.age.secrets.doceys-computer-ddns-config.path}";
 
   ###############################
   ### Radicle Seed Node (Git) ###

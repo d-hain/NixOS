@@ -15,8 +15,8 @@
         owner = "doce";
         group = "users";
       };
-      doceys-computer-ddns-config = {
-        file = ../../secrets/doceys.computer_ddns_config.age;
+      ddclient-secrets = {
+        file = ../../secrets/ddclient-secrets.age;
         owner = "doce";
         group = "users";
       };

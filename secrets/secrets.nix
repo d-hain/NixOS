@@ -4,5 +4,5 @@ let
 in {
   "homarr.age".publicKeys = [servarr d-hain];
   "radicle-servarr-private-key.age".publicKeys = [servarr d-hain];
-  "doceys.computer_ddns_config.age".publicKeys = [servarr d-hain];
+  "ddclient-secrets.age".publicKeys = [servarr d-hain];
 }
