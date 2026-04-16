@@ -11,6 +11,15 @@
   url-local = "192.168.1.69";
   url = "doceys.computer";
   url-git = "git.doceys.computer";
+
+  local-services = {
+    "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
+    "qbittorrent.sameg" = config.services.qbittorrent.webuiPort;
+    "sonarr.sameg" = config.services.sonarr.settings.server.port;
+    "radarr.sameg" = config.services.radarr.settings.server.port;
+    "bazarr.sameg" = config.services.bazarr.listenPort;
+    "jellyfin.sameg" = 8096;
+  };
 in {
   imports = [
     ./hardware-configuration.nix
@@ -126,31 +135,74 @@ in {
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
+      53 # Local DNS Server (Blocky)
       80 # HTTP for my Website
       443 # HTTPS for my Website
       config.services.radicle.httpd.listenPort # Radicle HTTP Daemon
+    ];
+    allowedUDPPorts = [
+      53 # Local DNS Server (Blocky)
     ];
   };
 
   services.caddy = {
     enable = true;
-    virtualHosts = {
-      # Website
-      ${url}.extraConfig = ''
-        root * ${./assets}
-        file_server
-      '';
-      ${url-local}.extraConfig = ''
-        respond "Hello, world!"
-      '';
+    virtualHosts = let
+      public-domains = {
+        # Website
+        ${url}.extraConfig = ''
+          root * ${./assets}
+          file_server
+        '';
 
-      # Radicle & Radicle HTTPD
-      ${url-git}.extraConfig = ''
-        # Radicle
-        reverse_proxy ${url-git}:${builtins.toString config.services.radicle.httpd.listenPort}
-        # Radicle-HTTP Daemon
-        reverse_proxy ${url-local}:${builtins.toString config.services.radicle.node.listenPort}
-      '';
+        # Radicle HTTPD
+        ${url-git}.extraConfig = ''
+          # Radicle-HTTP Daemon
+          reverse_proxy ${url-local}:${builtins.toString config.services.radicle.httpd.listenPort}
+        '';
+      };
+
+      local-configs =
+        builtins.mapAttrs (name: port: {
+          extraConfig = ''
+            tls internal
+            reverse_proxy localhost:${builtins.toString port}
+          '';
+        })
+        local-services;
+    in
+      public-domains // local-configs;
+  };
+
+  # Local DNS
+  networking.nameservers = [ "127.0.0.1" ];
+  services.blocky = {
+    enable = true;
+    settings = {
+      upstreams.groups.default = [
+        "https://dns.quad9.net/dns-query"
+        "https://one.one.one.one/dns-query"
+        "https://dns.google/dns-query" # Cursed ass domain
+        "9.9.9.9"
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
+      # ports.dns = [
+        # "53"
+        # "0.0.0.0:53"
+        # "[::]:53"
+      # ];
+      customDNS = {
+        mapping = let
+          external-domains = {
+            ${url} = url-local;
+            ${url-git} = url-local;
+          };
+
+          local-domains = builtins.mapAttrs (name: _: url-local) local-services;
+        in
+          external-domains // local-domains;
+      };
     };
   };
 

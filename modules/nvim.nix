@@ -15,7 +15,6 @@
       hash = "sha256-VFNIcJmz44y/1TzJ8IpB5US5VYZwWL7FhjZC4vKOuoQ=";
     };
   };
-
   # tree-sitter-jai = pkgs.tree-sitter.buildGrammar {
   #   language = "jai";
   #   version = "latest";
