@@ -147,6 +147,20 @@ in {
 
   services.caddy = {
     enable = true;
+    globalConfig = ''
+      # Disable admin page on port 2019
+      admin off
+
+      # Set fixed Root Certificate and Key
+      pki {
+        ca local {
+          root {
+            cert ${./root.crt}
+            key ${config.age.secrets.caddy_root_key.path}
+          }
+        }
+      }
+    '';
     virtualHosts = let
       public-domains = {
         # Website
@@ -187,11 +201,6 @@ in {
         "1.1.1.1"
         "8.8.8.8"
       ];
-      # ports.dns = [
-        # "53"
-        # "0.0.0.0:53"
-        # "[::]:53"
-      # ];
       customDNS = {
         mapping = let
           external-domains = {

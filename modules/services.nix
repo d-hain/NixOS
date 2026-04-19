@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  # Local DNS Certificate
+  security.pki.certificateFiles = [ ../hosts/servarr/root.crt ];
+
   # Greeter
   services.greetd = {
     enable = true;

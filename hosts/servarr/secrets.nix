@@ -20,6 +20,12 @@
         owner = "doce";
         group = "users";
       };
+      caddy_root_key = {
+        file = ../../secrets/caddy_root_key.age;
+        owner = "caddy";
+        group = "caddy";
+        mode = "0400";
+      };
     };
   };
 }
