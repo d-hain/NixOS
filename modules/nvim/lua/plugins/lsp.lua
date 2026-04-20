@@ -144,11 +144,10 @@ vim.filetype.add({ extension = { jai = "jai" } })
 vim.lsp.config("jails", {
   capabilities = capabilities,
   cmd = {
-    vim.fn.expand("~/Jai/Jails/bin/jails"),
+    "/home/dhain/Jai/Jails/bin/jails",
     "-jai_path", "/home/dhain/Jai/jai/",
   },
   root_markers = { "build.jai", "main.jai", ".git" },
-  filetypes = { "jai" },
-  single_file_support = true,
+  filetypes = { "jai" }
 })
 vim.lsp.enable("jails")
