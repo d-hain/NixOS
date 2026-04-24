@@ -58,6 +58,10 @@ in {
     packages = with pkgs; [
       (nix-wrapper-modules.lib.evalPackage [../../modules/nvim.nix {inherit pkgs;}])
     ];
+
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
+    ];
   };
 
   # Shell
@@ -80,9 +84,11 @@ in {
 
     openFirewall = true;
     # Require ssh key to authenticate
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "no";
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
 
   # DDNS
