@@ -71,6 +71,21 @@ in {
     };
   };
 
+  # Git Server setup
+  users.users.git = {
+    isSystemUser = true;
+    description = "Git System User";
+    group = "git";
+    home = "/home/git";
+    createHome = true;
+
+    shell = lib.getExe' pkgs.git "git-shell";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
+    ];
+  };
+  users.groups.git = {};
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.gnupg.agent = {
@@ -81,14 +96,25 @@ in {
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-
     openFirewall = true;
+
     # Require ssh key to authenticate
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
     };
+
+    # Git Server config
+    extraConfig = ''
+      Match user git
+        AllowTcpForwarding no
+        AllowAgentForwarding no
+        PasswordAuthentication no
+        KbdInteractiveAuthentication no
+        PermitTTY no
+        X11Forwarding no
+    '';
   };
 
   # DDNS

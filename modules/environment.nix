@@ -25,6 +25,13 @@
     zip
     unzip
     vim
-    git
   ];
+  # Git
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "master";
+      pull.ff = "only";
+    };
+  };
 }
