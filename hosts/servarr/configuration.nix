@@ -46,6 +46,7 @@ in {
   environment.variables = {
     # To make SSH work with any terminal (including ghostty)
     TERM = "xterm-256color";
+    EDITOR = "nvim";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
