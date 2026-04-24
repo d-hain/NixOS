@@ -31,15 +31,6 @@
     pulse.enable = true;
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
-
   # Automount USB devices
   services.udisks2.enable = true;
 
