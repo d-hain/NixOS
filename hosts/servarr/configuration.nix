@@ -95,39 +95,6 @@ in {
     secretsFile = config.age.secrets.ddclient-secrets.path;
   };
 
-  ###############################
-  ### Radicle Seed Node (Git) ###
-  ###############################
-
-  services.radicle = {
-    enable = true;
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVQAWYc1m9vIBHknidQGhORM5hUTu/obR8+iMixsYJk";
-    privateKey = config.age.secrets.radicle-servarr-private-key.path;
-    node = {
-      openFirewall = true;
-      listenAddress = "[::]";
-      listenPort = 8776;
-    };
-    settings = {
-      node = {
-        alias = url-git;
-        seedingPolicy.default = "block";
-        externalAddresses = ["${url-git}:${builtins.toString config.services.radicle.node.listenPort}"];
-      };
-      web = {
-        pinned = {
-          repositories = [
-            "rad:z3VieV5aCudK3sWwvPjzxAZxBCWoT" # website
-          ];
-        };
-      };
-    };
-    httpd = {
-      enable = true;
-      listenPort = 8777;
-    };
-  };
-
   ###############
   ### Website ###
   ###############
@@ -138,7 +105,6 @@ in {
       53 # Local DNS Server (Blocky)
       80 # HTTP for my Website
       443 # HTTPS for my Website
-      config.services.radicle.httpd.listenPort # Radicle HTTP Daemon
     ];
     allowedUDPPorts = [
       53 # Local DNS Server (Blocky)
@@ -167,12 +133,6 @@ in {
         ${url}.extraConfig = ''
           root * ${./assets}
           file_server
-        '';
-
-        # Radicle HTTPD
-        ${url-git}.extraConfig = ''
-          # Radicle-HTTP Daemon
-          reverse_proxy ${url-local}:${builtins.toString config.services.radicle.httpd.listenPort}
         '';
       };
 
