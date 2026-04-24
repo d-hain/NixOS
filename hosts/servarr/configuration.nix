@@ -11,6 +11,7 @@
   url-local = "192.168.1.69";
   url = "doceys.computer";
   url-git = "git.doceys.computer";
+  domains = [ url url-git ];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -92,7 +93,7 @@ in {
     usev4 = "webv4,webv4=ifconfig.me/ip";
     usev6 = "";
     extraConfig = "root-domain=${url}";
-    domains = [url url-git];
+    domains = domains;
     secretsFile = config.age.secrets.ddclient-secrets.path;
   };
 
@@ -164,14 +165,10 @@ in {
       ];
       customDNS = {
         mapping = let
-          external-domains = {
-            ${url} = url-local;
-            ${url-git} = url-local;
-          };
-
+          public-domains = lib.genAttrs domains (name: url-local);
           local-domains = builtins.mapAttrs (name: _: url-local) local-services;
         in
-          external-domains // local-domains;
+          public-domains // local-domains;
       };
     };
   };
