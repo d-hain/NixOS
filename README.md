@@ -2,9 +2,16 @@
 
 Here lies my NixOS configuration.
 
+## Neovim
+
+To access my neovim configuration on a system that has Nix installed, use this:
+```bash
+nix run git+https://git.doceys.computer/NixOS#neovim
+```
+
 ## File Structure
 
-```shell
+```bash
 .
 ├── dotfiles
 ├── flake.lock
@@ -33,10 +40,26 @@ Here lies my NixOS configuration.
 - `secrets`
   Agenix secrets mostly used for my home server.
 
+## Manual Steps for a new system
+
++ Copy my SSH Keys to `~/.ssh`
++ Add the SSH Keys to the GPG-Agent
+  ```bash
+  ssh-add ~/.ssh/<private-key-name>
+  ```
++ Restore my GPG Keys
+  ```bash
+  # For each key:
+  gpg --import public.gpg
+  gpg --import private.gpg
+  ```
+
+(I hope that's all)
+
 ## How to rebuild the system
 
 After cloning this repo to your home directory just run this command:
-```shell
+```bash
 sudo nixos-rebuild switch --flake /home/<USER>/NixOS#<SYSTEM>
 ```
 Replace `<USER>` and `<SYSTEM>` with something that makes sense.
@@ -48,4 +71,3 @@ Options for `<SYSTEM>`: `pc` `laptop` `servarr`
 2. Write whatever it is in the env file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop`)
 3. To use that secret add it in the `hosts/<HOST>/secrets.nix` file.
 4. Then in the configuration use `config.age.secrets.<SECRET_NAME>.path` to get the path of the file.
- 
