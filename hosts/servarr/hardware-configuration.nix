@@ -38,6 +38,12 @@
     fsType = "ext4";
   };
 
+  fileSystems."/home/git" = {
+    device = "/webserver/git";
+    fsType = "none";
+    options = [ "bind" "nofail" ];
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-label/swap";}
   ];

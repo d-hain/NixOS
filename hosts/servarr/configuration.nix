@@ -10,8 +10,9 @@
 }: let
   url-local = "192.168.1.69";
   url = "doceys.computer";
-  url-git = "git.doceys.computer";
-  domains = [ url url-git ];
+  # TODO: Some Git-Frontend will be on there
+  # url-git = "git.doceys.computer";
+  domains = [ url ]; # url-git ];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -57,6 +58,11 @@ in {
 
     packages = with pkgs; [
       (nix-wrapper-modules.lib.evalPackage [../../modules/nvim.nix {inherit pkgs;}])
+      # Git-system wrapper a la https://github.com/NixOS/nixpkgs/blob/a4bf06618f0b5ee50f14ed8f0da77d34ecc19160/nixos/modules/services/misc/radicle.nix#L19
+      (pkgs.writeShellScriptBin "git-sys" ''
+        # Use sudo to run the git command as the "git" user.
+        exec ${config.security.wrapperDir}/sudo -u git -- ${lib.getExe pkgs.git} "$@"
+      '')
     ];
 
     openssh.authorizedKeys.keys = [
