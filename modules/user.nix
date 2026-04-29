@@ -87,7 +87,7 @@
           #######################
 
           fuzzel
-          bemoji
+          rofimoji # also works with fuzzel
           waybar
           hyprshot
           hyprsunset
