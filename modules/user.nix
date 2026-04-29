@@ -3,6 +3,7 @@
   config,
   pkgs,
   fuzzel-pass,
+  helix-notes,
   nix-wrapper-modules,
   ...
 }: {
@@ -131,6 +132,7 @@
           thunderbird
           wireshark
           kdePackages.kdenlive
+          (helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default)
 
           # Password Store
           # only for importing from SafeInCloud

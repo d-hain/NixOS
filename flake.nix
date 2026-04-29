@@ -15,6 +15,10 @@
       url = "github:d-hain/fuzzel-pass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix-notes = {
+      url = "git+https://codeberg.org/doceys/HelixNotes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     servarr-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     servarr-agenix = {
@@ -33,6 +37,7 @@
     nix-wrapper-modules,
     hyprland,
     fuzzel-pass,
+    helix-notes,
     servarr-nixpkgs,
     servarr-agenix,
     servarr-nix-wrapper-modules,
@@ -44,7 +49,7 @@
       pc = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nix-wrapper-modules hyprland fuzzel-pass;
+          inherit nix-wrapper-modules hyprland fuzzel-pass helix-notes;
         };
 
         modules = [
@@ -55,7 +60,7 @@
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nix-wrapper-modules hyprland fuzzel-pass;
+          inherit nix-wrapper-modules hyprland fuzzel-pass helix-notes;
         };
 
         modules = [
