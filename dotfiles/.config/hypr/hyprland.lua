@@ -155,13 +155,6 @@ hl.config {
 --------------------
 
 hl.window_rule {
-  name = "Dwindle pseudotile",
-  match = {
-    class = ".", -- Any window
-  },
-  pseudo = true,
-}
-hl.window_rule {
   name = "Floating imv",
   match = {
     title = "^(imv)$",
