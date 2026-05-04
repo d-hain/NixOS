@@ -150,7 +150,7 @@
       cdd = "cd ~/Downloads/";
 
       enc = "cd ~/NixOS/modules/nvim/ && nvim .";
-      ehc = "cd ~/NixOS/dotfiles/.config/hypr/ && nvim ./hyprland.conf";
+      ehc = "cd ~/NixOS/dotfiles/.config/hypr/ && nvim ./hyprland.lua";
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
       shutdown = "hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown now'";
