@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix-notes = {
-      url = "git+https://codeberg.org/doceys/HelixNotes";
+      url = "git+https://codeberg.org/ArkHost/HelixNotes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

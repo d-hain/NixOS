@@ -139,17 +139,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1777480809,
-        "narHash": "sha256-cv4u2pWubYHSCNT9NXPJLhZ7nRNlpa2OOjsvf30X1X4=",
+        "lastModified": 1777541507,
+        "narHash": "sha256-KHV7ie1Dvm3JbSouyDUqdc2AKllut6ZVGOoff4Sx5E4=",
         "ref": "refs/heads/main",
-        "rev": "5754ff22997a8a6ab484e1cbb4c2a3b32e9e6434",
-        "revCount": 83,
+        "rev": "d275b0e783504222e1e7db7983dc563ffd508155",
+        "revCount": 81,
         "type": "git",
-        "url": "https://codeberg.org/doceys/HelixNotes"
+        "url": "https://codeberg.org/ArkHost/HelixNotes"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/doceys/HelixNotes"
+        "url": "https://codeberg.org/ArkHost/HelixNotes"
       }
     },
     "home-manager": {
