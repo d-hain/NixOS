@@ -25,9 +25,6 @@ hl.env("GTK_USE_PORTAL", "1")
 -- Electron Apps should use Wayland
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
--- Flatpak apps (aka Hytale)
-hl.env("XDG_DATA_DIRS", "$XDG_DATA_DIRS:/home/dhain/.local/share/flatpak/exports/share")
-
 ---------------
 --- STARTUP ---
 ---------------

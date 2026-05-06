@@ -27,6 +27,8 @@
       EDITOR = "nvim";
       TERMINAL = "ghostty";
     };
+    # Flatpak apps (aka Hytale)
+    environment.sessionVariables.XDG_DATA_DIRS = ["$XDG_DATA_DIRS:/home/${config.user.username}/.local/share/flatpak/exports/share"];
 
     fonts.packages = with pkgs; [
       font-awesome
