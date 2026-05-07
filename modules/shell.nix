@@ -154,6 +154,7 @@
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
       shutdown = "hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown now'";
+      reboot = "hyprshutdown -t 'Rebooting...' --post-cmd 'reboot'";
     };
   };
   programs.direnv.enable = true;
