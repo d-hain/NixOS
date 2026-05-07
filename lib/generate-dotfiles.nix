@@ -14,8 +14,9 @@
       else elseToDo;
 
     # Nix-Store filename
-    filename =
-      ifExists hostFile builtins.baseNameOf (ifExists sharedFile builtins.baseNameOf (throw "One of sharedFile or hostFile MUST exist!"));
+    filename = ifExists hostFile builtins.baseNameOf (
+      ifExists sharedFile builtins.baseNameOf (throw "One of sharedFile or hostFile MUST exist!")
+    );
 
     fileIsJson = (lib.hasSuffix ".json" filename) || (lib.hasSuffix ".jsonc" filename);
   in
@@ -39,7 +40,7 @@
       };
 
   getFiles = dir:
-    if ! builtins.pathExists dir
+    if !builtins.pathExists dir
     then []
     else let
       entries = builtins.attrNames (builtins.readDir dir);

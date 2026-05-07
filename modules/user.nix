@@ -28,7 +28,9 @@
       TERMINAL = "ghostty";
     };
     # Flatpak apps (aka Hytale)
-    environment.sessionVariables.XDG_DATA_DIRS = ["$XDG_DATA_DIRS:/home/${config.user.username}/.local/share/flatpak/exports/share"];
+    environment.sessionVariables.XDG_DATA_DIRS = [
+      "$XDG_DATA_DIRS:/home/${config.user.username}/.local/share/flatpak/exports/share"
+    ];
 
     fonts.packages = with pkgs; [
       font-awesome
@@ -79,7 +81,10 @@
           # Terminal Programs
           ghostty
           kdePackages.konsole # Fallback terminal
-          (nix-wrapper-modules.lib.evalPackage [./nvim.nix {inherit pkgs;}])
+          (nix-wrapper-modules.lib.evalPackage [
+            ./nvim.nix
+            {inherit pkgs;}
+          ])
           typst
           ffmpeg
           imagemagick

@@ -12,7 +12,7 @@
   url = "doceys.computer";
   # TODO: Some Git-Frontend will be on there
   # url-git = "git.doceys.computer";
-  domains = [ url ]; # url-git ];
+  domains = [url]; # url-git ];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -57,7 +57,10 @@ in {
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
 
     packages = with pkgs; [
-      (nix-wrapper-modules.lib.evalPackage [../../modules/nvim.nix {inherit pkgs;}])
+      (nix-wrapper-modules.lib.evalPackage [
+        ../../modules/nvim.nix
+        {inherit pkgs;}
+      ])
       # Git-system wrapper a la https://github.com/NixOS/nixpkgs/blob/a4bf06618f0b5ee50f14ed8f0da77d34ecc19160/nixos/modules/services/misc/radicle.nix#L19
       (pkgs.writeShellScriptBin "git-sys" ''
         # Use sudo to run the git command as the "git" user.
@@ -189,7 +192,7 @@ in {
   };
 
   # Local DNS
-  networking.nameservers = [ "127.0.0.1" ];
+  networking.nameservers = ["127.0.0.1"];
   services.blocky = {
     enable = true;
     settings = {

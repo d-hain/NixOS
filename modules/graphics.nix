@@ -38,7 +38,10 @@ in {
     enable = true;
     config = {
       preferred = {
-        default = ["hyprland" "kde"];
+        default = [
+          "hyprland"
+          "kde"
+        ];
         "org.freedesktop.impl.portal.FileChooser" = "kde";
       };
     };

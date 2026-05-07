@@ -49,7 +49,12 @@
       pc = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nix-wrapper-modules hyprland fuzzel-pass helix-notes;
+          inherit
+            nix-wrapper-modules
+            hyprland
+            fuzzel-pass
+            helix-notes
+            ;
         };
 
         modules = [
@@ -60,7 +65,12 @@
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nix-wrapper-modules hyprland fuzzel-pass helix-notes;
+          inherit
+            nix-wrapper-modules
+            hyprland
+            fuzzel-pass
+            helix-notes
+            ;
         };
 
         modules = [
@@ -83,7 +93,10 @@
 
     packages.${system} = {
       default = self.packages.${system}.neovim;
-      neovim = nix-wrapper-modules.lib.evalPackage [./modules/nvim.nix {inherit pkgs;}];
+      neovim = nix-wrapper-modules.lib.evalPackage [
+        ./modules/nvim.nix
+        {inherit pkgs;}
+      ];
     };
 
     devShells.${system} = {
