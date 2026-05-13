@@ -22,7 +22,7 @@ local home_monitor = {
 --   if set then
     hl.monitor(home_monitor)
 --   else
---     hl.monitor(fh_beamer)
+    -- hl.monitor(fh_beamer)
 --   end
 -- end)
 
@@ -52,15 +52,15 @@ hl.workspace_rule { workspace = "2", monitor = "eDP-1" }
 ----------------------------
 
 local battery_notification = hl.timer(function ()
-  local battery_capacity = hl.exec_cmd("cat /sys/class/power_supply/BAT1/capacity")
+  local handle = io.popen("cat /sys/class/power_supply/BAT1/capacity")
+  if handle == nil then return end
+  local battery_capacity = handle:read("n")
+  handle:close()
 
-  -- NOTE: Test
-  -- hl.notification.create { text = "Battery <= " .. tostring(battery_capacity), duration = 1000 * 10, color = col_purple }
-
-  -- if battery_capacity <= 10 then
-  --   hl.notification.create { text = "Battery <= 10%", duration = 1000 * 10, color = col_purple }
-  -- elseif battery_capacity <= 20 then
-  --   hl.notification.create { text = "Battery <= 20%", duration = 1000 * 10,  color = col_purple }
-  -- end
-end, { timeout = 1000, type = "repeat" })
+  if battery_capacity <= 10 then
+    hl.notification.create { text = "Battery <= 10%", duration = 1000 * 30, color = col_purple, font_size = 20 }
+  elseif battery_capacity <= 20 then
+    hl.notification.create { text = "Battery <= 20%", duration = 1000 * 30, color = col_purple, font_size = 20 }
+  end
+end, { timeout = 1000 * 60 * 5, type = "repeat" })
 battery_notification:set_enabled(true)
