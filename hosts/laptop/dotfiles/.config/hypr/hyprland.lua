@@ -1,3 +1,5 @@
+local conf = require("conf")
+
 local home_monitor = {
   output = "HDMI-A-1",
   mode = "1920x1080@75",
@@ -58,9 +60,9 @@ local battery_notification = hl.timer(function ()
   handle:close()
 
   if battery_capacity <= 10 then
-    hl.notification.create { text = "Battery <= 10%", duration = 1000 * 30, color = col_purple, font_size = 20 }
+    hl.notification.create { text = "Battery <= 10%", duration = 1000 * 30, color = conf.colors.purple, font_size = 20 }
   elseif battery_capacity <= 20 then
-    hl.notification.create { text = "Battery <= 20%", duration = 1000 * 30, color = col_purple, font_size = 20 }
+    hl.notification.create { text = "Battery <= 20%", duration = 1000 * 30, color = conf.colors.purple, font_size = 20 }
   end
 end, { timeout = 1000 * 60 * 5, type = "repeat" })
 battery_notification:set_enabled(true)

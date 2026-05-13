@@ -1,6 +1,6 @@
--- Bindings
 -- For Key Names see: https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
-_G.mod = "SUPER"
+local conf = require("conf")
+local mod = conf.mod
 
 -- Main Bindings
 hl.bind(mod ..         "+ Q",     hl.dsp.window.close())

@@ -1,3 +1,5 @@
+local conf = require("conf")
+
 hl.device {
   name = "hid-256c:006e",
   output = "DP-2",
@@ -90,12 +92,6 @@ require("bindings")
 --- LOOK AND FEEL ---
 ---------------------
 
-local col_text = "rgb(abb2bf)"
-local col_bg = "rgb(21252b)"
-local col_bg_highlight = "rgb(323844)"
-local col_purple = "rgb(c678dd)"
-local col_green = "rgb(98c379)"
-
 hl.config {
   render = {
     cm_auto_hdr = 2,
@@ -106,7 +102,7 @@ hl.config {
     gaps_out = 3,
     border_size = 2,
     col = {
-      active_border = { colors = { col_purple, col_green }, angle = 90 },
+      active_border = { colors = { conf.colors.purple, conf.colors.green }, angle = 90 },
     },
 
     -- Please see https://wiki.hyprland.org/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
