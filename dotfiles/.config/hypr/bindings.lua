@@ -1,6 +1,6 @@
 -- Bindings
 -- For Key Names see: https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
-local mod = "SUPER"
+_G.mod = "SUPER"
 
 -- Main Bindings
 hl.bind(mod ..         "+ Q",     hl.dsp.window.close())
@@ -21,7 +21,7 @@ hl.bind(mod ..        " + V",      hl.dsp.exec_cmd("cliphist list | fuzzel --dme
 hl.bind(mod ..        " + P",      hl.dsp.exec_cmd("fuzzel-pass --type"))
 hl.bind(mod ..        " + period", hl.dsp.exec_cmd("rofimoji -a copy -s neutral -r '> ' --selector fuzzel --clipboarder wl-copy"))
 hl.bind(mod .. "+ SHIFT + P",      hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mod .. " + SHIFT + W",     hl.dsp.exec_cmd("pkill -9 waybar || waybar"))
+hl.bind(mod .. "+ SHIFT + W",     hl.dsp.exec_cmd("pkill -9 waybar || waybar"))
 
 -- Apps
 hl.bind(mod .. "+ RETURN", hl.dsp.exec_cmd("ghostty"))
@@ -117,5 +117,5 @@ hl.bind(mod .. "+ ALT + down",  hl.dsp.window.resize { x =   0, y =  15, relativ
 hl.bind(mod .. "+ ALT + J",     hl.dsp.window.resize { x =   0, y =  15, relative = true }, { repeating = true })
 
 -- Move/resize windows with LMB/RMB
-hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mod .. "+ mouse:272", hl.dsp.window.drag(),   { mouse = true })
+hl.bind(mod .. "+ mouse:273", hl.dsp.window.resize(), { mouse = true })
