@@ -54,10 +54,16 @@ hl.workspace_rule { workspace = "2", monitor = "eDP-1" }
 ----------------------------
 
 local battery_notification = hl.timer(function ()
-  local handle = io.popen("cat /sys/class/power_supply/BAT1/capacity")
-  if handle == nil then return end
-  local battery_capacity = handle:read("n")
-  handle:close()
+  local status = io.popen("cat /sys/class/power_supply/BAT1/status")
+  if status == nil then return end
+  local battery_status = status:read("a")
+  status:close()
+  if battery_status ~= "Discharging" then return end
+
+  local capacity = io.popen("cat /sys/class/power_supply/BAT1/capacity")
+  if capacity == nil then return end
+  local battery_capacity = capacity:read("n")
+  capacity:close()
 
   if battery_capacity <= 10 then
     hl.notification.create { text = "Battery <= 10%", duration = 1000 * 30, color = conf.colors.purple, font_size = 20 }
