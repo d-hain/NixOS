@@ -156,6 +156,7 @@ in {
 
   services.caddy = {
     enable = true;
+    enableReload = false;
     globalConfig = ''
       # Disable admin page on port 2019
       admin off
