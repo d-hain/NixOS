@@ -1,7 +1,7 @@
 {config, ...}: {
   age = {
     identityPaths = [
-      "/home/${config.user.username}/.ssh/pc"
+      "/home/${config.user.username}/.ssh/laptop"
     ];
 
     secrets = {

@@ -73,6 +73,7 @@
         inherit system;
         specialArgs = {
           inherit
+            agenix
             nix-wrapper-modules
             hyprland
             fuzzel-pass
@@ -82,6 +83,7 @@
 
         modules = [
           ./hosts/laptop/configuration.nix
+          agenix.nixosModules.default
         ];
       };
 
