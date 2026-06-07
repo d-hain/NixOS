@@ -53,6 +53,17 @@
 
   programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/laptop/configuration.nix";
 
+  syncthing = {
+    enable = true;
+    deviceId = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";
+    peers = {
+      pc = {id = "XKPEYHH-5YQBG6S-OR6E6P4-5ZJUXEE-4TOPIIW-FY3JNZO-WPDIGWP-BQMWEAP";};
+      servarr = {id = "T6Q4C2E-QK3LHT6-BIVW26X-FBYO5YC-YE4ZKLQ-RTVNSXX-3LRPA4A-ULSFJQH";};
+    };
+    keyFile = ../../secrets/laptop-syncthing-key.age;
+    certFile = ../../secrets/laptop-syncthing-cert.age;
+  };
+
   #############################
   ### "DO NOT CHANGE"-stuff ###
   #############################

@@ -6,22 +6,23 @@
   helix-notes,
   nix-wrapper-modules,
   ...
-}: {
+}: with lib; let
+  cfg = config.user;
+in {
   options.user = {
-    enable = lib.mkEnableOption "User Account";
+    enable = mkEnableOption "User Account";
 
-    username = lib.mkOption {
-      default = "luffy";
+    username = mkOption {
+      type = types.str;
       description = "Username";
     };
-
-    packages = lib.mkOption {
-      default = [];
+    packages = mkOption {
+      type = types.listOf types.package;
       description = "Additional user specific packages";
     };
   };
 
-  config = lib.mkIf config.user.enable {
+  config = mkIf cfg.enable {
     # Environment variables
     environment.variables = {
       EDITOR = "nvim";
@@ -29,7 +30,7 @@
     };
     # Flatpak apps (aka Hytale)
     environment.sessionVariables.XDG_DATA_DIRS = [
-      "$XDG_DATA_DIRS:/home/${config.user.username}/.local/share/flatpak/exports/share"
+      "$XDG_DATA_DIRS:/home/${cfg.username}/.local/share/flatpak/exports/share"
     ];
 
     fonts.packages = with pkgs; [
@@ -45,7 +46,7 @@
     ];
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.${config.user.username} = {
+    users.users.${cfg.username} = {
       isNormalUser = true;
       extraGroups = [
         "wheel" # Enable ‘sudo’ for the user
@@ -152,7 +153,7 @@
           # Flatpak (only for Hytale)
           flatpak
         ]
-        ++ config.user.packages;
+        ++ cfg.packages;
     };
   };
 }

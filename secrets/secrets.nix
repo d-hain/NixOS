@@ -17,16 +17,28 @@ in {
     d-hain
   ];
 
-  "syncthing-cert.age".publicKeys = [
-    pc
-    laptop
+  "servarr-syncthing-cert.age".publicKeys = [
     servarr
     d-hain
   ];
-  "syncthing-key.age".publicKeys = [
-    pc
-    laptop
+  "servarr-syncthing-key.age".publicKeys = [
     servarr
+    d-hain
+  ];
+  "pc-syncthing-cert.age".publicKeys = [
+    pc
+    d-hain
+  ];
+  "pc-syncthing-key.age".publicKeys = [
+    pc
+    d-hain
+  ];
+  "laptop-syncthing-cert.age".publicKeys = [
+    laptop
+    d-hain
+  ];
+  "laptop-syncthing-key.age".publicKeys = [
+    laptop
     d-hain
   ];
 }
