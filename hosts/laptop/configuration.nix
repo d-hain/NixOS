@@ -45,6 +45,7 @@
 
     # extra :packages
     packages = with pkgs; [
+      hyprpaper
     ];
   };
 

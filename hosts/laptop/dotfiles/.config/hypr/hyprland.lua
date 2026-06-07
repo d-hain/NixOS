@@ -1,5 +1,10 @@
 local conf = require("conf")
 
+-- Wallpaper
+hl.on("hyprland.start", function()
+  hl.exec_cmd("hyprpaper")
+end)
+
 local home_monitor = {
   output = "HDMI-A-1",
   mode = "1920x1080@75",
