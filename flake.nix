@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-wrapper-modules = {
       url = "github:BirdeeHub/nix-wrapper-modules";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +38,7 @@
   outputs = {
     self,
     nixpkgs,
+    agenix,
     nix-wrapper-modules,
     hyprland,
     fuzzel-pass,
@@ -50,6 +55,7 @@
         inherit system;
         specialArgs = {
           inherit
+            agenix
             nix-wrapper-modules
             hyprland
             fuzzel-pass
@@ -59,6 +65,7 @@
 
         modules = [
           ./hosts/pc/configuration.nix
+          agenix.nixosModules.default
         ];
       };
 
@@ -100,7 +107,12 @@
     };
 
     devShells.${system} = {
-      default = self.devShells.${system}.servarr;
+      default = self.devShells.${system}.pc;
+      pc = pkgs.mkShell {
+        packages = [
+          agenix.packages.${system}.default
+        ];
+      };
       servarr = pkgs.mkShell {
         packages = [
           servarr-agenix.packages.${system}.default

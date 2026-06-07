@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./secrets.nix
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
     ../../modules/graphics.nix
@@ -15,6 +16,7 @@
     ../../modules/user.nix
     ../../modules/shell.nix
     ../../modules/programs.nix
+    ../../modules/syncthing.nix
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
     ../../modules/japanese.nix

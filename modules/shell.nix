@@ -154,7 +154,7 @@
 
       fastfetch = "fastfetch -c ~/.config/fastfetch/clean.jsonc";
       shutdown = "hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown now'";
-      shut= "shutdown";
+      shut = "shutdown";
       reboot = "hyprshutdown -t 'Rebooting...' --post-cmd 'reboot'";
     };
   };
