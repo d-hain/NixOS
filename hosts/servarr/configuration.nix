@@ -97,9 +97,8 @@ in {
 
   syncthing = {
     enable = true;
-    deviceId = "T6Q4C2E-QK3LHT6-BIVW26X-FBYO5YC-YE4ZKLQ-RTVNSXX-3LRPA4A-ULSFJQH";
     peers = {
-      pc = {id = "XKPEYHH-5YQBG6S-OR6E6P4-5ZJUXEE-4TOPIIW-FY3JNZO-WPDIGWP-BQMWEAP";};
+      pc = {id = "WRYBK4C-BMRSC7C-5CYSGDU-PE3H2DK-EVFFX7R-UF3UOFB-RMKJNXM-OLRGBQR";};
       laptop = {id = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";};
     };
     keyFile = ../../secrets/servarr-syncthing-key.age;

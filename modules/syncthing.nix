@@ -9,10 +9,6 @@ in {
   options.syncthing = {
     enable = mkEnableOption "Syncthing module";
 
-    deviceId = mkOption {
-      type = types.str;
-      description = "The Syncthing Device ID for THIS machine.";
-    };
     peers = mkOption {
       default = {};
       description = "The peers/devices which Syncthing should communicate with.";
@@ -21,14 +17,6 @@ in {
           id = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";
         };
       };
-    };
-    peerIds = mkOption {
-      type = types.listOf types.str;
-      description = "The Syncthing Device IDs for the OTHER machines.";
-    };
-    peerName = mkOption {
-      type = types.str;
-      description = "The display name of the remote peer.";
     };
     keyFile = mkOption {
       type = types.path;
