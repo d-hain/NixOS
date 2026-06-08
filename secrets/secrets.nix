@@ -1,8 +1,8 @@
 let
-  # TODO: move servarr and laptop keys to system keys
+  # TODO: move the servarr key to the system key
   servarr = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBDTHRSi4TtfoeatyB1778beVESIDpOpNtwI6g+uAP7+ servarr";
   pc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHIhgc8gF8ut3JW2NpIIzbH4NcRUCf1tIhKneXEMSyq root@doce-pc";
-  laptop = "";
+  laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkcDoB9ljtm9nAx750wz+ltBsbj7Rg5Cg2YkCIN2UjR root@portable";
   d-hain = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d.hain@gmx.at";
 in {
   "homarr.age".publicKeys = [
@@ -17,6 +17,8 @@ in {
     servarr
     d-hain
   ];
+
+  #############################################
 
   "servarr-syncthing-cert.age".publicKeys = [
     servarr
