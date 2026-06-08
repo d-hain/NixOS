@@ -1,7 +1,7 @@
-{config, ...}: {
+{...}: {
   age = {
     identityPaths = [
-      "/home/${config.user.username}/.ssh/laptop"
+      "/etc/ssh/ssh_host_ed25519_key"
     ];
 
     # secrets = {};

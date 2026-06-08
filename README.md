@@ -42,6 +42,13 @@ nix run git+https://git.doceys.computer/NixOS#neovim
 
 ## Manual Steps for a new system
 
++ Before running `nixos-install`
+  + If needed generate the system SSH Key
+    ```bash
+    sudo mkdir -p /mnt/etc/ssh
+    sudo ssh-keygen -t ed25519 -N "" -f /mnt/etc/ssh/ssh_host_ed25519_key
+    ```
+
 + Copy my SSH Keys to `~/.ssh`
 + Add the SSH Keys to the GPG-Agent
   ```bash
