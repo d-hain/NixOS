@@ -62,7 +62,7 @@ in {
     ];
   };
 
-  extraPackages = with pkgs; [
+  runtimePkgs = with pkgs; [
     lua-language-server
     clang-tools
     # WARN: currently broken in nixos-unstable

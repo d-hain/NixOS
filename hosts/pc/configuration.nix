@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   lib,
+  config,
   pkgs,
   ...
 }: {
@@ -67,31 +68,34 @@
 
   networking.hostName = "doce-pc"; # Define your hostname.
 
-  user = {
-    enable = true;
-    username = "dhain";
+  users.users.${config.user.username} = {
+    isNormalUser = true;
+    extraGroups = config.user.groups;
+    shell = pkgs.zsh;
 
     # extra :packages
-    packages = with pkgs; [
-      ###############
-      ### Drivers ###
-      ###############
+    packages = with pkgs;
+      [
+        ###############
+        ### Drivers ###
+        ###############
 
-      opentabletdriver
+        opentabletdriver
 
-      ############
-      ### Apps ###
-      ############
+        ############
+        ### Apps ###
+        ############
 
-      pkgsRocm.blender
+        pkgsRocm.blender
 
-      #############
-      ### Games ###
-      #############
+        #############
+        ### Games ###
+        #############
 
-      gamescope
-      osu-lazer-bin
-    ];
+        gamescope
+        osu-lazer-bin
+      ]
+      ++ config.user.packages;
   };
 
   programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/pc/configuration.nix";

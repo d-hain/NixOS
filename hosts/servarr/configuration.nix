@@ -28,6 +28,8 @@ in {
     ./secrets.nix
     ../../modules/nix.nix
     ../../modules/environment.nix
+    ../../modules/user.nix
+    ../../modules/syncthing.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -48,14 +50,14 @@ in {
   environment.variables = {
     # To make SSH work with any terminal (including ghostty)
     TERM = "xterm-256color";
-    EDITOR = "nvim";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.doce = {
+  user.username = "doce";
+  users.users.${config.user.username} = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
 
+    # extra :packages
     packages = with pkgs; [
       (nix-wrapper-modules.lib.evalPackage [
         ../../modules/nvim.nix

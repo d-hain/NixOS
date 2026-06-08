@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   pkgs,
   ...
 }: {
@@ -17,6 +18,28 @@
     font = "Lat2-Terminus16";
     keyMap = "de";
   };
+
+  fonts.packages = with pkgs; [
+    font-awesome
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+
+    # Japanese
+    ipafont
+    kochi-substitute
+    # Korean
+    baekmuk-ttf
+  ];
+
+  # Environment variables
+  environment.variables = {
+    EDITOR = "nvim";
+    TERMINAL = "ghostty";
+  };
+  # Flatpak apps (aka Hytale)
+  environment.sessionVariables.XDG_DATA_DIRS = [
+    "$XDG_DATA_DIRS:/home/${config.user.username}/.local/share/flatpak/exports/share"
+  ];
 
   # System-wide packages
   environment.systemPackages = with pkgs; [

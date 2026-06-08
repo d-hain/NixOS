@@ -41,14 +41,17 @@
 
   networking.hostName = "portable"; # Define your hostname.
 
-  user = {
-    enable = true;
-    username = "dhain";
+  users.users.${config.user.username} = {
+    isNormalUser = true;
+    extraGroups = config.user.groups;
+    shell = pkgs.zsh;
 
     # extra :packages
-    packages = with pkgs; [
-      hyprpaper
-    ];
+    packages = with pkgs;
+      [
+        hyprpaper
+      ]
+      ++ config.user.packages;
   };
 
   programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/laptop/configuration.nix";
