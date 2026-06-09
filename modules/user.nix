@@ -107,7 +107,7 @@ in {
       thunderbird
       wireshark
       kdePackages.kdenlive
-      (helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default)
+      # (helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default)
 
       # Password Store
       # only for importing from SafeInCloud
