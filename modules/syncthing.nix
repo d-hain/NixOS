@@ -63,5 +63,7 @@ in {
         };
       };
     };
+
+    user.packages = [pkgs.syncthingtray-minimal];
   };
 }

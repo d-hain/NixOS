@@ -54,6 +54,8 @@ hl.on("hyprland.start", function()
 
   -- Synology Drive Client
   hl.exec_cmd("synology-drive")
+  -- Syncthing Tray
+  hl.exec_cmd("syncthingtray")
 end)
 
 --------------
