@@ -55,7 +55,7 @@ hl.on("hyprland.start", function()
   -- Synology Drive Client
   hl.exec_cmd("synology-drive")
   -- Syncthing Tray
-  hl.exec_cmd("syncthingtray")
+  hl.exec_cmd("syncthingtray --wait")
 end)
 
 --------------
@@ -211,4 +211,12 @@ hl.window_rule {
     class = "^(xdg-desktop-portal-gtk)$",
   },
   float = true,
+}
+hl.window_rule {
+  name = "Floating Syncthing Tray",
+  match = {
+    initial_title = "^(Syncthing Tray)$",
+  },
+  float = true,
+  size = {"(monitor_w*0.5)", "(monitor_h*0.5)"},
 }
