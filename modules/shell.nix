@@ -145,8 +145,8 @@
 
       cda = "cd ~/anime-manga-notes";
       cdp = "cd ~/Programming/";
-      cdh = "cd ~/NAS-David/FH/";
-      cdw = "cd ~/NAS-David/Work/";
+      cdh = "cd ${config.services.syncthing.settings.folders.Sync.path}/FH/";
+      cdw = "cd ${config.services.syncthing.settings.folders.Sync.path}/Work/";
       cdd = "cd ~/Downloads/";
 
       enc = "cd ~/NixOS/modules/nvim/ && nvim .";

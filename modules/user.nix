@@ -100,7 +100,6 @@ in {
       vesktop
       gimp3
       anki
-      synology-drive-client
       mpv
       spotify
       libreoffice-fresh

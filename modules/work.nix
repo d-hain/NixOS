@@ -9,7 +9,7 @@
 
   # Work Wireguard
   networking.wg-quick.interfaces.work = {
-    configFile = "/home/${config.user.username}/NAS-David/Work/WireGuard.conf";
+    configFile = "${config.services.syncthing.settings.folders.Sync.path}/Work/WireGuard.conf";
     autostart = false;
   };
 }

@@ -16,6 +16,10 @@ in {
     servarr
     d-hain
   ];
+  "synology-rsync-backup-pwd.age".publicKeys = [
+    servarr
+    d-hain
+  ];
 
   #############################################
 

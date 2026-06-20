@@ -36,7 +36,6 @@
 
       "google-chrome"
       "spotify"
-      "synology-drive-client"
     ];
 
   networking.hostName = "portable"; # Define your hostname.

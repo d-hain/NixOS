@@ -109,7 +109,6 @@
     };
 
     devShells.${system} = {
-      default = self.devShells.${system}.pc;
       pc = pkgs.mkShell {
         packages = [
           agenix.packages.${system}.default

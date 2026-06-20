@@ -107,6 +107,34 @@ in {
     certFile = ../../secrets/servarr-syncthing-cert.age;
   };
 
+  # Systemd Timer to schedule the backup below weekly
+  systemd.timers.synology-backup = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      # The NAS is turned off from 01:00 - 07:00
+      OnCalendar = "Mon *-*-* 08:00:00";
+      Persistent = true;
+    };
+  };
+  systemd.services.synology-backup = {
+    description = "Weekly rsync backup of my Syncthing files to my Synology NAS";
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = config.user.username;
+      TimeoutStartSec = "3min";
+    };
+
+    script = ''
+      ${lib.getExe pkgs.rsync} -avz --delete \
+        ${config.services.syncthing.settings.folders.Sync.path} \
+        rsync-backup@hainasat.synology.me::David-Backup/Sync-Backup \
+        --password-file=${config.age.secrets.synology-rsync-backup-pwd.path}
+    '';
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.gnupg.agent = {

@@ -40,7 +40,6 @@
 
       "google-chrome"
       "spotify"
-      "synology-drive-client"
       "osu-lazer-bin"
     ];
 
