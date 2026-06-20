@@ -52,8 +52,6 @@ hl.on("hyprland.start", function()
   -- Japanese input
   -- hl.exec_cmd("uim-xim")
 
-  -- Synology Drive Client
-  hl.exec_cmd("synology-drive")
   -- Syncthing Tray
   hl.exec_cmd("syncthingtray --wait")
 end)
