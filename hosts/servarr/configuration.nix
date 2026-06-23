@@ -259,39 +259,7 @@ in {
   ### Server Dashboard ###
   ########################
 
-  virtualisation = {
-    docker.enable = true;
-    oci-containers = {
-      backend = "docker";
-      containers = {
-        homarr = {
-          image = "ghcr.io/homarr-labs/homarr:v1.34.0";
-          volumes = [
-            # "/var/run/docker.sock:/var/run/docker.sock" # Optional for docker integration. Whatever that means
-            "/media/homarr/appdata:/appdata"
-          ];
-          ports = [
-            "7575:7575"
-          ];
-          environmentFiles = [config.age.secrets.homarr.path];
-        };
-
-        dashdot = {
-          image = "mauricenino/dashdot:6.2.0";
-          privileged = true;
-          volumes = [
-            "/:/mnt/host:ro"
-          ];
-          ports = [
-            "5421:3001"
-          ];
-          environment = {
-            DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
-          };
-        };
-      };
-    };
-  };
+  # TODO: Make my own (or setup Graphana or smth)
 
   ##################
   ### Home Media ###
