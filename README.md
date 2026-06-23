@@ -74,7 +74,23 @@ Options for `<SYSTEM>`: `pc` `laptop` `servarr`
 
 ## How to add a secret
 
-1. Add an entry to `secrets/secrets.nix` with its keys.
-2. Write whatever it is in the env file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop`)
-3. To use that secret add it in the `hosts/<HOST>/secrets.nix` file.
-4. Then in the configuration use `config.age.secrets.<SECRET_NAME>.path` to get the path of the file.
++ Add an entry to `secrets/secrets.nix` with its keys.
++ Write whatever it is in the env file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop`)
++ To use that secret add it in the `hosts/<HOST>/secrets.nix` file.
++ Then in the configuration use `config.age.secrets.<SECRET_NAME>.path` to get the path of the file.
+
+## Git docs
+
+<!-- TODO: I should be able to do these things sometime using a Git frontent of some sort -->
+
+### How to make a new repository
+
++ Create the repo directory with `sudo -u git mkdir -p /home/git/<repository>.git`
++ Initialize the bare repository with `git-sys init --bare /home/git/<repository>.git`
+
+### How to make a repository public (cloneable over HTTP/S)
+
+```bash
+sudo -u git touch /home/git/<repository>.git/git-daemon-export-ok
+```
+And to make it private again remove that file.

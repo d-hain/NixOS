@@ -10,9 +10,9 @@
 }: let
   url-local = "192.168.1.69";
   url = "doceys.computer";
-  # TODO: Some Git-Frontend will be on there
-  # url-git = "git.doceys.computer";
-  domains = [url]; # url-git ];
+  # TODO: Make a Git-Frontend for this
+  url-git = "git.doceys.computer";
+  domains = [url url-git];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -83,6 +83,7 @@ in {
   };
 
   # Git Server setup
+  users.groups.git = {};
   users.users.git = {
     isSystemUser = true;
     description = "Git System User";
@@ -95,7 +96,18 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
     ];
   };
-  users.groups.git = {};
+
+  services.fcgiwrap.instances.git-http = {
+    process = {
+      user = "git";
+      group = "git";
+    };
+    socket = {
+      user = "caddy";
+      group = "caddy";
+      address = "/run/fgciwrap-git.sock";
+    };
+  };
 
   syncthing = {
     enable = true;
@@ -218,6 +230,15 @@ in {
           root * ${./assets}
           file_server
         '';
+
+        ${url-git}.extraConfig = ''
+          reverse_proxy unix/${config.services.fcgiwrap.instances.git-http.socket.address} {
+            transport fastcgi {
+              env SCRIPT_FILENAME ${pkgs.git}/libexec/git-core/git-http-backend
+              env GIT_PROJECT_ROOT ${config.users.users.git.home}
+            }
+          }
+        '';
       };
 
       local-configs =
@@ -278,22 +299,11 @@ in {
       log = {
         analyticsEnabled = true;
       };
-      #  server = {
-      #  urlbase = "";
-      #  bindaddress = "0.0.0.0";
-      #  port = 1;
-      #  # enablessl = true;
-      #  # sslport = 6969;
-      #  # sslcertpath = "";
-      #  # sslcertpassword = "";
-      #  };
     };
   };
   systemd.services.prowlarr = {
     serviceConfig = {
       PrivateNetwork = false;
-      # ProtextSystem = "no";
-      # ProtextHome = false;
     };
   };
 
