@@ -1,6 +1,11 @@
-{pkgs, ...}: {
-  # Make Jai work
+# Makes Jai work and available as a "jai" binary
+{
+  config,
+  pkgs,
+  ...
+}: {
   services.envfs.enable = true; # envfs fills out local variables
+
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
@@ -17,4 +22,10 @@
   environment.etc."ld.so.conf".text = ''
     /run/current-system/sw/share/nix-ld/lib
   '';
+
+  user.packages = [
+    (pkgs.writeShellScriptBin "jai" ''
+      exec ~/Jai/jai/bin/jai-linux "$@"
+    '')
+  ];
 }
