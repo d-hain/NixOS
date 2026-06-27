@@ -124,7 +124,7 @@ in {
     wantedBy = ["timers.target"];
     timerConfig = {
       # The NAS is turned off from 01:00 - 07:00
-      OnCalendar = "Mon *-*-* 08:00:00";
+      OnCalendar = "Mon *-*-* 09:00:00";
       Persistent = true;
     };
   };
