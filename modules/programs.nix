@@ -23,7 +23,7 @@
             LocalForward 8096 127.0.0.1:8096 # Jellyfin
             LocalForward 8989 127.0.0.1:8989 # Sonarr
 
-        Host doceys.computer
+        Host git.doceys.computer
           HostName doceys.computer
           User git
           PreferredAuthentications publickey
