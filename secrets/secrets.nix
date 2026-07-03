@@ -16,6 +16,10 @@ in {
     servarr
     d-hain
   ];
+  "dawarich-secret-key-base.age".publicKeys = [
+    servarr
+    d-hain
+  ];
 
   #############################################
 

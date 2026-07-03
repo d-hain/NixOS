@@ -21,6 +21,11 @@
         owner = config.user.username;
         group = "users";
       };
+      dawarich-secret-key-base = {
+        file = ../../secrets/dawarich-secret-key-base.age;
+        owner = config.user.username;
+        group = "users";
+      };
     };
   };
 }
