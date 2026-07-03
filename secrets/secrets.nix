@@ -4,10 +4,6 @@ let
   laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkcDoB9ljtm9nAx750wz+ltBsbj7Rg5Cg2YkCIN2UjR root@portable";
   d-hain = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d.hain@gmx.at";
 in {
-  "homarr.age".publicKeys = [
-    servarr
-    d-hain
-  ];
   "ddclient-secrets.age".publicKeys = [
     servarr
     d-hain

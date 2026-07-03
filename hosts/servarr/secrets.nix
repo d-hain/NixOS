@@ -5,11 +5,6 @@
     ];
 
     secrets = {
-      homarr = {
-        file = ../../secrets/homarr.age;
-        owner = config.user.username;
-        group = "users";
-      };
       ddclient-secrets = {
         file = ../../secrets/ddclient-secrets.age;
         owner = config.user.username;
