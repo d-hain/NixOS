@@ -13,7 +13,8 @@
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
   url-dawarich = "dawarich." + url;
-  domains = [url url-git url-dawarich];
+  url-immich = "immich." + url;
+  domains = [url url-git url-dawarich url-immich];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -242,13 +243,22 @@ in {
           }
         '';
 
+        ${url-immich}.extraConfig = ''
+          reverse_proxy http://localhost:${builtins.toString config.services.immich.port}
+
+          encode zstd gzip
+          request_body {
+            max_size 5000MB
+          }
+        '';
+
         ${url-dawarich}.extraConfig = ''
           root * ${config.services.dawarich.package}/public
           file_server
 
           # If a file is not found locally proxy to dawarich
           @file-not-found not file
-          reverse_proxy @file-not-found http://127.0.0.1:${builtins.toString config.services.dawarich.webPort}
+          reverse_proxy @file-not-found http://localhost:${builtins.toString config.services.dawarich.webPort}
 
           # brotli is recommended, but i don't want to install the caddy plugin for it
           encode zstd gzip
@@ -288,6 +298,18 @@ in {
           public-domains // local-domains;
       };
     };
+  };
+
+  services.immich = {
+    enable = true;
+    openFirewall = true;
+    mediaLocation = "/media/immich";
+
+    settings = {
+      server.externalDomain = "https://" + url-immich;
+    };
+    # environment = {
+    # };
   };
 
   services.dawarich = {
