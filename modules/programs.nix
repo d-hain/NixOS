@@ -22,7 +22,6 @@
             IdentityFile ~/.ssh/d-hain
             LocalForward 8096 127.0.0.1:8096 # Jellyfin
             LocalForward 8989 127.0.0.1:8989 # Sonarr
-            LocalForward 9696 127.0.0.1:9696 # Prowlarr
 
         Host git.doceys.computer
           HostName doceys.computer
