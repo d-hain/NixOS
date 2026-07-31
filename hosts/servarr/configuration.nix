@@ -12,9 +12,8 @@
   url = "doceys.computer";
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
-  url-dawarich = "dawarich." + url;
   url-immich = "immich." + url;
-  domains = [url url-git url-dawarich url-immich];
+  domains = [url url-git url-immich];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -251,18 +250,6 @@ in {
             max_size 5000MB
           }
         '';
-
-        ${url-dawarich}.extraConfig = ''
-          root * ${config.services.dawarich.package}/public
-          file_server
-
-          # If a file is not found locally proxy to dawarich
-          @file-not-found not file
-          reverse_proxy @file-not-found http://localhost:${builtins.toString config.services.dawarich.webPort}
-
-          # brotli is recommended, but i don't want to install the caddy plugin for it
-          encode zstd gzip
-        '';
       };
 
       local-configs =
@@ -310,13 +297,6 @@ in {
     };
     # environment = {
     # };
-  };
-
-  services.dawarich = {
-    enable = true;
-    configureNginx = false; # Nginx is my enemy and Caddy is my friend!
-    localDomain = url-dawarich;
-    secretKeyBaseFile = config.age.secrets.dawarich-secret-key-base.path;
   };
 
   ########################
