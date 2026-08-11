@@ -23,6 +23,11 @@
     "bazarr.sameg" = config.services.bazarr.listenPort;
     "jellyfin.sameg" = 8096;
   };
+
+  authorized-keys = [
+    "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFt5nVkGrS7uQXJ7/WG6qZKjIAPrffcdqtzxdir2/SMEAAAABHNzaDo= yubikey1"
+    "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIHP8ks0l0gGrMnNfH98tIMvvZFuunEghNTtJabXrDBMIAAAABHNzaDo= yubikey2"
+  ];
 in {
   imports = [
     ./hardware-configuration.nix
@@ -71,9 +76,7 @@ in {
       '')
     ];
 
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
-    ];
+    openssh.authorizedKeys.keys = authorized-keys;
   };
 
   # Shell
@@ -93,9 +96,7 @@ in {
     createHome = true;
 
     shell = lib.getExe' pkgs.git "git-shell";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
-    ];
+    openssh.authorizedKeys.keys = authorized-keys;
   };
 
   services.fcgiwrap.instances.git-http = {
