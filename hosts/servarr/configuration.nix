@@ -12,8 +12,8 @@
   url = "doceys.computer";
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
-  url-immich = "immich." + url;
-  domains = [url url-git url-immich];
+  # url-immich = "immich." + url;
+  domains = [url url-git /*url-immich*/];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -243,14 +243,14 @@ in {
           }
         '';
 
-        ${url-immich}.extraConfig = ''
-          reverse_proxy http://localhost:${builtins.toString config.services.immich.port}
-
-          encode zstd gzip
-          request_body {
-            max_size 5000MB
-          }
-        '';
+        # ${url-immich}.extraConfig = ''
+        #   reverse_proxy http://localhost:${builtins.toString config.services.immich.port}
+        #
+        #   encode zstd gzip
+        #   request_body {
+        #     max_size 5000MB
+        #   }
+        # '';
       };
 
       local-configs =
@@ -288,17 +288,15 @@ in {
     };
   };
 
-  services.immich = {
-    enable = true;
-    openFirewall = true;
-    mediaLocation = "/media/immich";
-
-    settings = {
-      server.externalDomain = "https://" + url-immich;
-    };
-    # environment = {
-    # };
-  };
+  # services.immich = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   mediaLocation = "/media/immich";
+  #
+  #   settings = {
+  #     server.externalDomain = "https://" + url-immich;
+  #   };
+  # };
 
   ########################
   ### Server Dashboard ###
