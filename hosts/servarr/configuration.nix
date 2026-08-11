@@ -230,6 +230,13 @@ in {
         # Website
         # TODO: make actually good
         ${url}.extraConfig = ''
+          # Public GPG Key
+          handle /gpg-pubkey.asc {
+            root * ${../..}
+            file_server
+            header Content-Type "text/plain; charset=utf-8"
+          }
+
           root * ${./assets}
           file_server
         '';
