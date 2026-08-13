@@ -218,3 +218,10 @@ hl.window_rule {
   float = true,
   size = {"(monitor_w*0.5)", "(monitor_h*0.5)"},
 }
+hl.window_rule {
+  name = "Floating OpenSSH Authentication",
+  match = {
+    initial_title = "^OpenSSH Authentication",
+  },
+  float = true,
+}

@@ -6,9 +6,15 @@
 }: {
   # Setup SSH
   programs.ssh = {
+    startAgent = true;
+    enableAskPassword = true;
+    askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
     extraConfig =
       # sshconfig
       ''
+        Host *
+            AddKeysToAgent yes
+
         Host pub.colonq.computer
             HostName pub.colonq.computer
             User doce
