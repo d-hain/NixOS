@@ -12,8 +12,8 @@
   url = "doceys.computer";
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
-  url-immich = "immich." + url;
-  domains = [url url-git url-immich];
+  # url-immich = "immich." + url;
+  domains = [url url-git /*url-immich*/];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;
@@ -23,6 +23,11 @@
     "bazarr.sameg" = config.services.bazarr.listenPort;
     "jellyfin.sameg" = 8096;
   };
+
+  authorized-keys = [
+    "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFt5nVkGrS7uQXJ7/WG6qZKjIAPrffcdqtzxdir2/SMEAAAABHNzaDo= yubikey1"
+    "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIHP8ks0l0gGrMnNfH98tIMvvZFuunEghNTtJabXrDBMIAAAABHNzaDo= yubikey2"
+  ];
 in {
   imports = [
     ./hardware-configuration.nix
@@ -66,9 +71,7 @@ in {
       '')
     ];
 
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
-    ];
+    openssh.authorizedKeys.keys = authorized-keys;
   };
 
   # Shell
@@ -88,9 +91,7 @@ in {
     createHome = true;
 
     shell = lib.getExe' pkgs.git "git-shell";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d-hain"
-    ];
+    openssh.authorizedKeys.keys = authorized-keys;
   };
 
   services.fcgiwrap.instances.git-http = {
@@ -221,8 +222,17 @@ in {
         # Website
         # TODO: make actually good
         ${url}.extraConfig = ''
-          root * ${./assets}
-          file_server
+          # Public SSH & GPG Keys
+          handle_path /keys/* {
+            root * ${../../keys}
+            file_server browse
+            header Content-Type "text/plain; charset=utf-8"
+          }
+
+          handle {
+            root * ${./assets}
+            file_server
+          }
         '';
 
         ${url-git}.extraConfig = ''
@@ -234,14 +244,14 @@ in {
           }
         '';
 
-        ${url-immich}.extraConfig = ''
-          reverse_proxy http://localhost:${builtins.toString config.services.immich.port}
-
-          encode zstd gzip
-          request_body {
-            max_size 5000MB
-          }
-        '';
+        # ${url-immich}.extraConfig = ''
+        #   reverse_proxy http://localhost:${builtins.toString config.services.immich.port}
+        #
+        #   encode zstd gzip
+        #   request_body {
+        #     max_size 5000MB
+        #   }
+        # '';
       };
 
       local-configs =
@@ -279,17 +289,15 @@ in {
     };
   };
 
-  services.immich = {
-    enable = true;
-    openFirewall = true;
-    mediaLocation = "/media/immich";
-
-    settings = {
-      server.externalDomain = "https://" + url-immich;
-    };
-    # environment = {
-    # };
-  };
+  # services.immich = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   mediaLocation = "/media/immich";
+  #
+  #   settings = {
+  #     server.externalDomain = "https://" + url-immich;
+  #   };
+  # };
 
   ########################
   ### Server Dashboard ###
