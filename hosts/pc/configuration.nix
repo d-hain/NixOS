@@ -21,8 +21,8 @@
     ../../modules/hyprsunset.nix
     ../../modules/services.nix
     ../../modules/japanese.nix
-    ../../modules/work.nix
     ../../modules/jai.nix
+    ../../modules/yubikey.nix
     ./dotfiles.nix
   ];
 

@@ -34,7 +34,7 @@
   # Environment variables
   environment.variables = {
     EDITOR = "nvim";
-    TERMINAL = "ghostty";
+    TERMINAL = "wezterm";
   };
   # Flatpak apps (aka Hytale)
   environment.sessionVariables.XDG_DATA_DIRS = [
@@ -49,12 +49,4 @@
     unzip
     vim
   ];
-  # Git
-  programs.git = {
-    enable = true;
-    config = {
-      init.defaultBranch = "master";
-      pull.ff = "only";
-    };
-  };
 }

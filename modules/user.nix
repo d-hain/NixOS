@@ -47,7 +47,7 @@ in {
       python3
 
       # Terminal Programs
-      ghostty
+      wezterm
       kdePackages.konsole # Fallback terminal
       (nix-wrapper-modules.lib.evalPackage [
         ./nvim.nix
