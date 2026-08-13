@@ -19,6 +19,7 @@
             HostName doceys.computer
             User doce
             PreferredAuthentications publickey
+            ForwardAgent yes
             IdentityFile ~/.ssh/d-hain_yubikey1
             IdentityFile ~/.ssh/d-hain_yubikey2
             LocalForward 8096 127.0.0.1:8096 # Jellyfin

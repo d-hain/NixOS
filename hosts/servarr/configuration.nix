@@ -48,11 +48,6 @@ in {
   ### User Stuff ###
   ##################
 
-  environment.variables = {
-    # To make SSH work with any terminal (including ghostty)
-    TERM = "xterm-256color";
-  };
-
   user.username = "doce";
   users.users.${config.user.username} = {
     isNormalUser = true;

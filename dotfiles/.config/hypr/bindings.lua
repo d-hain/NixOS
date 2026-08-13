@@ -24,7 +24,7 @@ hl.bind(mod .. "+ SHIFT + P",      hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mod .. "+ SHIFT + W",     hl.dsp.exec_cmd("pkill -9 waybar || waybar"))
 
 -- Apps
-hl.bind(mod .. "+ RETURN", hl.dsp.exec_cmd("ghostty"))
+hl.bind(mod .. "+ RETURN", hl.dsp.exec_cmd("wezterm"))
 hl.bind(mod .. "+ E",      hl.dsp.exec_cmd("dolphin"))
 hl.bind(mod .. "+ B",      hl.dsp.exec_cmd("brave"))
 hl.bind(mod .. "+ I",      hl.dsp.exec_cmd("gimp"))
@@ -35,9 +35,7 @@ hl.bind(mod .. "+ I",      hl.dsp.exec_cmd("gimp"))
 -- bind = SUPER, code:86, sendshortcut, CTRL SHIFT, D, class:^(vesktop)$
 -- bind = SUPER, N, sendshortcut, CTRL SHIFT, D, class:^(vesktop)$ # Testing
 
--- NOTE: The Ghostty one work but the Vesktop ones don't
--- bind = SUPER, T, sendshortcut, CTRL, T, class:^(com.mitchellh.ghostty)$
--- bind = CTRL, T, pass, class:^(com.mitchellh.ghostty)$
+-- NOTE: These don't work!
 -- bind = SUPER SHIFT, D, sendshortcut, CTRL SHIFT, D, class:^(vesktop)$
 -- bind = CTRL SHIFT, D, pass, class:^(vesktop)$
 
