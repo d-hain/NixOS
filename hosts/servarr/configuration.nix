@@ -13,7 +13,13 @@
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
   # url-immich = "immich." + url;
-  domains = [url url-git /*url-immich*/];
+  domains = [
+    url
+    url-git
+    /*
+    url-immich
+    */
+  ];
 
   local-services = {
     "prowlarr.sameg" = config.services.prowlarr.settings.server.port;

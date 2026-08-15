@@ -2,45 +2,47 @@ let
   servarr = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDdwRs0RnfJSx6lGDrb5R3SMLGLlOn6aFAsg+RsJvxQv root@servarr";
   pc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHIhgc8gF8ut3JW2NpIIzbH4NcRUCf1tIhKneXEMSyq root@doce-pc";
   laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkcDoB9ljtm9nAx750wz+ltBsbj7Rg5Cg2YkCIN2UjR root@portable";
-  d-hain = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILExjAbpsovl1IAt/cgGo1NiQfe0rYOdkjPZ+yqPfLc5 d.hain@gmx.at";
+  masterkey = "age1zgh9vkkmp6uv8jn4k6lvwur4z3k9yql743j6f0m9u8f9a5wc2dfscfs909";
 in {
   "ddclient-secrets.age".publicKeys = [
     servarr
-    d-hain
+    masterkey
   ];
   "caddy_root_key.age".publicKeys = [
     servarr
-    d-hain
+    masterkey
   ];
   "synology-rsync-backup-pwd.age".publicKeys = [
     servarr
-    d-hain
+    masterkey
   ];
 
-  #############################################
+  #################
+  ### Syncthing ###
+  #################
 
   "servarr-syncthing-cert.age".publicKeys = [
     servarr
-    d-hain
+    masterkey
   ];
   "servarr-syncthing-key.age".publicKeys = [
     servarr
-    d-hain
+    masterkey
   ];
   "pc-syncthing-cert.age".publicKeys = [
     pc
-    d-hain
+    masterkey
   ];
   "pc-syncthing-key.age".publicKeys = [
     pc
-    d-hain
+    masterkey
   ];
   "laptop-syncthing-cert.age".publicKeys = [
     laptop
-    d-hain
+    masterkey
   ];
   "laptop-syncthing-key.age".publicKeys = [
     laptop
-    d-hain
+    masterkey
   ];
 }
