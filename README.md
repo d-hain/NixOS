@@ -17,13 +17,13 @@ nix run git+https://git.doceys.computer/NixOS#neovim
 ├── flake.lock
 ├── flake.nix
 ├── hosts
-│   ├── laptop
-│   │   └── dotfiles
-│   ├── pc
-│   │   └── dotfiles
-│   └── servarr
+│   ├── laptop
+│   ├── pc
+│   └── servarr
+├── keys
 ├── lib
 ├── modules
+│   └── nvim
 └── secrets
 ```
 
@@ -33,6 +33,8 @@ nix run git+https://git.doceys.computer/NixOS#neovim
   All subdirectories of `hosts` are all files specific to one host.
   - `dotfiles`
     Non-nix dotfiles that are specific to that host.
+- `keys`
+  My SSH and GPG public keys.
 - `lib`
   Nix functions used throughout the config.
 - `modules`
@@ -50,16 +52,6 @@ nix run git+https://git.doceys.computer/NixOS#neovim
     ```
 
 + Copy my SSH Keys to `~/.ssh`
-+ Add the SSH Keys to the GPG-Agent
-  ```bash
-  ssh-add ~/.ssh/<private-key-name>
-  ```
-+ Restore my GPG Keys
-  ```bash
-  # For each key:
-  gpg --import public.gpg
-  gpg --import private.gpg
-  ```
 
 (I hope that's all)
 
@@ -67,15 +59,15 @@ nix run git+https://git.doceys.computer/NixOS#neovim
 
 After cloning this repo to your home directory just run this command:
 ```bash
-sudo nixos-rebuild switch --flake /home/<USER>/NixOS#<SYSTEM>
+sudo nixos-rebuild switch --flake /home/<USER>/NixOS#<HOST>
 ```
-Replace `<USER>` and `<SYSTEM>` with something that makes sense.
-Options for `<SYSTEM>`: `pc` `laptop` `servarr`
+Replace `<USER>` and `<HOST>` with something that makes sense.
+Options for `<HOST>`: `pc` `laptop` `servarr`
 
 ## How to add a secret
 
 + Add an entry to `secrets/secrets.nix` with its keys.
-+ Write whatever it is in the env file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop`)
++ Write whatever it is in the file using `agenix -e <SECRET_NAME>.age`. (to get `agenix` use `nix develop .#<HOST>`)
 + To use that secret add it in the `hosts/<HOST>/secrets.nix` file.
 + Then in the configuration use `config.age.secrets.<SECRET_NAME>.path` to get the path of the file.
 
