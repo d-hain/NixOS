@@ -138,9 +138,9 @@
       cls = "clear";
       csl = "sl";
 
-      l = "eza -lah --icons";
+      l = "eza --icons -lah";
       ls = "eza";
-      ll = "eza -la --icons";
+      ll = "eza --icons -la";
       la = "eza -a";
 
       cda = "cd ~/anime-manga-notes";
