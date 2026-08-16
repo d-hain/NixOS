@@ -54,21 +54,6 @@
       '';
   };
 
-  # Git
-  programs.git = {
-    enable = true;
-    config = {
-      user = {
-        email = "d.hain@gmx.at";
-        name = "David Hain";
-        signingkey = "57C33664F3FFF98281DE220E4AF40104E9BBA1FB";
-      };
-      init.defaultBranch = "master";
-      pull.ff = "only";
-      commit.gpgsign = true;
-    };
-  };
-
   # Steam
   programs.steam = {
     enable = true;

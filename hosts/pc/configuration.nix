@@ -13,6 +13,7 @@
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
     ../../modules/graphics.nix
+    ../../modules/git.nix
     ../../modules/environment.nix
     ../../modules/user.nix
     ../../modules/shell.nix
@@ -95,6 +96,11 @@
         osu-lazer-bin
       ]
       ++ config.user.packages;
+  };
+
+  programs.git.config = {
+    user.signingkey = "57C33664F3FFF98281DE220E4AF40104E9BBA1FB";
+    commit.gpgsign = true;
   };
 
   programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/pc/configuration.nix";

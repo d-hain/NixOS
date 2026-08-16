@@ -39,6 +39,7 @@ in {
     ./hardware-configuration.nix
     ./secrets.nix
     ../../modules/nix.nix
+    ../../modules/git.nix
     ../../modules/environment.nix
     ../../modules/user.nix
     ../../modules/syncthing.nix
