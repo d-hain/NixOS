@@ -19,7 +19,8 @@
             HostName pub.colonq.computer
             User doce
             PreferredAuthentications publickey
-            IdentityFile ~/.ssh/d-hain
+            IdentityFile ~/.ssh/d-hain_yubikey1
+            IdentityFile ~/.ssh/d-hain_yubikey2
 
         Host doceys.computer
             HostName doceys.computer
