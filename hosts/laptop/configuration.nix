@@ -13,6 +13,7 @@
     ../../modules/nix.nix
     ../../modules/hardware-stuff.nix
     ../../modules/graphics.nix
+    ../../modules/git.nix
     ../../modules/environment.nix
     ../../modules/user.nix
     ../../modules/shell.nix
