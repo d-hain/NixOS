@@ -15,8 +15,9 @@ vim.opt.signcolumn = "yes"
 -- Ignore case for searching with /
 vim.opt.ignorecase = true
 
--- 100 character line
+-- 120 character line
 vim.opt.colorcolumn = "120"
+vim.opt.textwidth = 120
 
 -- Line Numbers
 vim.opt.nu = true
