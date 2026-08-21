@@ -12,7 +12,7 @@
       owner = "rluba";
       repo = "jai.vim";
       rev = "master";
-      hash = "sha256-VFNIcJmz44y/1TzJ8IpB5US5VYZwWL7FhjZC4vKOuoQ=";
+      hash = "sha256-5AJrw/YNg9CS5X8NYZWqR08WztCBhLEPsESd6+NbnVY=";
     };
   };
   # tree-sitter-jai = pkgs.tree-sitter.buildGrammar {

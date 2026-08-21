@@ -54,6 +54,16 @@
       ++ config.user.packages;
   };
 
+  # pamu2fcfg
+  environment.etc."u2f_keys".text = ''
+    dhain:qFppPmUTaYX4ib++h6i20Ut8V51nerlK+7ANgR0kFAqiMMKrH5Uq/5v143cdPa8g6GliZYseEruaaUPX2VL+Qg==,dNd1wMZg/cymLKnveXVUvS3YIO/+7+xPFKR7az2Bo9fOZGBSY4KljXPTmG+PtEF30x4il5zyPf57/a2VImVyDw==,es256,+presence:xrNGyr2tyjZDFUfBia9sJS4B8kW2jZjjrry5hRPvmyi2R3uCassBWZN4KNYsagaWxQluG1ShKt3MDvIT5CRpJA==,wzppaesYn/CUqftuMrHmJKNZtJ/qAqDzSPbTgsit1tk/ecafQdOlKVw4RcZvhnG+u6ajfOgohzGRfyQQvH+2NA==,es256,+presence
+  '';
+
+  programs.git.config = {
+    user.signingkey = "57C33664F3FFF98281DE220E4AF40104E9BBA1FB";
+    commit.gpgsign = true;
+  };
+
   programs.zsh.shellAliases.enxc = "cd ~/NixOS/ && nvim ./hosts/laptop/configuration.nix";
 
   syncthing = {
