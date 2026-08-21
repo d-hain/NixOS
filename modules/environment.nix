@@ -24,6 +24,9 @@
     jetbrains-mono
     nerd-fonts.jetbrains-mono
 
+    # Emoji
+    noto-fonts-color-emoji
+
     # Japanese
     ipafont
     kochi-substitute

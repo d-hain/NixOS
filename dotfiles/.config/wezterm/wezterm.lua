@@ -6,7 +6,6 @@ local config = wezterm.config_builder()
 ------------------
 
 config.color_scheme = "One Dark (Gogh)"
-config.font = wezterm.font("JetBrains Mono")
 config.use_fancy_tab_bar = false
 config.window_decorations = "NONE"
 config.default_cursor_style = "SteadyBlock"
