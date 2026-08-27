@@ -11,7 +11,6 @@ in {
     enable = mkEnableOption "Syncthing module";
 
     peers = mkOption {
-      default = {};
       description = "The peers/devices which Syncthing should communicate with.";
       example = {
         laptop = {
@@ -19,6 +18,15 @@ in {
         };
       };
     };
+    peers-notes = mkOption {
+      description = "The peers ONLY for the Notes folder.";
+      default = {
+        phone = {
+          id = "YFQXO7W-CRPYDBK-BP3WWUK-O7MSZJP-IGC57VW-VRP7BY4-YOPIUCR-RFN3YQG";
+        };
+      };
+    };
+
     keyFile = mkOption {
       type = types.path;
       description = "Path to the agenix encrypted private key file.";
@@ -53,12 +61,17 @@ in {
       cert = config.age.secrets.syncthing-cert.path;
 
       settings = {
-        devices = cfg.peers;
+        devices = cfg.peers // cfg.peers-notes;
 
         folders = {
           Sync = {
             path = "/home/${config.user.username}/Sync";
             devices = builtins.attrNames cfg.peers;
+          };
+
+          Notes = {
+            path = "/home/${config.user.username}/Notes";
+            devices = (builtins.attrNames cfg.peers) ++ (builtins.attrNames cfg.peers-notes);
           };
         };
       };
