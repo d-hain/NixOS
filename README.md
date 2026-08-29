@@ -86,3 +86,14 @@ Options for `<HOST>`: `pc` `laptop` `servarr`
 sudo -u git touch /home/git/<repository>.git/git-daemon-export-ok
 ```
 And to make it private again remove that file.
+
+## Copy files from Phone to Synology NAS
+
+```bash
+$ ls
+nas phone
+```
++ `nix shell nixpkgs#simple-mtpfs nixpkgs#cifs-utils`
++ Mount phone: `simple-mtpfs --device 1 ./phone`
++ Mount NAS: `sudo mount -t cifs //<NAS-IP>/homes nas -o username=<username>,password="<password>",vers=3.0`
++ Copy files from one to the other: `rsync -avh -v --info=progress2 --no-perms --no-owner --no-group source/ dest/`
