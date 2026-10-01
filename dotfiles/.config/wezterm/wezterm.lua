@@ -58,12 +58,12 @@ config.keys = {
 
 config.mouse_bindings = {
   -- Unbind copying on selection, cause that is hella weird and annoying
-  { event = { Up = { streak = 1, button = "Left" }}, mods = "SHIFT", action = {} },
-  { event = { Up = { streak = 1, button = "Left" }}, mods = "NONE", action = {} },
-  { event = { Up = { streak = 1, button = "Left" }}, mods = "ALT", action = {} },
-  { event = { Up = { streak = 2, button = "Left" }}, mods = "NONE", action = {} },
-  { event = { Up = { streak = 3, button = "Left" }}, mods = "NONE", action = {} },
-  { event = { Up = { streak = 3, button = "Left" }}, mods = "ALT|SHIFT", action = {} },
+  { event = { Up = { streak = 1, button = "Left" }}, mods = "SHIFT",     action = act.DisableDefaultAssignment },
+  { event = { Up = { streak = 1, button = "Left" }}, mods = "NONE",      action = act.DisableDefaultAssignment },
+  { event = { Up = { streak = 1, button = "Left" }}, mods = "ALT",       action = act.DisableDefaultAssignment },
+  { event = { Up = { streak = 2, button = "Left" }}, mods = "NONE",      action = act.DisableDefaultAssignment },
+  { event = { Up = { streak = 3, button = "Left" }}, mods = "NONE",      action = act.DisableDefaultAssignment },
+  { event = { Up = { streak = 3, button = "Left" }}, mods = "ALT|SHIFT", action = act.DisableDefaultAssignment },
 };
 
 return config
