@@ -95,5 +95,11 @@ nas phone
 ```
 + `nix shell nixpkgs#simple-mtpfs nixpkgs#cifs-utils`
 + Mount phone: `simple-mtpfs --device 1 ./phone`
-+ Mount NAS: `sudo mount -t cifs //<NAS-IP>/homes nas -o username=<username>,password="<password>",vers=3.0`
-+ Copy files from one to the other: `rsync -avh -v --info=progress2 --no-perms --no-owner --no-group source/ dest/`
++ Mount NAS: `sudo mount -t cifs //<NAS-IP>/homes nas -o username=<username>,password="<password>",vers=3.0,uid=$(id -u),gid=$(id -g),file_mode=0644,dir_mode=0755`
++ Copy files from one to the other: `rsync -rtvh --info=progress2 --inplace -O --no-perms source/ dest/`
+
+To unmount both run these commands:
+```bash
+sudo umount ./nas
+fusermount -u ./phone
+```
