@@ -12,13 +12,11 @@
   url = "doceys.computer";
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
-  # url-immich = "immich." + url;
+  url-ai = "chatn." + url;
   domains = [
     url
     url-git
-    /*
-    url-immich
-    */
+    url-ai
   ];
 
   local-services = {
@@ -26,7 +24,7 @@
     "qbittorrent.sameg" = config.services.qbittorrent.webuiPort;
     "sonarr.sameg" = config.services.sonarr.settings.server.port;
     "radarr.sameg" = config.services.radarr.settings.server.port;
-    "bazarr.sameg" = config.services.bazarr.listenPort;
+    "bazarr.sameg" = config.services.bazarr.settings.general.port;
     "jellyfin.sameg" = 8096;
   };
 
@@ -44,6 +42,11 @@ in {
     ../../modules/user.nix
     ../../modules/syncthing.nix
   ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "open-webui"
+    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -249,14 +252,9 @@ in {
           }
         '';
 
-        # ${url-immich}.extraConfig = ''
-        #   reverse_proxy http://localhost:${builtins.toString config.services.immich.port}
-        #
-        #   encode zstd gzip
-        #   request_body {
-        #     max_size 5000MB
-        #   }
-        # '';
+        ${url-ai}.extraConfig = ''
+          reverse_proxy ${config.services.open-webui.host}:${builtins.toString config.services.open-webui.port}
+        '';
       };
 
       local-configs =
@@ -269,6 +267,24 @@ in {
         local-services;
     in
       public-domains // local-configs;
+  };
+
+  # Local AI
+  services.ollama = {
+    enable = true;
+  };
+  services.open-webui = {
+    enable = true;
+    host = "0.0.0.0";
+    port = 6967;
+    openFirewall = true;
+    environment = {
+      OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
+      ENABLE_SIGNUP = "False";
+      ANONYMIZED_TELEMETRY = "False";
+      DO_NOT_TRACK = "True";
+      SCARF_NO_ANALYTICS = "True";
+    };
   };
 
   # Local DNS
@@ -293,16 +309,6 @@ in {
       };
     };
   };
-
-  # services.immich = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   mediaLocation = "/media/immich";
-  #
-  #   settings = {
-  #     server.externalDomain = "https://" + url-immich;
-  #   };
-  # };
 
   ########################
   ### Server Dashboard ###
