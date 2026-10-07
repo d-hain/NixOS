@@ -116,6 +116,11 @@
       laptop = {id = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";};
       servarr = {id = "T6Q4C2E-QK3LHT6-BIVW26X-FBYO5YC-YE4ZKLQ-RTVNSXX-3LRPA4A-ULSFJQH";};
     };
+    peers-notes = {
+      phone = {id = "YFQXO7W-CRPYDBK-BP3WWUK-O7MSZJP-IGC57VW-VRP7BY4-YOPIUCR-RFN3YQG";};
+      laptop = {id = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";};
+      servarr = {id = "T6Q4C2E-QK3LHT6-BIVW26X-FBYO5YC-YE4ZKLQ-RTVNSXX-3LRPA4A-ULSFJQH";};
+    };
     keyFile = ../../secrets/pc-syncthing-key.age;
     certFile = ../../secrets/pc-syncthing-cert.age;
   };

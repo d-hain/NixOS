@@ -119,6 +119,11 @@ in {
       pc = {id = "WRYBK4C-BMRSC7C-5CYSGDU-PE3H2DK-EVFFX7R-UF3UOFB-RMKJNXM-OLRGBQR";};
       laptop = {id = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";};
     };
+    peers-notes = {
+      phone = {id = "YFQXO7W-CRPYDBK-BP3WWUK-O7MSZJP-IGC57VW-VRP7BY4-YOPIUCR-RFN3YQG";};
+      pc = {id = "WRYBK4C-BMRSC7C-5CYSGDU-PE3H2DK-EVFFX7R-UF3UOFB-RMKJNXM-OLRGBQR";};
+      laptop = {id = "5TGBSL7-WJBWPYJ-HV2COFK-SR5VC7F-VA47MAA-I3LO4XF-W3E5X5X-KECH4AP";};
+    };
     keyFile = ../../secrets/servarr-syncthing-key.age;
     certFile = ../../secrets/servarr-syncthing-cert.age;
   };
