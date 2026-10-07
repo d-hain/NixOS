@@ -229,14 +229,6 @@ in {
         # Website
         # TODO: make actually good
         ${url}.extraConfig = ''
-          # NOTE: these will be added with my website
-          # # Public SSH & GPG Keys
-          # handle_path /keys/* {
-          #   root * ${../../keys}
-          #   file_server browse
-          #   header Content-Type "text/plain; charset=utf-8"
-          # }
-
           handle {
             root * ${./assets}
             file_server
