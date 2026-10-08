@@ -13,23 +13,23 @@ local home_monitor = {
   bitdepth = 8,
   cm = "srgb",
 }
--- local fh_beamer = {
---   output = "HDMI-A-1",
---   mode = "1920x1080@60",
---   position = "0x0",
---   scale = 1,
---   mirror = "eDP-1",
---   bitdepth = 8,
---   cm = "srgb",
--- }
+local fh_beamer = {
+  output = "HDMI-A-1",
+  mode = "1920x1080@60",
+  position = "0x0",
+  scale = 1,
+  mirror = "eDP-1",
+  bitdepth = 8,
+  cm = "srgb",
+}
 
 -- local set = false
 -- hl.bind(mod .. "+ M", function()
 --   set = not set
 --   if set then
-    hl.monitor(home_monitor)
+    -- hl.monitor(home_monitor)
 --   else
-    -- hl.monitor(fh_beamer)
+    hl.monitor(fh_beamer)
 --   end
 -- end)
 
