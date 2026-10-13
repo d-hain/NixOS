@@ -12,11 +12,9 @@
   url = "doceys.computer";
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
-  url-ai = "chatn." + url;
   domains = [
     url
     url-git
-    url-ai
   ];
 
   local-services = {
@@ -42,11 +40,6 @@ in {
     ../../modules/user.nix
     ../../modules/syncthing.nix
   ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "open-webui"
-    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -251,10 +244,6 @@ in {
             }
           }
         '';
-
-        ${url-ai}.extraConfig = ''
-          reverse_proxy ${config.services.open-webui.host}:${builtins.toString config.services.open-webui.port}
-        '';
       };
 
       local-configs =
@@ -267,24 +256,6 @@ in {
         local-services;
     in
       public-domains // local-configs;
-  };
-
-  # Local AI
-  services.ollama = {
-    enable = true;
-  };
-  services.open-webui = {
-    enable = true;
-    host = "0.0.0.0";
-    port = 6967;
-    openFirewall = true;
-    environment = {
-      OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
-      ENABLE_SIGNUP = "False";
-      ANONYMIZED_TELEMETRY = "False";
-      DO_NOT_TRACK = "True";
-      SCARF_NO_ANALYTICS = "True";
-    };
   };
 
   # Local DNS
