@@ -228,20 +228,46 @@ in {
     virtualHosts = let
       public-domains = {
         # Website
-        # TODO: make actually good
         ${url}.extraConfig = ''
-          handle {
-            root * ${./assets}
-            file_server
-          }
+          root * /webserver/${url}
+          encode zstd gzip
+          file_server
         '';
 
+        # Git site
         ${url-git}.extraConfig = ''
-          reverse_proxy unix/${config.services.fcgiwrap.instances.git-http.socket.address} {
-            transport fastcgi {
-              env SCRIPT_FILENAME ${pkgs.git}/libexec/git-core/git-http-backend
-              env GIT_PROJECT_ROOT ${config.users.users.git.home}
+          @git path */info/refs */git-upload-pack
+
+          handle @git {
+            reverse_proxy unix/${config.services.fcgiwrap.instances.git-http.socket.address} {
+              transport fastcgi {
+                env SCRIPT_FILENAME ${pkgs.git}/libexec/git-core/git-http-backend
+                env GIT_PROJECT_ROOT ${config.users.users.git.home}
+              }
             }
+          }
+
+          handle {
+            header Content-Type text/html
+            respond <<HTML
+              <!DOCTYPE html>
+              <html>
+                <head><title>501 Not Implemented</title></head>
+                <body>
+                  <h1>501 Not Implemented</h1>
+                  <p style="font-size: 16pt;">
+                    There is no page for this git server yet.<br>
+                    Though you can still (probably) clone this project using this command:<br>
+                    ```shell<br>
+                    git clone <span id="url"></span><br>
+                    ```
+                  </p>
+                  <script>
+                  document.querySelector("#url").textContent = window.location.href;
+                  </script>
+                </body>
+              </html>
+              HTML 501
           }
         '';
       };
