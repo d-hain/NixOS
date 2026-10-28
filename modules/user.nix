@@ -101,7 +101,7 @@ in {
       anki
       mpv
       spotify
-      libreoffice-fresh
+      libreoffice
       thunderbird
       wireshark
       kdePackages.kdenlive
