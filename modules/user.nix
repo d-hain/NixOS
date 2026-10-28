@@ -30,8 +30,8 @@ in {
       ### Utilities ###
       #################
 
-      gcc14
-      clang_18
+      gcc
+      clang
       man-pages
       man-pages-posix
       gdb
