@@ -19,10 +19,6 @@
       url = "github:d-hain/fuzzel-pass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix-notes = {
-      url = "git+https://codeberg.org/ArkHost/HelixNotes";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     servarr-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     servarr-agenix = {
@@ -42,7 +38,6 @@
     nix-wrapper-modules,
     hyprland,
     fuzzel-pass,
-    helix-notes,
     servarr-nixpkgs,
     servarr-agenix,
     servarr-nix-wrapper-modules,
@@ -59,7 +54,6 @@
             nix-wrapper-modules
             hyprland
             fuzzel-pass
-            helix-notes
             ;
         };
 
@@ -77,7 +71,6 @@
             nix-wrapper-modules
             hyprland
             fuzzel-pass
-            helix-notes
             ;
         };
 
