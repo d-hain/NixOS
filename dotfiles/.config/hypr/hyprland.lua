@@ -51,6 +51,8 @@ hl.on("hyprland.start", function()
 
   -- Japanese input
   hl.exec_cmd("fcitx5 -d")
+  -- Force XWayland to use "de nodeadkeys" (Steam ...)
+  hl.exec_cmd("setxkbmap de nodeadkeys")
 
   -- Syncthing Tray
   hl.exec_cmd("syncthingtray --wait")

@@ -88,6 +88,7 @@ in {
       hyprshutdown
       brightnessctl
       pavucontrol
+      setxkbmap # used to fix XWayland keyboard layout
       # Bluetooth GUI (doesn't work but makes it work) see:
       # https://github.com/bluez/bluez/issues/673#issuecomment-1849132576
       # https://wiki.nixos.org/wiki/Bluetooth
