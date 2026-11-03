@@ -225,3 +225,10 @@ hl.window_rule {
   },
   float = true,
 }
+hl.window_rule {
+  name = "Floating Screenshot Annotator Satty",
+  match = {
+    class = "^org.satty.satty$",
+  },
+  float = true,
+}

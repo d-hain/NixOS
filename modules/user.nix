@@ -8,6 +8,25 @@
   ...
 }: let
   cfg = config.user;
+
+  satty-config = pkgs.writeText "satty-config.toml" /* toml */ ''
+    [general]
+    app-id = "org.satty.satty"
+    disable-notifications = false
+    output-filename = ""
+    initial-tool = "brush"
+
+    [font]
+    family = "JetBrains Mono"
+    style = "Medium"
+
+    [color-palette]
+    palette = [
+      "#ff0000ff",
+      "#00ff00ff",
+      "#0000ffff",
+    ]
+  '';
 in {
   options.user = {
     username = lib.mkOption {type = lib.types.str;};
@@ -64,7 +83,6 @@ in {
       fuzzel
       rofimoji # also works with fuzzel
       waybar
-      hyprshot
       hyprsunset
       hyprlock
       hyprshutdown
@@ -78,6 +96,13 @@ in {
       kdePackages.qtwayland
       kdePackages.qtsvg
       kdePackages.dolphin
+
+      # Screenshots
+      grim
+      slurp
+      (pkgs.writeShellScriptBin "satty" ''
+        exec ${satty}/bin/satty --config ${satty-config} "$@"
+      '')
 
       # Clipboard
       wl-clipboard

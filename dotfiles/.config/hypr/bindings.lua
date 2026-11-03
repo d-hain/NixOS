@@ -15,7 +15,7 @@ hl.bind(mod .. "+ SHIFT + TAB",   hl.dsp.window.cycle_next { next = false })
 -- Flameshot is broken on wayland
 -- hl.bind(mod .. "+ SHIFT + S", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind(mod ..        " + D",      hl.dsp.exec_cmd("fuzzel"))
-hl.bind(mod .. "+ SHIFT + S",      hl.dsp.exec_cmd("hyprshot -z -m region --clipboard-only"))
+hl.bind(mod .. "+ SHIFT + S",      hl.dsp.exec_cmd('grim -g "$(slurp -o)" - | satty -f -'))
 hl.bind(mod .. "+ SHIFT + R",      hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mod ..        " + V",      hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
 hl.bind(mod ..        " + P",      hl.dsp.exec_cmd("fuzzel-pass --type"))
