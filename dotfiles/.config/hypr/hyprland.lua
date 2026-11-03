@@ -94,7 +94,7 @@ require("bindings")
 
 hl.config {
   render = {
-    cm_auto_hdr = 2,
+    cm_auto_hdr = 0,
   },
 
   general = {
