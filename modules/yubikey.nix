@@ -26,5 +26,8 @@
     services.greetd.u2f.enable = true;
     services.su.u2f.enable = true;
     services.sudo.u2f.enable = true;
+
+    # Suppress the many runuser logs on rebuild
+    services.runuser.rules.session.unix.args = ["quiet"];
   };
 }
