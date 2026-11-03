@@ -50,7 +50,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 24")
 
   -- Japanese input
-  -- hl.exec_cmd("uim-xim")
+  hl.exec_cmd("fcitx5 -d")
 
   -- Syncthing Tray
   hl.exec_cmd("syncthingtray --wait")
