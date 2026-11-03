@@ -58,7 +58,7 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
   environment.variables.RUSTICL_ENABLE = "radeonsi";
-  hardware.graphics.extraPackages = [ pkgs.mesa.opencl ];
+  hardware.graphics.extraPackages = [pkgs.mesa.opencl];
 
   # NOTE: "amdgpu" is already set in the hardware module
   services.xserver.videoDrivers = ["nvidia"];

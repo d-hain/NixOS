@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
@@ -7,7 +11,7 @@
       waylandFrontend = true;
       ignoreUserConfig = lib.mkDefault true;
 
-      addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
+      addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
       settings = {
         inputMethod = {
           "Groups/0" = {
@@ -28,5 +32,5 @@
     };
   };
 
-  fonts.packages = with pkgs; [ noto-fonts-cjk-sans noto-fonts-cjk-serif ];
+  fonts.packages = with pkgs; [noto-fonts-cjk-sans noto-fonts-cjk-serif];
 }
