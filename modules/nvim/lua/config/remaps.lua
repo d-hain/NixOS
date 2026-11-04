@@ -45,6 +45,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Undo highlight search done by using '*'
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Clear multicursors using Escape
+vim.keymap.set("n", "<Esc>", function()
+  vim.api.nvim_buf_clear_namespace(0, vim.api.nvim_create_namespace("nvim.multicursor"), 0, -1) -- magic
+end)
+
 -- Align equal signs
 vim.keymap.set("v", "<C-0>", "<Esc>:'<,'> ! column -t -s= -o= | sed 's/=/ = /g'<CR>")
 
