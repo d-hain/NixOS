@@ -19,6 +19,11 @@
       url = "github:d-hain/fuzzel-pass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # TEMP: Until neovim 0.13 releases (I need multicursor NOW)
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     servarr-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     servarr-agenix = {
@@ -38,12 +43,21 @@
     nix-wrapper-modules,
     hyprland,
     fuzzel-pass,
+    neovim-nightly-overlay,
     servarr-nixpkgs,
     servarr-agenix,
     servarr-nix-wrapper-modules,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+
+    # TEMP: Until neovim 0.13 releases (I need multicursor NOW)
+    neovim-013 = {
+      nix.settings = {
+          substituters = ["https://nix-community.cachix.org"];
+          trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
+      };
+    };
   in {
     nixosConfigurations = {
       pc = nixpkgs.lib.nixosSystem {
@@ -54,11 +68,13 @@
             nix-wrapper-modules
             hyprland
             fuzzel-pass
+            neovim-nightly-overlay
             ;
         };
 
         modules = [
           ./hosts/pc/configuration.nix
+          neovim-013
           agenix.nixosModules.default
         ];
       };
@@ -71,11 +87,13 @@
             nix-wrapper-modules
             hyprland
             fuzzel-pass
+            neovim-nightly-overlay
             ;
         };
 
         modules = [
           ./hosts/laptop/configuration.nix
+          neovim-013
           agenix.nixosModules.default
         ];
       };

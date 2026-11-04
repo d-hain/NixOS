@@ -4,6 +4,7 @@
   options,
   pkgs,
   fuzzel-pass,
+  neovim-nightly-overlay,
   nix-wrapper-modules,
   ...
 }: let
@@ -70,6 +71,7 @@ in {
       (nix-wrapper-modules.lib.evalPackage [
         ./nvim.nix
         {inherit pkgs;}
+        {_module.args.neovim-nightly-overlay = neovim-nightly-overlay;}
       ])
       typst
       ffmpeg
