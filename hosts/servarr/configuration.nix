@@ -289,6 +289,13 @@ in {
   services.blocky = {
     enable = true;
     settings = {
+      ports.dns = "0.0.0.0:53";
+      bootstrapDns = [
+        {
+          upstream = "https://dns.quad9.net/dns-query";
+          ips = ["9.9.9.9"];
+        }
+      ];
       upstreams.groups.default = [
         "https://dns.quad9.net/dns-query"
         "https://one.one.one.one/dns-query"
