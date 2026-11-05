@@ -1,6 +1,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- TEMP: Until neovim 0.13 releases (maybe, only if file editing options will get added)
+-- Disable dir.lua, because you cannot edit files in there, which is absolutely useless
+vim.g.loaded_nvim_dir_plugin = 1
+
 -- Cursor is always thick
 vim.opt.guicursor = ""
 
