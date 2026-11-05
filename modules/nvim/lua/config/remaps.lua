@@ -42,11 +42,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Undo highlight search done by using '*'
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
--- Clear multicursors using Escape
 vim.keymap.set("n", "<Esc>", function()
+  -- Undo highlight search done by using '*'
+  vim.cmd("nohlsearch")
+  -- Clear multicursors
   vim.api.nvim_buf_clear_namespace(0, vim.api.nvim_create_namespace("nvim.multicursor"), 0, -1) -- magic
 end)
 
