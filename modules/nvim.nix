@@ -1,10 +1,13 @@
 {
   lib,
+  config,
   pkgs,
   wlib,
-  neovim-nightly-overlay ? null,
   ...
 }: let
+  # TEMP: Until neovim 0.13 releases
+  nvim-nightly = config._module.args.neovim-nightly-overlay or null;
+
   jai-vim = pkgs.vimUtils.buildVimPlugin {
     pname = "jai-vim";
     version = "git";
@@ -31,8 +34,8 @@ in {
   ];
 
   # TEMP: Until neovim 0.13 releases
-  package = lib.mkIf (neovim-nightly-overlay != null)
-    neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
+  package = lib.mkIf (nvim-nightly != null)
+    nvim-nightly.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
 
   settings.config_directory = ./nvim;
   specs = {
