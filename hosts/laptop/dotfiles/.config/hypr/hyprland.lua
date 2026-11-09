@@ -37,7 +37,7 @@ local fh_beamer = {
 hl.monitor {
   output = "eDP-1", -- Laptop inbuilt
   mode = "1920x1080@60",
-  position = "1920x500",
+  position = "1920x300",
   scale = 1.2,
   bitdepth = 8,
   cm = "srgb",
