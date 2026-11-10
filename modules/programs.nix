@@ -29,8 +29,8 @@
             ForwardAgent yes
             IdentityFile ~/.ssh/d-hain_yubikey1
             IdentityFile ~/.ssh/d-hain_yubikey2
-            LocalForward 8096 127.0.0.1:8096 # Jellyfin
-            LocalForward 8989 127.0.0.1:8989 # Sonarr
+            # Use with SOCKS v5 enabled in Firefox and set to 127.0.0.1:1080
+            DynamicForward 1080
 
         Host git.doceys.computer
             HostName doceys.computer

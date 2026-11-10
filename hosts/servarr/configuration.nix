@@ -10,10 +10,12 @@
 }: let
   url-local = "192.168.1.69";
   url = "doceys.computer";
+  url-stats = "stats." + url;
   # TODO: Make a Git-Frontend for this
   url-git = "git." + url;
   domains = [
     url
+    url-stats
     url-git
   ];
 
@@ -234,6 +236,20 @@ in {
           file_server
         '';
 
+        # Stats page (only reachable through Intranet and a SSH Tunnel)
+        ${url-stats}.extraConfig = ''
+          @lan remote_ip private_ranges
+
+          handle @lan {
+            root * /var/lib/goaccess/www
+            file_server
+          }
+
+          handle {
+            abort
+          }
+        '';
+
         # Git site
         ${url-git}.extraConfig = ''
           @git path */info/refs */git-upload-pack
@@ -318,7 +334,32 @@ in {
   ### Server Dashboard ###
   ########################
 
-  # TODO: Make my own (or setup Graphana or smth)
+  systemd.services.goaccess = {
+    description = "GoAccess website statistics";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "caddy";
+      StateDirectory = "goaccess"; # /var/lib/goaccess
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/goaccess/db /var/lib/goaccess/www";
+    };
+    script = ''
+      ${lib.getExe pkgs.goaccess} /var/log/caddy/access-*${url}.log \
+        --log-format=CADDY \
+        --geoip-database=${pkgs.dbip-city-lite}/share/dbip/dbip-city-lite.mmdb \
+        --db-path=/var/lib/goaccess/db \
+        --persist --restore \
+        --ignore-crawlers \
+        -o /var/lib/goaccess/www/index.html
+    '';
+  };
+
+  systemd.timers.goaccess = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "*:0/10";
+      Persistent = true;
+    };
+  };
 
   ##################
   ### Home Media ###
