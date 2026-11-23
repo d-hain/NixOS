@@ -5,7 +5,12 @@ vim.keymap.set("n", "<leader>pf", function()
         hidden = true,
     }
 end, {})
-vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>pg", function()
+    builtin.live_grep {
+        hidden = true,
+        additional_args = { "--no-ignore" },
+    }
+end, {})
 
 -- Visual Studio - hell yeah
 vim.keymap.set("n", "<C-S-f>", function()
