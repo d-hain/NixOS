@@ -16,13 +16,17 @@ end, {})
 vim.keymap.set("n", "<C-S-f>", function()
     local word = vim.fn.expand("<cword>")
     builtin.live_grep {
-        default_text = word
+        default_text = word,
+        hidden = true,
+        additional_args = { "--no-ignore" },
     }
 end)
 vim.keymap.set("v", "<C-S-f>", function()
     vim.cmd('normal! "zy')
     local selection = vim.fn.getreg("z")
     builtin.live_grep {
-        default_text = selection
+        default_text = selection,
+        hidden = true,
+        additional_args = { "--no-ignore" },
     }
 end)
