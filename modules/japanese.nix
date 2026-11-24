@@ -13,6 +13,14 @@
 
       addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
       settings = {
+        globalOptions = {
+          # Remove the Ctrl+Space global keybind
+          "Hotkey/TriggerKeys" = {
+            "0" = "Zenkaku_Hankaku";
+            "1" = "Hangul";
+          };
+        };
+
         inputMethod = {
           "Groups/0" = {
             Name = "Default";
