@@ -77,6 +77,7 @@ in {
       ffmpeg
       imagemagick
       sendme # Ultimate magic and just the best thing ever
+      yt-dlp
 
       #######################
       ### "Desktop" Stuff ###
