@@ -8,7 +8,8 @@ end, {})
 vim.keymap.set("n", "<leader>pg", function()
     builtin.live_grep {
         hidden = true,
-        additional_args = { "--no-ignore" },
+        -- Search through hidden files except the .git folder
+        additional_args = { "--no-ignore", "--glob", "!**/.git/*" },
     }
 end, {})
 
